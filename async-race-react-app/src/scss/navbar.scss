@@ -30,12 +30,13 @@
                 color: $dark-blue;
                 background-color: $light-blue;
                 font-size: 1.5rem;
-                width: 9rem;
+                width: 11rem;
+                height: 3rem;
                 text-align: center;
-                padding: 1rem 0.5rem;
                 border: 5px solid $orange;
                 border-radius: 10rem;
                 transition: .3s;
+                position: relative;
 
                 &:first-child {
                     margin-right: 2rem;
@@ -45,6 +46,15 @@
                     transition: .3s;
                     background-color: $orange;
                     border-color: $light-blue;
+                }
+
+                a {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    padding: .7rem 0;
+                    text-decoration: none;
+                    color: $dark-blue;
                 }
             }
         }

@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Yaldevi:wght@200..700&display=swap");
+#garage-content {
+  margin-top: 2.5rem;
+  font-family: "Yaldevi", sans-serif;
+  padding: 0 2rem;
+}
+#garage-content button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border-radius: 50rem;
+  font-size: 20px;
+}
+#garage-content .sm-padding {
+  padding: 0.2rem 0.5rem;
+}
+#garage-content .md-padding {
+  padding: 0.25rem 0.55rem;
+}
+#garage-content .sm-btn {
+  font-size: 16px;
+}
+#garage-content .orange-btn {
+  color: #D39E6F;
+  border-color: #D39E6F;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .orange-btn:hover {
+  background-color: #D39E6F;
+  color: #021826;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .light-blue-btn {
+  color: #CFFBFC;
+  border-color: #CFFBFC;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .light-blue-btn:hover {
+  background-color: #CFFBFC;
+  color: #021826;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .green-btn {
+  color: #8FD36F;
+  border-color: #8FD36F;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .green-btn:hover {
+  background-color: #8FD36F;
+  color: #021826;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .gray-btn {
+  color: #CBCBCB;
+  border-color: #CBCBCB;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .gray-btn:hover {
+  background-color: #CBCBCB;
+  color: #021826;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#garage-content .btns-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 2rem;
+}
+#garage-content .btns-block .race-btns button:first-child {
+  margin-right: 1rem;
+}
+#garage-content .btns-block .cu-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+#garage-content .btns-block .cu-btns input[type=text] {
+  width: 9rem;
+  height: 1.5rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-radius: 50rem;
+}
+#garage-content .btns-block .cu-btns input[type=color] {
+  width: 2rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 0 0.5rem;
+}
+#garage-content .btns-block .cu-btns .create {
+  margin-right: 2rem;
+}
+#garage-content .divider {
+  background-image: url("./Assets/divider.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20rem;
+  margin: 0 auto;
+  height: 3rem;
+}
+#garage-content .cars-list .car .car-sets {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#garage-content .cars-list .car .car-sets .car-race-btns, #garage-content .cars-list .car .car-sets .start-stop-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-right: 0.5rem;
+}
+#garage-content .cars-list .car .car-sets .car-race-btns button:first-child, #garage-content .cars-list .car .car-sets .start-stop-btns button:first-child {
+  margin-bottom: 0.5rem;
+}
+#garage-content .cars-list .car .car-sets .car-ico i {
+  font-size: 3rem;
+  color: orange;
+}
+#garage-content .garage-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 1.5rem;
+}
+#garage-content .garage-info .garage-count p {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #CFFBFC;
+}
+#garage-content .garage-info .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  color: #D39E6F;
+}
+#garage-content .garage-info .pagination p {
+  font-size: 2rem;
+  margin: 0 1rem;
+}

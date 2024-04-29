@@ -37,6 +37,9 @@
   padding: 1rem 0;
   font-size: 1rem;
 }
+#winners-content .winners-tb tr td:nth-child(3) {
+  text-transform: uppercase;
+}
 #winners-content .winners-tb tr:first-child {
   border: 1px solid #D39E6F;
 }

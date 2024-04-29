@@ -1,6 +1,6 @@
-import '../garage.css';
-import CarList from './CarList';
-import useFetch from './useFetch';
+import '../../garage.css';
+import CarList from '../CarList';
+import useFetch from '../useFetch';
 
 type Props = {};
 

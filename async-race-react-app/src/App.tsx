@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Garage from './TSComponents/Garage';
-import Winners from './TSComponents/Winners';
-import Navbar from './TSComponents/Navbar';
+import Garage from './TSComponents/Pages/Garage';
+import Winners from './TSComponents/Pages/Winners';
+import Navbar from './TSComponents/Pages/Navbar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {

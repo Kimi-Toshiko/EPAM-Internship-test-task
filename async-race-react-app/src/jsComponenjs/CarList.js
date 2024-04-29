@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
-var _ICar = _interopRequireDefault(require("./ICar"));
+var _ICar = _interopRequireDefault(require("./Interfaces/ICar"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var CarList = function CarList(_ref) {
   var cars = _ref.cars;

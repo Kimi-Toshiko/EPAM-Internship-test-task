@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 require("./App.css");
-var _Garage = _interopRequireDefault(require("./TSComponents/Garage"));
-var _Winners = _interopRequireDefault(require("./TSComponents/Winners"));
-var _Navbar = _interopRequireDefault(require("./TSComponents/Navbar"));
+var _Garage = _interopRequireDefault(require("./TSComponents/Pages/Garage"));
+var _Winners = _interopRequireDefault(require("./TSComponents/Pages/Winners"));
+var _Navbar = _interopRequireDefault(require("./TSComponents/Pages/Navbar"));
 var _reactRouterDom = require("react-router-dom");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function App() {

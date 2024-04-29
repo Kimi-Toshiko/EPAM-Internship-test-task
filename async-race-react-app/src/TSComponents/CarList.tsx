@@ -1,5 +1,5 @@
 import React from "react";
-import ICar from "./ICar";
+import ICar from "./Interfaces/ICar";
 
 interface ICarListProps {
     cars: ICar[];

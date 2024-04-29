@@ -1,4 +1,4 @@
-import '../winners.css';
+import '../../winners.css';
 
 type Props = {};
 

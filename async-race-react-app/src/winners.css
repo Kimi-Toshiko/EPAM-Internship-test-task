@@ -89,3 +89,15 @@
     margin: 0rem 0.5rem !important;
   }
 }
+
+@media screen and (max-width: 1150px) {
+  #winners-content {
+    font-size: 1rem;
+  }
+  #winners-content h2 {
+    font-size: 1.3rem;
+  }
+  #winners-content .winners-tb tr td {
+    font-size: 0.82rem;
+  }
+}

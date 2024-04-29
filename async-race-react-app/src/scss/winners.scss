@@ -70,3 +70,22 @@
 
     @include pagination;
 }
+
+// RESPONSIVE
+@media screen and (max-width: 1150px) {
+    #winners-content {
+        font-size: 1rem;
+
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        .winners-tb {
+            tr {
+                td {
+                    font-size: 0.82rem;
+                }
+            }
+        }
+    }
+}

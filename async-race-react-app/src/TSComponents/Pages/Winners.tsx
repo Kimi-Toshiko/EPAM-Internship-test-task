@@ -1,75 +1,21 @@
 import '../../winners.css';
+import useFetch from '../useFetch';
+import WinnerList from '../WinnerList';
 
 type Props = {};
 
 const Winners = (props: Props) => {
+    const {data: winnersData, isPending: winnersIsPending, error: winnersError} = useFetch('http://localhost:3000/winners');
+
     return (
         <div className="winners">
             <div id="winners-content">
                 <h2>WINNERS</h2>
-                <table className="winners-tb">
-                    <tr>
-                        <th>№</th>
-                        <th>CAR</th>
-                        <th>NAME</th>
-                        <th>WINS</th>
-                        <th>BEST TIME (SECONDS)</th>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td><i className="fa-solid fa-car-side"></i></td>
-                        <td>AUDI S3</td>
-                        <td>1</td>
-                        <td>2.73</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td><i className="fa-solid fa-car-side"></i></td>
-                        <td>AUDI S3</td>
-                        <td>1</td>
-                        <td>2.73</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td><i className="fa-solid fa-car-side"></i></td>
-                        <td>AUDI S3</td>
-                        <td>1</td>
-                        <td>2.73</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td><i className="fa-solid fa-car-side"></i></td>
-                        <td>AUDI S3</td>
-                        <td>1</td>
-                        <td>2.73</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td><i className="fa-solid fa-car-side"></i></td>
-                        <td>AUDI S3</td>
-                        <td>1</td>
-                        <td>2.73</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td><i className="fa-solid fa-car-side"></i></td>
-                        <td>AUDI S3</td>
-                        <td>1</td>
-                        <td>2.73</td>
-                    </tr>
-                    <tr>
-                        <td>103</td>
-                        <td><i className="fa-solid fa-car-side"></i></td>
-                        <td>AUDI S3</td>
-                        <td>1</td>
-                        <td>2.73</td>
-                    </tr>
-                </table>
-                <div className="pagination">
-                    <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-left"></i></button>
-                    <p>PAGE #1</p>
-                    <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-right"></i></button>
-                </div>
+                <section>
+                    {winnersError && <p className='fetch-error'>{winnersError}</p>}
+                    {winnersIsPending && <p className='fetch-loading'>Loading winners...</p>}
+                    {winnersData && <WinnerList winners={winnersData} />}
+                </section>
             </div>
         </div>
     )

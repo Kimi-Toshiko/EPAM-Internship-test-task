@@ -5,37 +5,24 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 require("../../winners.css");
+var _useFetch2 = _interopRequireDefault(require("../useFetch"));
+var _WinnerList = _interopRequireDefault(require("../WinnerList"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var Winners = function Winners(props) {
+  var _useFetch = (0, _useFetch2.default)('http://localhost:3000/winners'),
+    winnersData = _useFetch.data,
+    winnersIsPending = _useFetch.isPending,
+    winnersError = _useFetch.error;
   return /*#__PURE__*/React.createElement("div", {
     className: "winners"
   }, /*#__PURE__*/React.createElement("div", {
     id: "winners-content"
-  }, /*#__PURE__*/React.createElement("h2", null, "WINNERS"), /*#__PURE__*/React.createElement("table", {
-    className: "winners-tb"
-  }, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "\u2116"), /*#__PURE__*/React.createElement("th", null, "CAR"), /*#__PURE__*/React.createElement("th", null, "NAME"), /*#__PURE__*/React.createElement("th", null, "WINS"), /*#__PURE__*/React.createElement("th", null, "BEST TIME (SECONDS)")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "103"), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-car-side"
-  })), /*#__PURE__*/React.createElement("td", null, "AUDI S3"), /*#__PURE__*/React.createElement("td", null, "1"), /*#__PURE__*/React.createElement("td", null, "2.73")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "103"), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-car-side"
-  })), /*#__PURE__*/React.createElement("td", null, "AUDI S3"), /*#__PURE__*/React.createElement("td", null, "1"), /*#__PURE__*/React.createElement("td", null, "2.73")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "103"), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-car-side"
-  })), /*#__PURE__*/React.createElement("td", null, "AUDI S3"), /*#__PURE__*/React.createElement("td", null, "1"), /*#__PURE__*/React.createElement("td", null, "2.73")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "103"), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-car-side"
-  })), /*#__PURE__*/React.createElement("td", null, "AUDI S3"), /*#__PURE__*/React.createElement("td", null, "1"), /*#__PURE__*/React.createElement("td", null, "2.73")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "103"), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-car-side"
-  })), /*#__PURE__*/React.createElement("td", null, "AUDI S3"), /*#__PURE__*/React.createElement("td", null, "1"), /*#__PURE__*/React.createElement("td", null, "2.73")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "103"), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-car-side"
-  })), /*#__PURE__*/React.createElement("td", null, "AUDI S3"), /*#__PURE__*/React.createElement("td", null, "1"), /*#__PURE__*/React.createElement("td", null, "2.73")), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "103"), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-car-side"
-  })), /*#__PURE__*/React.createElement("td", null, "AUDI S3"), /*#__PURE__*/React.createElement("td", null, "1"), /*#__PURE__*/React.createElement("td", null, "2.73"))), /*#__PURE__*/React.createElement("div", {
-    className: "pagination"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "orange-btn sm-padding"
-  }, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-caret-left"
-  })), /*#__PURE__*/React.createElement("p", null, "PAGE #1"), /*#__PURE__*/React.createElement("button", {
-    className: "orange-btn sm-padding"
-  }, /*#__PURE__*/React.createElement("i", {
-    className: "fa-solid fa-caret-right"
-  })))));
+  }, /*#__PURE__*/React.createElement("h2", null, "WINNERS"), /*#__PURE__*/React.createElement("section", null, winnersError && /*#__PURE__*/React.createElement("p", {
+    className: "fetch-error"
+  }, winnersError), winnersIsPending && /*#__PURE__*/React.createElement("p", {
+    className: "fetch-loading"
+  }, "Loading winners..."), winnersData && /*#__PURE__*/React.createElement(_WinnerList.default, {
+    winners: winnersData
+  }))));
 };
 var _default = exports.default = Winners;

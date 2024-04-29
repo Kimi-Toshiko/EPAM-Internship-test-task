@@ -32,7 +32,9 @@ var CarList = function CarList(_ref) {
       className: "car-ico"
     }, /*#__PURE__*/_react.default.createElement("i", {
       className: "fa-solid fa-car-side",
-      color: car.color
+      style: {
+        'color': car.color
+      }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "car-name"
     }, /*#__PURE__*/_react.default.createElement("p", null, car.name))), /*#__PURE__*/_react.default.createElement("div", {

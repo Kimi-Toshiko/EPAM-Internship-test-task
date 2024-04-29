@@ -20,7 +20,7 @@ const CarList: React.FC<ICarListProps> = ({cars}) => {
                             <button className='gray-btn sm-padding sm-btn'>B</button>
                         </div>
                         <div className="car-ico">
-                            <i className="fa-solid fa-car-side" color={car.color}></i>
+                            <i className="fa-solid fa-car-side" style={{'color': car.color}}></i>
                         </div>
                         <div className="car-name">
                             <p>{car.name}</p>

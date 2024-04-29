@@ -1,8 +1,12 @@
 import '../garage.css';
+import CarList from './CarList';
+import useFetch from './useFetch';
 
 type Props = {};
 
 const Garage = (props: Props) => {
+    const { data: cars, isPending, error } = useFetch('http://localhost:3000/garage');
+
     return (
         <div className="garage">
             <div id="garage-content">
@@ -28,137 +32,11 @@ const Garage = (props: Props) => {
                     </div>
                 </div>
                 <div className="divider"></div>
-                <div className="cars-list">
-                    <div className="car">
-                        <div className="car-sets">
-                            <div className="car-race-btns">
-                                <button className='orange-btn md-padding sm-btn'>Select</button>
-                                <button className='light-blue-btn md-padding sm-btn'>Remove</button>
-                            </div>
-                            <div className="start-stop-btns">
-                                <button className='green-btn sm-padding sm-btn'>A</button>
-                                <button className='gray-btn sm-padding sm-btn'>B</button>
-                            </div>
-                            <div className="car-ico">
-                                <i className="fa-solid fa-car-side"></i>
-                            </div>
-                        </div>
-                        <div className="finish-block"></div>
-                        <hr />
-                    </div>
-                    <div className="car">
-                        <div className="car-sets">
-                            <div className="car-race-btns">
-                                <button className='orange-btn md-padding sm-btn'>Select</button>
-                                <button className='light-blue-btn md-padding sm-btn'>Remove</button>
-                            </div>
-                            <div className="start-stop-btns">
-                                <button className='green-btn sm-padding sm-btn'>A</button>
-                                <button className='gray-btn sm-padding sm-btn'>B</button>
-                            </div>
-                            <div className="car-ico">
-                                <i className="fa-solid fa-car-side"></i>
-                            </div>
-                        </div>
-                        <div className="finish-block"></div>
-                        <hr />
-                    </div>
-                    <div className="car">
-                        <div className="car-sets">
-                            <div className="car-race-btns">
-                                <button className='orange-btn md-padding sm-btn'>Select</button>
-                                <button className='light-blue-btn md-padding sm-btn'>Remove</button>
-                            </div>
-                            <div className="start-stop-btns">
-                                <button className='green-btn sm-padding sm-btn'>A</button>
-                                <button className='gray-btn sm-padding sm-btn'>B</button>
-                            </div>
-                            <div className="car-ico">
-                                <i className="fa-solid fa-car-side"></i>
-                            </div>
-                        </div>
-                        <div className="finish-block"></div>
-                        <hr />
-                    </div>
-                    <div className="car">
-                        <div className="car-sets">
-                            <div className="car-race-btns">
-                                <button className='orange-btn md-padding sm-btn'>Select</button>
-                                <button className='light-blue-btn md-padding sm-btn'>Remove</button>
-                            </div>
-                            <div className="start-stop-btns">
-                                <button className='green-btn sm-padding sm-btn'>A</button>
-                                <button className='gray-btn sm-padding sm-btn'>B</button>
-                            </div>
-                            <div className="car-ico">
-                                <i className="fa-solid fa-car-side"></i>
-                            </div>
-                        </div>
-                        <div className="finish-block"></div>
-                        <hr />
-                    </div>
-                    <div className="car">
-                        <div className="car-sets">
-                            <div className="car-race-btns">
-                                <button className='orange-btn md-padding sm-btn'>Select</button>
-                                <button className='light-blue-btn md-padding sm-btn'>Remove</button>
-                            </div>
-                            <div className="start-stop-btns">
-                                <button className='green-btn sm-padding sm-btn'>A</button>
-                                <button className='gray-btn sm-padding sm-btn'>B</button>
-                            </div>
-                            <div className="car-ico">
-                                <i className="fa-solid fa-car-side"></i>
-                            </div>
-                        </div>
-                        <div className="finish-block"></div>
-                        <hr />
-                    </div>
-                    <div className="car">
-                        <div className="car-sets">
-                            <div className="car-race-btns">
-                                <button className='orange-btn md-padding sm-btn'>Select</button>
-                                <button className='light-blue-btn md-padding sm-btn'>Remove</button>
-                            </div>
-                            <div className="start-stop-btns">
-                                <button className='green-btn sm-padding sm-btn'>A</button>
-                                <button className='gray-btn sm-padding sm-btn'>B</button>
-                            </div>
-                            <div className="car-ico">
-                                <i className="fa-solid fa-car-side"></i>
-                            </div>
-                        </div>
-                        <div className="finish-block"></div>
-                        <hr />
-                    </div>
-                    <div className="car">
-                        <div className="car-sets">
-                            <div className="car-race-btns">
-                                <button className='orange-btn md-padding sm-btn'>Select</button>
-                                <button className='light-blue-btn md-padding sm-btn'>Remove</button>
-                            </div>
-                            <div className="start-stop-btns">
-                                <button className='green-btn sm-padding sm-btn'>A</button>
-                                <button className='gray-btn sm-padding sm-btn'>B</button>
-                            </div>
-                            <div className="car-ico">
-                                <i className="fa-solid fa-car-side"></i>
-                            </div>
-                        </div>
-                        <div className="finish-block"></div>
-                        <hr />
-                    </div>
-                </div>
-                <div className="garage-info">
-                    <div className="garage-count">
-                        <p>GARAGE (105)</p>
-                    </div>
-                    <div className="pagination">
-                        <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-left"></i></button>
-                        <p>PAGE #1</p>
-                        <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-right"></i></button>
-                    </div>
-                </div>
+                <section>
+                    {error && <p className='fetch-error'>{error}</p>}
+                    {isPending && <p className='fetch-loading'>Loading cars...</p>}
+                    {cars && <CarList cars={cars} />}
+                </section>
             </div>
         </div>
     )

@@ -9,7 +9,8 @@ var _useFetch2 = _interopRequireDefault(require("../useFetch"));
 var _WinnerList = _interopRequireDefault(require("../WinnerList"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var Winners = function Winners(props) {
-  var _useFetch = (0, _useFetch2.default)('http://localhost:3000/winners'),
+  var winnersUrl = 'http://localhost:3000/winners';
+  var _useFetch = (0, _useFetch2.default)(winnersUrl),
     winnersData = _useFetch.data,
     winnersIsPending = _useFetch.isPending,
     winnersError = _useFetch.error;

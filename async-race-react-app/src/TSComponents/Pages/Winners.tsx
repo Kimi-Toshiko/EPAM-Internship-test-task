@@ -5,7 +5,8 @@ import WinnerList from '../WinnerList';
 type Props = {};
 
 const Winners = (props: Props) => {
-    const {data: winnersData, isPending: winnersIsPending, error: winnersError} = useFetch('http://localhost:3000/winners');
+    const winnersUrl: string = 'http://localhost:3000/winners';
+    const {data: winnersData, isPending: winnersIsPending, error: winnersError} = useFetch(winnersUrl);
 
     return (
         <div className="winners">

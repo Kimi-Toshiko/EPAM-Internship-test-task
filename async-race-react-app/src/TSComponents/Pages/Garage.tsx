@@ -5,7 +5,8 @@ import useFetch from '../useFetch';
 type Props = {};
 
 const Garage = (props: Props) => {
-    const { data: cars, isPending, error } = useFetch('http://localhost:3000/garage');
+    const carsUrl: string = 'http://localhost:3000/garage'; 
+    const { data: cars, isPending, error } = useFetch(carsUrl);
 
     return (
         <div className="garage">

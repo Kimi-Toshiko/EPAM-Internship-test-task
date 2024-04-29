@@ -7,11 +7,8 @@ interface IWinnerListProps {
 }
 
 const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
-
-    const {data: carsData, isPending: carsIsPending, error: carsError} = useFetch('http://localhost:3000/garage');
-
-    console.log(carsIsPending);
-    console.log(carsError);
+    const carsUrl: string = 'http://localhost:3000/garage';
+    const {data: carsData} = useFetch(carsUrl);
 
     function filterById(jsonObject: [], id: number) {
         return jsonObject.filter(function(jsonObject) {
@@ -21,18 +18,16 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
     let isCarsDataLoaded = false;
 
     try {
-        if (carsData == null) {
+        if (carsData === null) {
             console.log('cars data is null');
-            console.log(`cars data load is: ${isCarsDataLoaded}`);
         }
         else {
             console.log('cars data is loaded');
             isCarsDataLoaded = true;
-            console.log(`cars data load is: ${isCarsDataLoaded}`);
         }
     }
-    catch {
-        console.log('error with cars data occurred');
+    catch (err) {
+        console.log(err);
     }
 
     return ( 

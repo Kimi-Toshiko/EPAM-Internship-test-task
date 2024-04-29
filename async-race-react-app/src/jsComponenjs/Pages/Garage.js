@@ -9,7 +9,8 @@ var _CarList = _interopRequireDefault(require("../CarList"));
 var _useFetch2 = _interopRequireDefault(require("../useFetch"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var Garage = function Garage(props) {
-  var _useFetch = (0, _useFetch2.default)('http://localhost:3000/garage'),
+  var carsUrl = 'http://localhost:3000/garage';
+  var _useFetch = (0, _useFetch2.default)(carsUrl),
     cars = _useFetch.data,
     isPending = _useFetch.isPending,
     error = _useFetch.error;

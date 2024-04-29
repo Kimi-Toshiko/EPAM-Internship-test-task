@@ -38,6 +38,8 @@
 
     .btns-block {
         @include flex (row, no-wrap, space-between); 
+        align-content: center;
+        align-items: center;
         margin-bottom: 2rem;  
         
         .race-btns {
@@ -128,5 +130,124 @@
         margin-top: 0;
         margin-left: 2rem;
         text-transform: uppercase;
+    }
+}
+
+// RESPONSIVE
+@media screen and (max-width: 1150px) {
+    #garage-content {
+        button {
+            font-size: 1rem;
+            padding: .2rem .6rem;
+        }
+        .sm-padding {
+            padding: .1rem .3rem;
+        }
+        .md-padding {
+            padding: .15rem .4rem;
+        }
+        .sm-btn {
+            font-size: .82rem;
+        }
+
+        .btns-block {
+            .cu-btns {
+                input[type="text"] {
+                    width: 8rem;
+                    height: 1rem;
+                }
+                input[type="color"] {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                    margin: 0 .5rem;
+                }
+            }
+        }
+
+        .divider {
+            width: 15rem;
+            height: 2rem;
+        }
+
+        .cars-list {
+            .car {
+                .car-sets {
+                    .car-race-btns, .start-stop-btns {
+                        button {
+                            &:first-child {
+                                margin-bottom: .3rem;
+                            }
+                        }
+                    }
+    
+                    .car-ico {
+                        i {
+                            font-size: 2.5rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .garage-info {
+            .garage-count p {
+                font-size: 1.3rem;
+                margin-top: 1rem;
+            }
+        }
+
+        .fetch-error, .fetch-loading, .car-name p {
+            font-size: 1rem;
+            margin-top: 1.5rem;
+        }
+    
+        .car-name p {
+            margin-top: 0;
+        }
+
+        .pagination {
+            margin-top: 1.5rem;
+            p {
+                font-size: 1.3rem !important;
+                margin: 0rem .5rem !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 910px) {
+    #garage-content {
+        .btns-block {
+            .race-btns {
+                @include flex(column, no-wrap, space-between);
+                width: 6rem;
+
+                button {
+                    width: 93%;
+
+                    &:first-child {
+                        margin-bottom: .3rem;
+                    }
+                }
+            }
+
+            .cu-btns {
+                flex-direction: column;
+
+                button {
+                    width: 4.3rem !important;
+                }
+
+                .create {
+                    margin-bottom: .3rem;
+                    margin-right: 0;
+                }
+
+                input[type="text"] {
+                    width: 6rem;
+                    height: 1rem;
+                }
+            }
+        }
     }
 }

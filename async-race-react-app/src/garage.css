@@ -169,7 +169,6 @@
 }
 #garage-content .cars-list .car .car-sets .car-ico i {
   font-size: 3rem;
-  color: orange;
 }
 #garage-content .garage-info {
   display: -webkit-box;
@@ -209,4 +208,14 @@
 #garage-content .garage-info .pagination p {
   font-size: 2rem;
   margin: 0 1rem;
+}
+#garage-content .fetch-error, #garage-content .fetch-loading, #garage-content .car-name p {
+  color: #CBCBCB;
+  font-size: 20px;
+  margin-top: 2rem;
+}
+#garage-content .car-name p {
+  margin-top: 0;
+  margin-left: 2rem;
+  text-transform: uppercase;
 }

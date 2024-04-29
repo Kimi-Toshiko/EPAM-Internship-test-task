@@ -99,7 +99,6 @@
                 .car-ico {
                     i {
                         font-size: 3rem;
-                        color: orange;
                     }
                 }
             }
@@ -117,5 +116,17 @@
         }
 
         @include pagination;
+    }
+
+    .fetch-error, .fetch-loading, .car-name p {
+        color: $gray;
+        font-size: 20px;
+        margin-top: 2rem;
+    }
+
+    .car-name p {
+        margin-top: 0;
+        margin-left: 2rem;
+        text-transform: uppercase;
     }
 }

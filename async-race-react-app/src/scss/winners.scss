@@ -64,5 +64,9 @@
         }
     }
 
+    .fetch-error, .fetch-loading {
+        margin-top: 2rem;
+    }
+
     @include pagination;
 }

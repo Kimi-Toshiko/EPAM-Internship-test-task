@@ -15,7 +15,7 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
             return (jsonObject['id'] === id);})[0];
     };
 
-    let isCarsDataLoaded = false;
+    let isCarsDataLoaded: boolean = false;
 
     try {
         if (carsData === null) {

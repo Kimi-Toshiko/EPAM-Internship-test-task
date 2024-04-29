@@ -58,6 +58,9 @@
 #winners-content .winners-tb tr th:nth-child(4), #winners-content .winners-tb tr td:nth-child(4) {
   width: 10%;
 }
+#winners-content .fetch-error, #winners-content .fetch-loading {
+  margin-top: 2rem;
+}
 #winners-content .pagination {
   display: -webkit-box;
   display: -ms-flexbox;

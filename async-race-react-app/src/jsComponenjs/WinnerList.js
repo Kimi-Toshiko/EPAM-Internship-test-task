@@ -10,12 +10,9 @@ var _IWinner = _interopRequireDefault(require("./Interfaces/IWinner"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var WinnerList = function WinnerList(_ref) {
   var winners = _ref.winners;
-  var _useFetch = (0, _useFetch2.default)('http://localhost:3000/garage'),
-    carsData = _useFetch.data,
-    carsIsPending = _useFetch.isPending,
-    carsError = _useFetch.error;
-  console.log(carsIsPending);
-  console.log(carsError);
+  var carsUrl = 'http://localhost:3000/garage';
+  var _useFetch = (0, _useFetch2.default)(carsUrl),
+    carsData = _useFetch.data;
   function filterById(jsonObject, id) {
     return jsonObject.filter(function (jsonObject) {
       return jsonObject['id'] === id;
@@ -24,16 +21,14 @@ var WinnerList = function WinnerList(_ref) {
   ;
   var isCarsDataLoaded = false;
   try {
-    if (carsData == null) {
+    if (carsData === null) {
       console.log('cars data is null');
-      console.log("cars data load is: ".concat(isCarsDataLoaded));
     } else {
       console.log('cars data is loaded');
       isCarsDataLoaded = true;
-      console.log("cars data load is: ".concat(isCarsDataLoaded));
     }
-  } catch (_unused) {
-    console.log('error with cars data occurred');
+  } catch (err) {
+    console.log(err);
   }
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "winners-list-content"

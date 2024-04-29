@@ -40,4 +40,14 @@
             margin: 0 1rem;
         }
     }
+
+    @media screen and (max-width: 1150px) {
+        .pagination {
+            margin-top: 1.5rem;
+            p {
+                font-size: 1.3rem !important;
+                margin: 0rem .5rem !important;
+            }
+        }
+    }
 }

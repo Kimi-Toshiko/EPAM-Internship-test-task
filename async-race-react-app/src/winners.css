@@ -80,3 +80,12 @@
   font-size: 2rem;
   margin: 0 1rem;
 }
+@media screen and (max-width: 1150px) {
+  #winners-content .pagination {
+    margin-top: 1.5rem;
+  }
+  #winners-content .pagination p {
+    font-size: 1.3rem !important;
+    margin: 0rem 0.5rem !important;
+  }
+}

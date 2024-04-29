@@ -214,6 +214,15 @@
   font-size: 2rem;
   margin: 0 1rem;
 }
+@media screen and (max-width: 1150px) {
+  #garage-content .garage-info .pagination {
+    margin-top: 1.5rem;
+  }
+  #garage-content .garage-info .pagination p {
+    font-size: 1.3rem !important;
+    margin: 0rem 0.5rem !important;
+  }
+}
 #garage-content .fetch-error, #garage-content .fetch-loading, #garage-content .car-name p {
   color: #CBCBCB;
   font-size: 20px;
@@ -268,13 +277,6 @@
   }
   #garage-content .car-name p {
     margin-top: 0;
-  }
-  #garage-content .pagination {
-    margin-top: 1.5rem;
-  }
-  #garage-content .pagination p {
-    font-size: 1.3rem !important;
-    margin: 0rem 0.5rem !important;
   }
 }
 @media screen and (max-width: 910px) {

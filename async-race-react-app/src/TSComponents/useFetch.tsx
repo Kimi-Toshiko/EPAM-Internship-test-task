@@ -28,7 +28,7 @@ const useFetch = (url: string): IUseFetchResult => {
                 setIsPending(false);
                 setError(err.message);
             })
-    }, [url]);
+    }, [url, data]);
 
     return {data, isPending, error};
 }

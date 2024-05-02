@@ -8,7 +8,6 @@ require("../../garage.css");
 var _CarList = _interopRequireDefault(require("../CarList"));
 var _useFetch2 = _interopRequireDefault(require("../useFetch"));
 var _axios = _interopRequireDefault(require("axios"));
-var _ICar = _interopRequireDefault(require("../Interfaces/ICar"));
 var _CarBrandList = _interopRequireDefault(require("../Data/CarBrandList"));
 var _CarModelList = _interopRequireDefault(require("../Data/CarModelList"));
 var _HexAlphabetList = _interopRequireDefault(require("../Data/HexAlphabetList"));
@@ -30,6 +29,15 @@ var Garage = function Garage(props) {
     cars = _useFetch.data,
     isPending = _useFetch.isPending,
     error = _useFetch.error;
+  var _useState3 = (0, _react.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    inputName = _useState4[0],
+    setInputName = _useState4[1];
+  var _useState5 = (0, _react.useState)('#000000'),
+    _useState6 = _slicedToArray(_useState5, 2),
+    inputColor = _useState6[0],
+    setInputColor = _useState6[1];
+  var createCarName = document.getElementById('create-car-name');
   var handleGenerateRandomCars = function handleGenerateRandomCars() {
     for (var i = cars.length; i < cars.length + 100; i++) {
       var newCar = {
@@ -39,6 +47,30 @@ var Garage = function Garage(props) {
       _axios.default.post(carsUrl, newCar);
     }
     setIsDataChanged(_isDataChanged + 1);
+  };
+  var handleNameInputChange = function handleNameInputChange(el) {
+    setInputName(el.target.value);
+    if (createCarName !== null && createCarName !== void 0 && createCarName.classList.contains('invalid-form-input')) {
+      createCarName === null || createCarName === void 0 || createCarName.classList.remove('invalid-form-input');
+    }
+  };
+  var handleColorInputChange = function handleColorInputChange(el) {
+    setInputColor(el.target.value);
+  };
+  var handleCreateCar = function handleCreateCar(el) {
+    el.preventDefault();
+    var newCar = {
+      'name': inputName,
+      'color': inputColor
+    };
+    if (inputName === '') {
+      console.log('name is empty');
+      createCarName === null || createCarName === void 0 || createCarName.setAttribute('placeholder', 'Enter car name...');
+      createCarName === null || createCarName === void 0 || createCarName.classList.add('invalid-form-input');
+    } else {
+      _axios.default.post(carsUrl, newCar);
+      setIsDataChanged(_isDataChanged + 1);
+    }
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "garage"
@@ -60,13 +92,22 @@ var Garage = function Garage(props) {
     className: "cu-btns"
   }, /*#__PURE__*/React.createElement("div", {
     className: "create"
+  }, /*#__PURE__*/React.createElement("form", {
+    action: "http://localhost:3000/garage",
+    method: "POST"
   }, /*#__PURE__*/React.createElement("input", {
-    type: "text"
+    type: "text",
+    id: "create-car-name",
+    onChange: handleNameInputChange
   }), /*#__PURE__*/React.createElement("input", {
-    type: "color"
+    type: "color",
+    id: "create-car-color",
+    onChange: handleColorInputChange
   }), /*#__PURE__*/React.createElement("button", {
-    className: "orange-btn"
-  }, "Create")), /*#__PURE__*/React.createElement("div", {
+    className: "orange-btn",
+    type: "submit",
+    onClick: handleCreateCar
+  }, "Create"))), /*#__PURE__*/React.createElement("div", {
     className: "update"
   }, /*#__PURE__*/React.createElement("input", {
     type: "text"

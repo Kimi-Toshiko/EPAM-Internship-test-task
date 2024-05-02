@@ -2,7 +2,6 @@ import '../../garage.css';
 import CarList from '../CarList';
 import useFetch from '../useFetch';
 import axios from 'axios';
-import ICar from '../Interfaces/ICar';
 import CarBrandList from '../Data/CarBrandList';
 import CarModelList from '../Data/CarModelList';
 import HexAlphabetList from '../Data/HexAlphabetList';
@@ -14,6 +13,10 @@ const Garage = (props: Props) => {
     const [isDataChanged, setIsDataChanged] = useState<number>(0);
     const carsUrl: string = 'http://localhost:3000/garage'; 
     const { data: cars, isPending, error } = useFetch(carsUrl, isDataChanged);
+    const [inputName, setInputName] = useState<string>('');
+    const [inputColor, setInputColor] = useState<string>('#000000');
+
+    const createCarName = document.getElementById('create-car-name');
 
     const handleGenerateRandomCars: VoidFunction = () => {        
         for (let i: number = cars.length; i < cars.length + 100; i++) {
@@ -26,6 +29,36 @@ const Garage = (props: Props) => {
         setIsDataChanged(isDataChanged + 1);
     }
 
+    const handleNameInputChange: React.ChangeEventHandler<HTMLInputElement> = (el) => {
+        setInputName(el.target.value);
+
+        if (createCarName?.classList.contains('invalid-form-input')) {
+            createCarName?.classList.remove('invalid-form-input');
+        }
+    }
+
+    const handleColorInputChange: React.ChangeEventHandler<HTMLInputElement> = (el) => {
+        setInputColor(el.target.value);
+    }
+
+    const handleCreateCar: React.MouseEventHandler<HTMLButtonElement> = (el) => {
+        el.preventDefault();
+        let newCar = {
+            'name': inputName,
+            'color': inputColor
+        }
+
+        if (inputName === '') {
+            console.log('name is empty');
+            createCarName?.setAttribute('placeholder', 'Enter car name...');
+            createCarName?.classList.add('invalid-form-input');
+        }
+        else {
+            axios.post(carsUrl, newCar);
+            setIsDataChanged(isDataChanged + 1);
+        }
+    }
+
     return (
         <div className="garage">
             <div id="garage-content">
@@ -36,9 +69,11 @@ const Garage = (props: Props) => {
                     </div>
                     <div className="cu-btns">
                         <div className="create">
-                            <input type="text" />
-                            <input type="color" />
-                            <button className='orange-btn'>Create</button>
+                            <form action="http://localhost:3000/garage" method='POST'>
+                                <input type="text" id='create-car-name' onChange={handleNameInputChange} />
+                                <input type="color" id='create-car-color' onChange={handleColorInputChange} />
+                                <button className='orange-btn' type='submit' onClick={handleCreateCar}>Create</button>
+                            </form>
                         </div>
                         <div className="update">
                             <input type="text" />

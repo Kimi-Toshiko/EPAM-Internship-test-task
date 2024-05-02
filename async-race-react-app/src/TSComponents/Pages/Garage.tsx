@@ -57,7 +57,7 @@ const Garage = (props: Props) => {
                 <section>
                     {error && <p className='fetch-error'>{error}</p>}
                     {isPending && <p className='fetch-loading'>Loading cars...</p>}
-                    {cars && <CarList cars={cars} />}
+                    {cars && <CarList cars={cars} isDataChanged={() => {setIsDataChanged(isDataChanged + 1)}} />}
                 </section>
             </div>
         </div>

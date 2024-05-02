@@ -1,12 +1,16 @@
 import React from "react";
 import ICar from "./Interfaces/ICar";
 import usePagination from "./usePagination";
+import axios from "axios";
 
 interface ICarListProps {
     cars: ICar[];
+    isDataChanged: () => void;
 }
 
-const CarList: React.FC<ICarListProps> = ({cars}) => {
+const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
+    const dataUrl = 'http://localhost:3000/garage';
+
     const {
         firstContentIndex,
         lastContentIndex,
@@ -26,7 +30,12 @@ const CarList: React.FC<ICarListProps> = ({cars}) => {
                     <div className="car-sets">
                         <div className="car-race-btns">
                             <button className='orange-btn md-padding sm-btn'>Select</button>
-                            <button className='light-blue-btn md-padding sm-btn'>Remove</button>
+                            <button 
+                            className='light-blue-btn md-padding sm-btn'
+                            onClick={() => {isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged is not defined')
+                                            axios.delete(`${dataUrl}/${car.id}`)}}>
+                                Remove
+                            </button>
                         </div>
                         <div className="start-stop-btns">
                             <button className='green-btn sm-padding sm-btn'>A</button>

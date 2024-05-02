@@ -54,9 +54,7 @@ const CarList: React.FC<ICarListProps> = ({cars}) => {
                         onClick={prevPage}>
                             <i className="fa-solid fa-caret-left"></i>
                         </button>
-
                         <p>PAGE №{page}/{totalPages}</p>
-                
                         <button 
                         className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
                         disabled={page === totalPages ? true : false} 

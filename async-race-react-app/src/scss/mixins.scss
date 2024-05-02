@@ -39,6 +39,14 @@
             font-size: 2rem;
             margin: 0 1rem;
         }
+
+        .btn-disabled {
+            color: $gray !important;
+            border-color: $gray;
+            &:hover {
+                background-color: transparent;
+            }
+        }
     }
 
     @media screen and (max-width: 1150px) {

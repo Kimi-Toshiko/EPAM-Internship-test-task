@@ -80,6 +80,13 @@
   font-size: 2rem;
   margin: 0 1rem;
 }
+#winners-content .pagination .btn-disabled {
+  color: #CBCBCB !important;
+  border-color: #CBCBCB;
+}
+#winners-content .pagination .btn-disabled:hover {
+  background-color: transparent;
+}
 @media screen and (max-width: 1150px) {
   #winners-content .pagination {
     margin-top: 1.5rem;

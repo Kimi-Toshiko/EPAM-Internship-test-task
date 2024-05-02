@@ -1,15 +1,28 @@
 import React from "react";
 import ICar from "./Interfaces/ICar";
+import usePagination from "./usePagination";
 
 interface ICarListProps {
     cars: ICar[];
 }
 
 const CarList: React.FC<ICarListProps> = ({cars}) => {
+    const {
+        firstContentIndex,
+        lastContentIndex,
+        nextPage,
+        prevPage,
+        page,
+        totalPages
+    } = usePagination({
+        contentPerPage: 7,
+        count: cars.length
+    });
+
     return (
         <div className="cars-list">
-            {cars.map(car => (
-                <div className="car">
+            {cars.slice(firstContentIndex, lastContentIndex).map(car => (
+                <div className="car" key={car.id}>
                     <div className="car-sets">
                         <div className="car-race-btns">
                             <button className='orange-btn md-padding sm-btn'>Select</button>
@@ -35,9 +48,21 @@ const CarList: React.FC<ICarListProps> = ({cars}) => {
                         <p>GARAGE ({cars.length})</p>
                     </div>
                     <div className="pagination">
-                        <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-left"></i></button>
-                        <p>PAGE #1</p>
-                        <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-right"></i></button>
+                        <button 
+                        className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 
+                        disabled={page === 1 ? true : false} 
+                        onClick={prevPage}>
+                            <i className="fa-solid fa-caret-left"></i>
+                        </button>
+
+                        <p>PAGE №{page}/{totalPages}</p>
+                
+                        <button 
+                        className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
+                        disabled={page === totalPages ? true : false} 
+                        onClick={nextPage}>
+                            <i className="fa-solid fa-caret-right"></i>
+                        </button>
                     </div>
                 </div>
         </div>

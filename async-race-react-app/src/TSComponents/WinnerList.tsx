@@ -1,12 +1,25 @@
 import React from "react";
 import useFetch from "./useFetch";
 import IWinner from "./Interfaces/IWinner";
+import usePagination from "./usePagination";
 
 interface IWinnerListProps {
     winners: IWinner[];
 }
 
 const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
+    const {
+        firstContentIndex,
+        lastContentIndex,
+        nextPage,
+        prevPage,
+        page,
+        totalPages
+    } = usePagination({
+        contentPerPage: 7,
+        count: winners.length
+    });
+
     const carsUrl: string = 'http://localhost:3000/garage';
     const {data: carsData} = useFetch(carsUrl);
 
@@ -41,7 +54,7 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
                     <th>BEST TIME (SECONDS)</th>
                 </tr>
                 {
-                    winners.map(winner => (
+                    winners.slice(firstContentIndex, lastContentIndex).map(winner => (
                         <tr key={winner.id}>
                             <td>{winner.id}</td>
                             <td><i className="fa-solid fa-car-side" style={{'color': isCarsDataLoaded ? filterById(carsData, winner.id)['color'] : '#CBCBCB'}}></i></td>
@@ -53,9 +66,21 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
                 }
             </table>
             <div className="pagination">
-                <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-left"></i></button>
-                <p>PAGE #1</p>
-                <button className='orange-btn sm-padding'><i className="fa-solid fa-caret-right"></i></button>
+                <button 
+                className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 
+                disabled={page === 1 ? true : false} 
+                onClick={prevPage}>
+                    <i className="fa-solid fa-caret-left"></i>
+                </button>
+
+                <p>PAGE №{page}/{totalPages}</p>
+                
+                <button 
+                className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
+                disabled={page === totalPages ? true : false} 
+                onClick={nextPage}>
+                    <i className="fa-solid fa-caret-right"></i>
+                </button>
             </div>
         </div>
     );

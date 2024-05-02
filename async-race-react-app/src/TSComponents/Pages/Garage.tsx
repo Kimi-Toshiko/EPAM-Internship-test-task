@@ -6,14 +6,18 @@ import ICar from '../Interfaces/ICar';
 import CarBrandList from '../Data/CarBrandList';
 import CarModelList from '../Data/CarModelList';
 import HexAlphabetList from '../Data/HexAlphabetList';
+import { useState } from 'react';
 
 type Props = {};
 
 const Garage = (props: Props) => {
+    const [isDataChanged, setIsDataChanged] = useState<number>(0);
     const carsUrl: string = 'http://localhost:3000/garage'; 
-    const { data: cars, isPending, error } = useFetch(carsUrl);
+    const { data: cars, isPending, error } = useFetch(carsUrl, isDataChanged);
 
     const handleGenerateRandomCars: VoidFunction = () => {
+        setIsDataChanged(isDataChanged + 1);
+        
         for (let i: number = cars.length; i < cars.length + 100; i++) {
             let newCar: ICar = {
                 "name": `${CarBrandList[Math.round(Math.random()*(CarBrandList.length -1))]} ${CarModelList[Math.round(Math.random()*(CarModelList.length -1))]}`,

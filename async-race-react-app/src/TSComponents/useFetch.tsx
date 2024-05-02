@@ -6,7 +6,7 @@ interface IUseFetchResult {
     error: any | null;
 }
 
-const useFetch = (url: string): IUseFetchResult => {
+const useFetch = (url: string, isDataChanged?: number): IUseFetchResult => {
     const [data, setData] = useState<any | null>(null);
     const [isPending, setIsPending] = useState<boolean>(true);
     const [error, setError] = useState<any | null>(null);
@@ -28,7 +28,7 @@ const useFetch = (url: string): IUseFetchResult => {
                 setIsPending(false);
                 setError(err.message);
             })
-    }, [url, data]);
+    }, [url, isDataChanged]);
 
     return {data, isPending, error};
 }

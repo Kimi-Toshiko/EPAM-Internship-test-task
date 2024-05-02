@@ -23,23 +23,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Garage = function Garage(props) {
   var _useState = (0, _react.useState)(0),
     _useState2 = _slicedToArray(_useState, 2),
-    isDataChanged = _useState2[0],
+    _isDataChanged = _useState2[0],
     setIsDataChanged = _useState2[1];
   var carsUrl = 'http://localhost:3000/garage';
-  var _useFetch = (0, _useFetch2.default)(carsUrl, isDataChanged),
+  var _useFetch = (0, _useFetch2.default)(carsUrl, _isDataChanged),
     cars = _useFetch.data,
     isPending = _useFetch.isPending,
     error = _useFetch.error;
   var handleGenerateRandomCars = function handleGenerateRandomCars() {
-    setIsDataChanged(isDataChanged + 1);
     for (var i = cars.length; i < cars.length + 100; i++) {
       var newCar = {
         "name": "".concat(_CarBrandList.default[Math.round(Math.random() * (_CarBrandList.default.length - 1))], " ").concat(_CarModelList.default[Math.round(Math.random() * (_CarModelList.default.length - 1))]),
-        "color": "#".concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]),
-        "id": i + 1
+        "color": "#".concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))]).concat(_HexAlphabetList.default[Math.round(Math.random() * (_HexAlphabetList.default.length - 1))])
       };
       _axios.default.post(carsUrl, newCar);
     }
+    setIsDataChanged(_isDataChanged + 1);
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "garage"
@@ -87,7 +86,10 @@ var Garage = function Garage(props) {
   }, error), isPending && /*#__PURE__*/React.createElement("p", {
     className: "fetch-loading"
   }, "Loading cars..."), cars && /*#__PURE__*/React.createElement(_CarList.default, {
-    cars: cars
+    cars: cars,
+    isDataChanged: function isDataChanged() {
+      setIsDataChanged(_isDataChanged + 1);
+    }
   }))));
 };
 var _default = exports.default = Garage;

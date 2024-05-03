@@ -2,10 +2,28 @@
 @import 'vars';
 @import 'mixins';
 
+#swal2-title {
+    font-family: $secondary-font;
+    font-size: 1.5rem;
+    color: $dark-blue;
+}
+
+.swal2-confirm {
+    font-family: $secondary-font !important;
+    background-color: $dark-blue !important;
+    transition: .3s;
+    border: 1px solid $dark-blue !important;
+    &:hover {
+        transition: .3s;
+        background-color: $light-blue !important;
+        color: $dark-blue;
+    }
+}
+
 #garage-content {
     margin-top: 2.5rem;
     font-family: $secondary-font;
-    padding: 0 2rem 2rem 2rem;
+    padding: 0 2rem;
 
     button {
         padding: .5rem 1rem;
@@ -38,8 +56,6 @@
 
     .btns-block {
         @include flex (row, no-wrap, space-between); 
-        align-content: center;
-        align-items: center;
         margin-bottom: 2rem;  
         
         .race-btns {
@@ -74,7 +90,6 @@
             .invalid-form-input {
                 border-color: rgb(132, 1, 1);
                 color: rgb(132, 1, 1);
-                font-size: 1rem;
             }
         }
     }
@@ -102,11 +117,17 @@
                             margin-bottom: .5rem;
                         }
                     }
+
+                    .btn-selected-active {
+                        background-color: $orange;
+                        color: $dark-blue;
+                    }
                 }
 
                 .car-ico {
                     i {
                         font-size: 3rem;
+                        // color: orange;
                     }
                 }
             }
@@ -136,121 +157,5 @@
         margin-top: 0;
         margin-left: 2rem;
         text-transform: uppercase;
-    }
-}
-
-// RESPONSIVE
-@media screen and (max-width: 1150px) {
-    #garage-content {
-        button {
-            font-size: 1rem;
-            padding: .2rem .6rem;
-        }
-        .sm-padding {
-            padding: .1rem .3rem;
-        }
-        .md-padding {
-            padding: .15rem .4rem;
-        }
-        .sm-btn {
-            font-size: .82rem;
-        }
-
-        .btns-block {
-            .cu-btns {
-                input[type="text"] {
-                    width: 8rem;
-                    height: 1rem;
-                }
-
-                input[type="color"] {
-                    height: 1.5rem;
-                    width: 1.5rem;
-                    margin: 0 .5rem;
-                }
-
-                .invalid-form-input {
-                    font-size: 1rem;
-                }
-            }
-        }
-
-        .divider {
-            width: 15rem;
-            height: 2rem;
-        }
-
-        .cars-list {
-            .car {
-                .car-sets {
-                    .car-race-btns, .start-stop-btns {
-                        button {
-                            &:first-child {
-                                margin-bottom: .3rem;
-                            }
-                        }
-                    }
-    
-                    .car-ico {
-                        i {
-                            font-size: 2.5rem;
-                        }
-                    }
-                }
-            }
-        }
-
-        .garage-info {
-            .garage-count p {
-                font-size: 1.3rem;
-                margin-top: 1rem;
-            }
-        }
-
-        .fetch-error, .fetch-loading, .car-name p {
-            font-size: 1rem;
-            margin-top: 1.5rem;
-        }
-    
-        .car-name p {
-            margin-top: 0;
-        }
-    }
-}
-
-@media screen and (max-width: 910px) {
-    #garage-content {
-        .btns-block {
-            .race-btns {
-                @include flex(column, no-wrap, space-between);
-                width: 6rem;
-
-                button {
-                    width: 93%;
-
-                    &:first-child {
-                        margin-bottom: .3rem;
-                    }
-                }
-            }
-
-            .cu-btns {
-                flex-direction: column;
-
-                button {
-                    width: 4.3rem !important;
-                }
-
-                .create {
-                    margin-bottom: .3rem;
-                    margin-right: 0;
-                }
-
-                input[type="text"] {
-                    width: 6rem;
-                    height: 1rem;
-                }
-            }
-        }
     }
 }

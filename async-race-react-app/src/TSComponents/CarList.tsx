@@ -2,6 +2,8 @@ import React from "react";
 import ICar from "./Interfaces/ICar";
 import usePagination from "./usePagination";
 import axios from "axios";
+import 'animate.css';
+import Swal from "sweetalert2";
 
 interface ICarListProps {
     cars: ICar[];
@@ -32,8 +34,29 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                             <button className='orange-btn md-padding sm-btn'>Select</button>
                             <button 
                             className='light-blue-btn md-padding sm-btn'
-                            onClick={() => {isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged is not defined')
-                                            axios.delete(`${dataUrl}/${car.id}`)}}>
+                            onClick={() => {isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged not defined');
+                            if (document.getElementById(`select-btn-${car.id}`)?.classList.contains('btn-selected-active')) {
+                                Swal.fire({
+                                    title: "Please, deselect this car before deleting it!",
+                                    showClass: {
+                                      popup: `
+                                        animate__animated
+                                        animate__fadeInUp
+                                        animate__faster
+                                      `
+                                    },
+                                    hideClass: {
+                                      popup: `
+                                        animate__animated
+                                        animate__fadeOutDown
+                                        animate__faster
+                                      `
+                                    }
+                                  });
+                            }
+                            else {
+                                axios.delete(`http://localhost:3000/garage/${car.id}`)}}
+                            }>
                                 Remove
                             </button>
                         </div>

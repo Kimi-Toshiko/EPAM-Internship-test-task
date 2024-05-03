@@ -12,6 +12,8 @@ var _CarBrandList = _interopRequireDefault(require("../Data/CarBrandList"));
 var _CarModelList = _interopRequireDefault(require("../Data/CarModelList"));
 var _HexAlphabetList = _interopRequireDefault(require("../Data/HexAlphabetList"));
 var _react = require("react");
+require("animate.css");
+var _sweetalert = _interopRequireDefault(require("sweetalert2"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -31,13 +33,22 @@ var Garage = function Garage(props) {
     error = _useFetch.error;
   var _useState3 = (0, _react.useState)(''),
     _useState4 = _slicedToArray(_useState3, 2),
-    inputName = _useState4[0],
-    setInputName = _useState4[1];
+    createInputName = _useState4[0],
+    setCreateInputName = _useState4[1];
   var _useState5 = (0, _react.useState)('#000000'),
     _useState6 = _slicedToArray(_useState5, 2),
-    inputColor = _useState6[0],
-    setInputColor = _useState6[1];
+    createInputColor = _useState6[0],
+    setCreateInputColor = _useState6[1];
+  var _useState7 = (0, _react.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    updateInputName = _useState8[0],
+    setUpdateInputName = _useState8[1];
+  var _useState9 = (0, _react.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    updateInputColor = _useState10[0],
+    setUpdateInputColor = _useState10[1];
   var createCarName = document.getElementById('create-car-name');
+  var selectedCar = document.querySelector('div[data-selected]');
   var handleGenerateRandomCars = function handleGenerateRandomCars() {
     for (var i = cars.length; i < cars.length + 100; i++) {
       var newCar = {
@@ -48,28 +59,73 @@ var Garage = function Garage(props) {
     }
     setIsDataChanged(_isDataChanged + 1);
   };
-  var handleNameInputChange = function handleNameInputChange(el) {
-    setInputName(el.target.value);
+  var handleCreateNameInputChange = function handleCreateNameInputChange(el) {
+    setCreateInputName(el.target.value);
     if (createCarName !== null && createCarName !== void 0 && createCarName.classList.contains('invalid-form-input')) {
       createCarName === null || createCarName === void 0 || createCarName.classList.remove('invalid-form-input');
     }
   };
-  var handleColorInputChange = function handleColorInputChange(el) {
-    setInputColor(el.target.value);
+  var handleCreateColorInputChange = function handleCreateColorInputChange(el) {
+    setCreateInputColor(el.target.value);
   };
   var handleCreateCar = function handleCreateCar(el) {
     el.preventDefault();
     var newCar = {
-      'name': inputName,
-      'color': inputColor
+      'name': createInputName,
+      'color': createInputColor
     };
-    if (inputName === '') {
-      console.log('name is empty');
+    if (createInputName === '') {
       createCarName === null || createCarName === void 0 || createCarName.setAttribute('placeholder', 'Enter car name...');
       createCarName === null || createCarName === void 0 || createCarName.classList.add('invalid-form-input');
     } else {
       _axios.default.post(carsUrl, newCar);
       setIsDataChanged(_isDataChanged + 1);
+    }
+  };
+  var handleUpdateNameInputChange = function handleUpdateNameInputChange(el) {
+    setUpdateInputName(el.target.value);
+    if (createCarName !== null && createCarName !== void 0 && createCarName.classList.contains('invalid-form-input')) {
+      createCarName === null || createCarName === void 0 || createCarName.classList.remove('invalid-form-input');
+    }
+  };
+  var handleUpdateColorInputChange = function handleUpdateColorInputChange(el) {
+    setUpdateInputColor(el.target.value);
+  };
+  var handleUpdate = function handleUpdate(el) {
+    el.preventDefault();
+    var selectedCarId = Number(selectedCar === null || selectedCar === void 0 ? void 0 : selectedCar.getAttribute('data-selected'));
+    if (cars[selectedCarId] === undefined && selectedCarId !== cars.length) {
+      console.log(selectedCarId, cars.length);
+      _sweetalert.default.fire({
+        title: "Please, select a car you want to update!",
+        showClass: {
+          popup: "\n                    animate__animated\n                    animate__fadeInUp\n                    animate__faster\n                  "
+        },
+        hideClass: {
+          popup: "\n                    animate__animated\n                    animate__fadeOutDown\n                    animate__faster\n                  "
+        }
+      });
+    } else {
+      if ((updateInputName === '' || null || undefined) && (updateInputColor !== '' || null || undefined)) {
+        _axios.default.patch("".concat(carsUrl, "/").concat(selectedCarId), {
+          "color": updateInputColor
+        });
+        setIsDataChanged(_isDataChanged + 1);
+      } else if ((updateInputName !== '' || null || undefined) && (updateInputColor === '' || null || undefined)) {
+        _axios.default.patch("".concat(carsUrl, "/").concat(selectedCarId), {
+          "name": updateInputName
+        });
+        setIsDataChanged(_isDataChanged + 1);
+      } else if ((updateInputName !== '' || null || undefined) && (updateInputColor !== '' || null || undefined)) {
+        _axios.default.patch("".concat(carsUrl, "/").concat(selectedCarId), {
+          "name": updateInputName,
+          "color": updateInputColor,
+          "id": selectedCarId
+        });
+        setIsDataChanged(_isDataChanged + 1);
+      } else {
+        console.log('nothing is changed');
+      }
     }
   };
   return /*#__PURE__*/React.createElement("div", {
@@ -98,24 +154,31 @@ var Garage = function Garage(props) {
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
     id: "create-car-name",
-    onChange: handleNameInputChange
+    onChange: handleCreateNameInputChange
   }), /*#__PURE__*/React.createElement("input", {
     type: "color",
     id: "create-car-color",
-    onChange: handleColorInputChange
+    onChange: handleCreateColorInputChange
   }), /*#__PURE__*/React.createElement("button", {
     className: "orange-btn",
     type: "submit",
     onClick: handleCreateCar
   }, "Create"))), /*#__PURE__*/React.createElement("div", {
     className: "update"
+  }, /*#__PURE__*/React.createElement("form", {
+    action: "http://localhost:3000/garage",
+    method: "POST"
   }, /*#__PURE__*/React.createElement("input", {
-    type: "text"
+    type: "text",
+    onChange: handleUpdateNameInputChange
   }), /*#__PURE__*/React.createElement("input", {
-    type: "color"
+    type: "color",
+    onChange: handleUpdateColorInputChange
   }), /*#__PURE__*/React.createElement("button", {
-    className: "orange-btn"
-  }, "Update"))), /*#__PURE__*/React.createElement("div", {
+    className: "orange-btn",
+    type: "submit",
+    onClick: handleUpdate
+  }, "Update")))), /*#__PURE__*/React.createElement("div", {
     className: "generate-cars-btn"
   }, /*#__PURE__*/React.createElement("button", {
     className: "light-blue-btn",

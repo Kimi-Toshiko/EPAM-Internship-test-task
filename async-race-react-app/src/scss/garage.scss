@@ -124,10 +124,44 @@
                     }
                 }
 
+                // .animation-move-car {
+                //     animation-name: moveCar;
+                //     animation-duration: 5s;
+                //     animation-direction: right;
+                //     animation-timing-function: ease-in;
+                //     animation-fill-mode: forwards;
+
+                //     @keyframes moveCar {
+                //         from {
+                //             left: 0px;
+                //         }
+                //         to {
+                //             left: 80vw;
+                //         }
+                //     }
+                // }
+
                 .car-ico {
+                    // .animation-move-car {
+                    //     animation-name: moveCar;
+                    //     animation-duration: 5s;
+                    //     animation-direction: right;
+                    //     animation-timing-function: ease-in;
+                    //     animation-fill-mode: forwards;
+
+                    //     @keyframes moveCar {
+                    //         from {
+                    //             left: 0px;
+                    //         }
+                    //         to {
+                    //             left: 80vw;
+                    //         }
+                    //     }
+                    // }
+
                     i {
                         font-size: 3rem;
-                        // color: orange;
+                        position: relative;
                     }
                 }
             }

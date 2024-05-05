@@ -197,6 +197,7 @@
 }
 #garage-content .cars-list .car .car-sets .car-ico i {
   font-size: 3rem;
+  position: relative;
 }
 #garage-content .garage-info {
   display: -webkit-box;

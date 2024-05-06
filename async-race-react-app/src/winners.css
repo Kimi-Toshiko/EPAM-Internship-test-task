@@ -6,6 +6,11 @@
   padding: 0 2rem;
   font-size: 1.25rem;
 }
+#winners-content .winners-count {
+  color: #CFFBFC;
+  font-size: 2rem;
+  font-weight: bold;
+}
 #winners-content .sm-padding {
   padding: 0.2rem 0.5rem;
 }

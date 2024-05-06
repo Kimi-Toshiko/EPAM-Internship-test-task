@@ -65,6 +65,9 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
                     ))
                 }
             </table>
+            <div className="winners-count">
+                <p>WINNERS ({winners.length})</p>
+            </div>
             <div className="pagination">
                 <button 
                 className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 

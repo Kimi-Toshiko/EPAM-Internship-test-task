@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/EPAM-Internship-test-task/static/css/main.75f00506.css",
+    "main.js": "/EPAM-Internship-test-task/static/js/main.3ac3f353.js",
+    "static/js/453.f48c3799.chunk.js": "/EPAM-Internship-test-task/static/js/453.f48c3799.chunk.js",
+    "static/media/ai-generated-8656751_1920.jpg": "/EPAM-Internship-test-task/static/media/ai-generated-8656751_1920.6679ff365f492a9b2b37.jpg",
+    "static/media/divider.png": "/EPAM-Internship-test-task/static/media/divider.d0abf26164619d010a41.png",
+    "index.html": "/EPAM-Internship-test-task/index.html",
+    "main.75f00506.css.map": "/EPAM-Internship-test-task/static/css/main.75f00506.css.map",
+    "main.3ac3f353.js.map": "/EPAM-Internship-test-task/static/js/main.3ac3f353.js.map",
+    "453.f48c3799.chunk.js.map": "/EPAM-Internship-test-task/static/js/453.f48c3799.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75f00506.css",
+    "static/js/main.3ac3f353.js"
+  ]
+}

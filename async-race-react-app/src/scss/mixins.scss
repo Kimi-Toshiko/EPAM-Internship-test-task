@@ -1,0 +1,61 @@
+@mixin flex($direction, $wrap, $justify) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $justify;
+}
+
+@mixin bg-img ($img, $repeat, $size) {
+    background-image: $img;
+    background-repeat: $repeat;
+    background-size: $size;
+}
+
+@mixin center-thru-position {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin diff-color-btns ($color) {
+    color: $color;
+    border-color: $color;
+    transition: .3s;
+    &:hover {
+        background-color: $color;
+        color: $dark-blue;
+        transition: .3s;
+    }
+}
+
+@mixin pagination {
+    .pagination {
+        @include flex (row, no-wrap, right);
+        color: $orange;
+        
+        p {
+            font-size: 2rem;
+            margin: 0 1rem;
+        }
+
+        .btn-disabled {
+            color: $gray !important;
+            border-color: $gray;
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1150px) {
+        .pagination {
+            margin-top: 1.5rem;
+            p {
+                font-size: 1.3rem !important;
+                margin: 0rem .5rem !important;
+            }
+        }
+    }
+}

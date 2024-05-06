@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import 'vars';
+@import 'mixins';
+
+#navbar-content {
+    @include bg-img (url('./Assets/ai-generated-8656751_1920.jpg'), no-repeat, cover);
+    font-family: $main-font;
+    height: 8rem;
+    padding: 0 2rem;
+    @include flex (row, no-wrap, space-between);
+    align-items: center;
+    align-content: center;
+
+    h1 {
+        font-size: 3rem;
+        line-height: 3.5rem;
+        color: $white;
+        -webkit-text-stroke-color: $dark-blue;
+        -webkit-text-stroke-width: 1px;
+        i {
+            display: block;
+            margin-left: 6rem;
+        }
+    }
+
+    .nav-links {
+        ul {
+            @include flex (row, no-wrap, left);
+            li {
+                color: $dark-blue;
+                background-color: $light-blue;
+                font-size: 1.5rem;
+                width: 11rem;
+                height: 3rem;
+                text-align: center;
+                border: 5px solid $orange;
+                border-radius: 10rem;
+                transition: .3s;
+                position: relative;
+
+                &:first-child {
+                    margin-right: 2rem;
+                }
+
+                &:hover {
+                    transition: .3s;
+                    background-color: $orange;
+                    border-color: $light-blue;
+                }
+
+                a {
+                    width: 100%;
+                    height: 1.5rem;
+                    display: block;
+                    padding: .7rem 0;
+                    text-decoration: none;
+                    color: $dark-blue;
+                }
+            }
+        }
+    }
+}
+
+// RESPONSIVE
+@media screen and (max-width: 780px) {
+    #navbar-content {
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .nav-links {
+            ul {
+                flex-direction: column;
+                li {
+                    height: 2.5rem;
+
+                    &:first-child {
+                        margin-right: 0;
+                        margin-bottom: .5rem;
+                    }
+                }
+
+                a {
+                    height: 2rem;
+                    padding: .2rem;
+                }
+            }
+        }
+    }
+}

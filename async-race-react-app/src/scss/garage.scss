@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@200..700&display=swap');
+@import 'vars';
+@import 'mixins';
+
+#swal2-title {
+    font-family: $secondary-font;
+    font-size: 1.5rem;
+    color: $dark-blue;
+}
+
+.swal2-confirm {
+    font-family: $secondary-font !important;
+    background-color: $dark-blue !important;
+    transition: .3s;
+    border: 1px solid $dark-blue !important;
+    &:hover {
+        transition: .3s;
+        background-color: $light-blue !important;
+        color: $dark-blue;
+    }
+}
+
+#garage-content {
+    margin-top: 2.5rem;
+    font-family: $secondary-font;
+    padding: 0 2rem;
+
+    button {
+        padding: .5rem 1rem;
+        background-color: transparent;
+        border-radius: 50rem;
+        font-size: 20px;
+    } 
+
+    .sm-padding {
+        padding: .2rem .5rem;
+    }
+    .md-padding {
+        padding: .25rem .55rem;
+    }
+    .sm-btn {
+        font-size: 16px;
+    }
+    .orange-btn {
+        @include diff-color-btns ($orange);
+    }
+    .light-blue-btn {
+        @include diff-color-btns ($light-blue);
+    }
+    .green-btn {
+        @include diff-color-btns ($green);
+    }
+    .gray-btn {
+        @include diff-color-btns ($gray);
+    }
+
+    .btns-block {
+        @include flex (row, no-wrap, space-between); 
+        margin-bottom: 2rem;  
+        
+        .race-btns {
+            button {
+                &:first-child {
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        .cu-btns {
+            @include flex (row, no-wrap, space-between);
+            align-items: center;
+            align-content: center;
+
+            input[type="text"] {
+                width: 9rem;
+                height: 1.5rem;
+                align-self: center;
+                border-radius: 50rem;
+            }
+            input[type="color"] {
+                width: 2rem;
+                align-self: center;
+                margin: 0 .5rem;
+            }
+
+            .create {
+                margin-right: 2rem;
+            }
+
+            .invalid-form-input {
+                border-color: rgb(132, 1, 1);
+                color: rgb(132, 1, 1);
+            }
+        }
+    }
+
+    .divider {
+        @include bg-img (url('./Assets/divider.png'), no-repeat, contain);
+        width: 20rem;
+        margin: 0 auto;
+        height: 3rem;
+    }
+
+    .cars-list {
+        .car {
+            .car-sets {
+                @include flex (row, no-wrap, left);
+                align-content: center;
+                align-items: center;
+
+                .car-race-btns, .start-stop-btns {
+                    @include flex (column, no-wrap, space-between);
+                    margin-right: .5rem;
+
+                    button {
+                        &:first-child {
+                            margin-bottom: .5rem;
+                        }
+                    }
+
+                    .btn-selected-active {
+                        background-color: $orange;
+                        color: $dark-blue;
+                    }
+                }
+
+                // .animation-move-car {
+                //     animation-name: moveCar;
+                //     animation-duration: 5s;
+                //     animation-direction: right;
+                //     animation-timing-function: ease-in;
+                //     animation-fill-mode: forwards;
+
+                //     @keyframes moveCar {
+                //         from {
+                //             left: 0px;
+                //         }
+                //         to {
+                //             left: 80vw;
+                //         }
+                //     }
+                // }
+
+                .car-ico {
+                    // .animation-move-car {
+                    //     animation-name: moveCar;
+                    //     animation-duration: 5s;
+                    //     animation-direction: right;
+                    //     animation-timing-function: ease-in;
+                    //     animation-fill-mode: forwards;
+
+                    //     @keyframes moveCar {
+                    //         from {
+                    //             left: 0px;
+                    //         }
+                    //         to {
+                    //             left: 80vw;
+                    //         }
+                    //     }
+                    // }
+
+                    i {
+                        font-size: 3rem;
+                        position: relative;
+                    }
+                }
+            }
+        }
+    }
+
+    .garage-info {
+        @include flex (row, no-wrap, space-between);
+        margin-top: 1.5rem;
+
+        .garage-count p {
+            font-size: 2rem;
+            font-weight: 600;
+            color: $light-blue;
+        }
+
+        @include pagination;
+    }
+
+    .fetch-error, .fetch-loading, .car-name p {
+        color: $gray;
+        font-size: 20px;
+        margin-top: 2rem;
+    }
+
+    .car-name p {
+        margin-top: 0;
+        margin-left: 2rem;
+        text-transform: uppercase;
+    }
+}

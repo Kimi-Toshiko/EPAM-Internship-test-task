@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Yaldevi:wght@200..700&display=swap');
+@import 'vars';
+@import 'mixins';
+
+#winners-content {
+    margin-top: 1.5rem;
+    color: $gray;
+    font-family: $secondary-font;
+    padding: 0 2rem;
+    font-size: 1.25rem;
+
+    .sm-padding {
+        padding: .2rem .5rem;
+    }
+    .orange-btn {
+        @include diff-color-btns ($orange);
+        background-color: transparent;
+        border-radius: 50rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: $light-blue;
+        font-weight: bold;
+    }
+
+    .winners-tb {
+        width: 100%;
+        text-align: center;
+        margin: 1rem auto;
+
+        tr {
+            td {
+                padding: 1rem 0;
+                font-size: 1rem;
+
+                &:nth-child(3) {
+                    text-transform: uppercase;
+                }
+            }
+
+            &:first-child {
+                border: 1px solid $orange;
+
+                th {
+                    padding: .5rem 0;
+                }
+            }
+
+            th, td {
+                &:first-child {
+                    width: 5%;
+                }
+                &:nth-child(2) {
+                    width: 10%s;
+                }
+                &:nth-child(3) {
+                    width: 50%;
+                }
+                &:nth-child(4) {
+                    width: 10%;
+                }
+            }
+        }
+    }
+
+    .fetch-error, .fetch-loading {
+        margin-top: 2rem;
+    }
+
+    @include pagination;
+}
+
+// RESPONSIVE
+@media screen and (max-width: 1150px) {
+    #winners-content {
+        font-size: 1rem;
+
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        .winners-tb {
+            tr {
+                td {
+                    font-size: 0.82rem;
+                }
+            }
+        }
+    }
+}

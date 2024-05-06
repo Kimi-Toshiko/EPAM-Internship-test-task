@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Yaldevi:wght@200..700&display=swap");
+#winners-content {
+  margin-top: 1.5rem;
+  color: #CBCBCB;
+  font-family: "Yaldevi", sans-serif;
+  padding: 0 2rem;
+  font-size: 1.25rem;
+}
+#winners-content .sm-padding {
+  padding: 0.2rem 0.5rem;
+}
+#winners-content .orange-btn {
+  color: #D39E6F;
+  border-color: #D39E6F;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  background-color: transparent;
+  border-radius: 50rem;
+}
+#winners-content .orange-btn:hover {
+  background-color: #D39E6F;
+  color: #021826;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+#winners-content h2 {
+  font-size: 2rem;
+  color: #CFFBFC;
+  font-weight: bold;
+}
+#winners-content .winners-tb {
+  width: 100%;
+  text-align: center;
+  margin: 1rem auto;
+}
+#winners-content .winners-tb tr td {
+  padding: 1rem 0;
+  font-size: 1rem;
+}
+#winners-content .winners-tb tr td:nth-child(3) {
+  text-transform: uppercase;
+}
+#winners-content .winners-tb tr:first-child {
+  border: 1px solid #D39E6F;
+}
+#winners-content .winners-tb tr:first-child th {
+  padding: 0.5rem 0;
+}
+#winners-content .winners-tb tr th:first-child, #winners-content .winners-tb tr td:first-child {
+  width: 5%;
+}
+#winners-content .winners-tb tr th:nth-child(2), #winners-content .winners-tb tr td:nth-child(2) {
+  width: 10% s;
+}
+#winners-content .winners-tb tr th:nth-child(3), #winners-content .winners-tb tr td:nth-child(3) {
+  width: 50%;
+}
+#winners-content .winners-tb tr th:nth-child(4), #winners-content .winners-tb tr td:nth-child(4) {
+  width: 10%;
+}
+#winners-content .fetch-error, #winners-content .fetch-loading {
+  margin-top: 2rem;
+}
+#winners-content .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  color: #D39E6F;
+}
+#winners-content .pagination p {
+  font-size: 2rem;
+  margin: 0 1rem;
+}
+#winners-content .pagination .btn-disabled {
+  color: #CBCBCB !important;
+  border-color: #CBCBCB;
+}
+#winners-content .pagination .btn-disabled:hover {
+  background-color: transparent;
+}
+@media screen and (max-width: 1150px) {
+  #winners-content .pagination {
+    margin-top: 1.5rem;
+  }
+  #winners-content .pagination p {
+    font-size: 1.3rem !important;
+    margin: 0rem 0.5rem !important;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  #winners-content {
+    font-size: 1rem;
+  }
+  #winners-content h2 {
+    font-size: 1.3rem;
+  }
+  #winners-content .winners-tb tr td {
+    font-size: 0.82rem;
+  }
+}

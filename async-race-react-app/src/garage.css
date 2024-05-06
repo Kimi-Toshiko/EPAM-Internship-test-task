@@ -24,6 +24,13 @@
   font-family: "Yaldevi", sans-serif;
   padding: 0 2rem;
 }
+#garage-content h1 {
+  color: #CFFBFC;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 #garage-content button {
   padding: 0.5rem 1rem;
   background-color: transparent;

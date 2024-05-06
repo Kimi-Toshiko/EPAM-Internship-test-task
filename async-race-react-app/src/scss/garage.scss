@@ -25,6 +25,14 @@
     font-family: $secondary-font;
     padding: 0 2rem;
 
+    h1 {
+        color: $light-blue;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
     button {
         padding: .5rem 1rem;
         background-color: transparent;

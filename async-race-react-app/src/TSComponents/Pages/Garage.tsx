@@ -120,6 +120,7 @@ const Garage = (props: Props) => {
     return (
         <div className="garage">
             <div id="garage-content">
+                <h1>Garage</h1>
                 <div className="btns-block">
                     <div className="race-btns">
                         <button className='orange-btn'>Race <i className="fa-solid fa-play"></i></button>

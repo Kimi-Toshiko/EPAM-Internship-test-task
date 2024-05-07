@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>197 points</ins>)**
+**(Total score: <ins>262 points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -84,12 +84,12 @@ These instructions will help to get you a copy of the project up and running it 
 ##### Car Generation (10 out of 10 points)
 - [x] **Random Car Creation (10 points)**: There is a button, which allows to generate 100 random cars per click. Name is assembled from two random parts (in the generation lists there are at least 10 different names for each part). Color is also generated randomly.
 
-### Car Animation (18 points out of 50 points)
+### Car Animation (43 points out of 50 points)
 - [x] **Engine Control Buttons (10 points)**: All of the engine buttons near each car's image.
-- [x] **Start Engine Animation (8 points out of 20 points)**: When the user clicks on engine button, UI is waiting for car's velocity answer. Car is animated. However, it does not make another request to drive and it does not check 500 error on stopping. 
-- [ ] **Stop Engine Animation (0 out of 10 points)**: Stop engine button logic is not implemented. 
-- [ ] **Button States (0 out of 5 points)**: Not implemented.
-- [ ] **Responsive Animation (0 out of 5 points)**: Not implemented.
+- [x] **Start Engine Animation (13 points out of 20 points)**: When the user clicks on engine button, UI is waiting for car's velocity answer. Car is animated. However, it does not make another request to drive.
+- [x] **Stop Engine Animation (10 points)**: User clicks to engine sto button, UI is waiting for stopping engine from the database, and car is returned to its place.
+- [x] **Button States (5 points)**: Start engine button is disabled, if the car is in driving mode. Stop engine button is also disabled, when the car's is at its initial place.
+- [x] **Responsive Animation (5 points)**: Car animations are fluid on screens as small as 500px.
 
 ### Race Animation (0 points out of 35 points)
 - [ ] **Start Race Button (0 out of 15 points)**: Not implemented.

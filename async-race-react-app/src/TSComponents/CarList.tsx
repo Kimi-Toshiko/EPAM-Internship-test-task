@@ -127,11 +127,6 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                         <div className="start-stop-btns">
                           <button className='green-btn sm-padding sm-btn'
                             onClick={() => {
-                                if (animationPlayState === 'paused') {
-                                  setAnimationPlayState('running');
-                                }
-                                else {
-                                  setAnimationPlayState('running');
                                 setIsCarMoving(true);
                                 fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
@@ -144,11 +139,22 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                               setSingleCarTime(carTime);
                               animatedCar?.classList.add('animation-move-car');
                               }))
-                                }
                           }}
                             >A</button>
                             <button className='gray-btn sm-padding sm-btn'
-                                    onClick={() => {setAnimationPlayState('paused')}}
+                                    onClick={() => {
+                                      setAnimationPlayState('paused');
+                                setIsCarMoving(true);
+                                fetch(`http://localhost:3000/engine?id=${car.id}&status=stopped`, {
+                                method: 'PATCH'
+                              })
+                              .then(response => response.json()
+                              .then(data => ({data: data}))
+                              .then((res) => {
+                              const animatedCar = document.getElementById(`animated-car-${car.id}`);
+                              animatedCar?.classList.remove('animation-move-car');
+                              }))
+                                    }}
                             >B</button>
                         </div>
                         <div className="car-ico" style={{'color': car.color}}>

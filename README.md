@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>192 points</ins>)**
+**(Total score: <ins>197 points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -68,16 +68,16 @@ These instructions will help to get you a copy of the project up and running it 
 
 ## Checklist
 
-### Basic Structure (70 points out of 85 points)
+### Basic Structure (75 points out of 85 points)
 #### 1. View Configuration (20 out of 30 points)
 - [x] **Two views (10 points)**: Two primary views "Garage" and "Winners" are implemented.
 - [x] **Garage View Content (5 points)**: The "Garage" View displays its name, the current page number, and the total numbers of cars in the database (how many car user has in his garage).
 - [x] **Winners View Content (5 points)**: The "Winners" View displays its name, the current page number, and the total count of records in the database (how many records the winners table contains).
 - [ ] **Persistent state (0 out of 10 points)**: View states do not remain the same after switching views and etc.
 
-#### 2. Garage View Functionality (50 out of 55 points)
-##### Car Management (40 out of 45 points)
-- [x] **CRUD Operations (15 out of 20 points)**: Users are allowed to create, update and delete cars, the list of the cars is also displayed. A car has two attributes: "name" and "color". For "delete" operation car is not deleted from the winners table.
+#### 2. Garage View Functionality (55 out of 55 points)
+##### Car Management (45 out of 45 points)
+- [x] **CRUD Operations (20 out of 20 points)**: Users are allowed to create, update and delete cars, the list of the cars is also displayed. A car has two attributes: "name" and "color". For "delete" operation car is not deleted from the winners table.
 - [x] **Color Selection (10 points)**: Color selection from RGB palette is allowed. It displays the selected color on the car's image along with its name.
 - [x] **Management Buttons (5 points)**: Buttons for updating car attributes or deleting it are provided near each car's image.
 - [x] **Pagination (10 points)**: Pagination is implemented for the "Garage" view and displays 7 cars per page.

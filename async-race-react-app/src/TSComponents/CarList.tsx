@@ -3,8 +3,10 @@ import ICar from "./Interfaces/ICar";
 import usePagination from "./usePagination";
 import axios from "axios";
 import { useState } from "react";
+import useFetch from "./useFetch";
 import Swal from "sweetalert2";
 import 'animate.css';
+import IWinner from "./Interfaces/IWinner";
 
 interface ICarListProps {
     cars: ICar[];
@@ -23,6 +25,9 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
         contentPerPage: 7,
         count: cars.length,
     });
+
+    const winnersUrl: string = 'http://localhost:3000/winners';
+    const {data: winnersData} = useFetch(winnersUrl);
 
     const [carContainerId, setCarContainerId] = useState<number>(cars.length + 1);
     const [btnSelectedAmount, setBtnSelectedAmount] = useState<number>(0);
@@ -75,8 +80,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                             </button>
                             <button 
                             className='light-blue-btn md-padding sm-btn' 
-                            onClick={() => {isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged not defined');
-                                            if (document.getElementById(`select-btn-${car.id}`)?.classList.contains('btn-selected-active')) {
+                            onClick={() => {if (document.getElementById(`select-btn-${car.id}`)?.classList.contains('btn-selected-active')) {
                                                 Swal.fire({
                                                     title: "Please, deselect this car before deleting it!",
                                                     showClass: {
@@ -96,7 +100,10 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                                                   });
                                             }
                                             else {
-                                                axios.delete(`http://localhost:3000/garage/${car.id}`)}}
+                                                axios.delete(`http://localhost:3000/garage/${car.id}`);
+                                                isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged not defined');
+                                                axios.delete(`http://localhost:3000/winners/${car.id}`);
+                                              }}
                                             }>
                                 Remove
                             </button>

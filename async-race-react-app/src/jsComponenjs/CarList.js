@@ -12,7 +12,6 @@ var _axios = _interopRequireDefault(require("axios"));
 var _useFetch2 = _interopRequireDefault(require("./useFetch"));
 var _sweetalert = _interopRequireDefault(require("sweetalert2"));
 require("animate.css");
-var _IWinner = _interopRequireDefault(require("./Interfaces/IWinner"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -148,7 +147,7 @@ var CarList = function CarList(_ref) {
       className: "gray-btn sm-padding sm-btn engine-inactive-btn",
       id: "btn-stop-engine-".concat(car.id),
       onClick: function onClick() {
-        setIsCarMoving(true);
+        setIsCarMoving(false);
         fetch("http://localhost:3000/engine?id=".concat(car.id, "&status=stopped"), {
           method: 'PATCH'
         }).then(function (response) {
@@ -178,6 +177,28 @@ var CarList = function CarList(_ref) {
       id: "animated-car-".concat(car.id),
       style: {
         'animationDuration': "".concat(singleCarTime, "s")
+      },
+      onAnimationEnd: function onAnimationEnd() {
+        if (singleCarTime !== 0) {
+          var thisCar = document.getElementById("animated-car-".concat(car.id));
+          thisCar === null || thisCar === void 0 || thisCar.classList.remove('animation-move-car');
+          _sweetalert.default.fire({
+            title: "".concat(car.name, " had finished race in ").concat(singleCarTime, "s!"),
+            showClass: {
+              popup: "\n                                          animate__animated\n                                          animate__fadeInUp\n                                          animate__faster\n                                        "
+            },
+            hideClass: {
+              popup: "\n                                          animate__animated\n                                          animate__fadeOutDown\n                                          animate__faster\n                                        "
+            }
+          });
+          var thisBtnStartEngine = document.getElementById("btn-start-engine-".concat(car.id));
+          var thisBtnStopEngine = document.getElementById("btn-stop-engine-".concat(car.id));
+          thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.remove('engine-inactive-btn');
+          thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.add('engine-active-btn');
+          thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.remove('engine-active-btn');
+          thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.add('engine-inactive-btn');
+        }
+        ;
       }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "car-name"

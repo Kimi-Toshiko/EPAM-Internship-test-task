@@ -201,12 +201,20 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                     <div className="garage-count">
                         <p>GARAGE ({cars.length})</p>
                     </div>
-                <div className="pagination">
-                    <button onClick={prevPage} className="orange-btn sm-padding prev-page"><i className="fa-solid fa-caret-left"></i></button>
-                    <p className="text">Page №{page}/{totalPages}</p>
-                    <button onClick={nextPage} className="orange-btn sm-padding next-page"><i className="fa-solid fa-caret-right"></i></button>
-                    <div className="items">
-                </div>
+                    <div className="pagination">
+                <button 
+                className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 
+                disabled={page === 1 ? true : false} 
+                onClick={prevPage}>
+                    <i className="fa-solid fa-caret-left"></i>
+                </button>
+                <p>PAGE №{page}/{totalPages}</p>
+                <button 
+                className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
+                disabled={page === totalPages ? true : false} 
+                onClick={nextPage}>
+                    <i className="fa-solid fa-caret-right"></i>
+                </button>
             </div>
         </div>
         </div>

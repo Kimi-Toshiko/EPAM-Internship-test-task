@@ -16,7 +16,7 @@ This application is written, using React library in correlation with Typescript.
 
 ---
 
-## Project Overview {#project-overview}
+## Project Overview
 
 This project is aimed at demonstrating the ability to tackle real-world problems using modern software development practices. Async-race is an application, which takes the random data for different cars and they are competing with one another. Application contains two folders. **async-race-api**, which is forked from the repository by [Mikhama](https://github.com/mikhama/async-race-api). It contains all of the server-side information, including database for cars, winners and cars engine charachteristics (such as velocity of the car and race distance). The second folder is **async-race-react-app**. It contains the front-end part of the application, including UI/UX and code for its embodiment. Application connects to the provided server and allows to manage operations with it, creating a fully working application, which is powered by React framework and TypeScript superset of JavaScript language.
 
@@ -37,7 +37,7 @@ This project is aimed at demonstrating the ability to tackle real-world problems
 
 ---
 
-## Getting started {#getting-started}
+## Getting started
 These instructions will help to get you a copy of the project up and running it on your local machine for development and testing purposes.
 
 ### Prerequisites:
@@ -66,7 +66,7 @@ These instructions will help to get you a copy of the project up and running it 
 
 ---
 
-## Checklist {checklist}
+## Checklist
 
 ### Basic Structure (70 points out of 85 points)
 #### 1. View Configuration (20 out of 30 points)
@@ -123,4 +123,4 @@ These instructions will help to get you a copy of the project up and running it 
 
 ### Prettier and ESLint Configuration (2 out of 10 points)
 - [ ] **Prettier Setup (5 points)**: Prettier is not set up.
-- [x] **ESLint Configuration (2 out of 5 points)**: ESLint is configured to check TypeScript in a strict mode. 
+- [x] **ESLint Configuration (2 out of 5 points)**: ESLint is configured to check TypeScript in a strict mode.  

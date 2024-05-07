@@ -16,7 +16,7 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
         page,
         totalPages
     } = usePagination({
-        contentPerPage: 7,
+        contentPerPage: 10,
         count: winners.length
     });
 

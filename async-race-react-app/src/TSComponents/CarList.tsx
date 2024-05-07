@@ -6,7 +6,6 @@ import { useState } from "react";
 import useFetch from "./useFetch";
 import Swal from "sweetalert2";
 import 'animate.css';
-import IWinner from "./Interfaces/IWinner";
 
 interface ICarListProps {
     cars: ICar[];
@@ -131,12 +130,13 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                               setSingleCarTime(carTime);
                               animatedCar?.classList.add('animation-move-car');
                               }))
-                          }}
+                          }
+                        }
                             >A</button>
                             <button className='gray-btn sm-padding sm-btn engine-inactive-btn'
                                     id={`btn-stop-engine-${car.id}`}
                                     onClick={() => {
-                                setIsCarMoving(true);
+                                setIsCarMoving(false);
                                 fetch(`http://localhost:3000/engine?id=${car.id}&status=stopped`, {
                                 method: 'PATCH'
                               })
@@ -158,7 +158,36 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                         <div className="car-ico" style={{'color': car.color}}>
                             <i className="fa-solid fa-car-side" 
                                 id={`animated-car-${car.id}`} 
-                                style={{'animationDuration': `${singleCarTime}s`}}></i>
+                                style={{'animationDuration': `${singleCarTime}s`}}
+                                onAnimationEnd={() => {
+                                  if (singleCarTime !== 0) {
+                                    const thisCar = document.getElementById(`animated-car-${car.id}`);
+                                    thisCar?.classList.remove('animation-move-car');
+                                    Swal.fire({
+                                      title: `${car.name} had finished race in ${singleCarTime}s!`,
+                                      showClass: {
+                                        popup: `
+                                          animate__animated
+                                          animate__fadeInUp
+                                          animate__faster
+                                        `
+                                      },
+                                      hideClass: {
+                                        popup: `
+                                          animate__animated
+                                          animate__fadeOutDown
+                                          animate__faster
+                                        `
+                                      }
+                                    });
+                                    const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
+                                    const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
+                                    thisBtnStartEngine?.classList.remove('engine-inactive-btn');
+                                    thisBtnStartEngine?.classList.add('engine-active-btn');
+                                   thisBtnStopEngine?.classList.remove('engine-active-btn');
+                                    thisBtnStopEngine?.classList.add('engine-inactive-btn');
+                                  };
+                                }}></i>
                         </div>
                         <div className="car-name">
                             <p>{car.name}</p>

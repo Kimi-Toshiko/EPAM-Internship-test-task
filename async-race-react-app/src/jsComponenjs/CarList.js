@@ -54,24 +54,6 @@ var CarList = function CarList(_ref) {
     _useState8 = _slicedToArray(_useState7, 2),
     isCarMoving = _useState8[0],
     setIsCarMoving = _useState8[1];
-  var _useState9 = (0, _react.useState)(0),
-    _useState10 = _slicedToArray(_useState9, 2),
-    amountOfAlerts = _useState10[0],
-    setAmountOfAlerts = _useState10[1];
-  var _useState11 = (0, _react.useState)('running'),
-    _useState12 = _slicedToArray(_useState11, 2),
-    animationPlayState = _useState12[0],
-    setAnimationPlayState = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
-    _useState14 = _slicedToArray(_useState13, 2),
-    isAnimating = _useState14[0],
-    setIsAnimating = _useState14[1];
-  var handleAnimationStart = function handleAnimationStart() {
-    setIsAnimating(true);
-  };
-  var handleAnimationEnd = function handleAnimationEnd() {
-    setIsAnimating(false);
-  };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "class-list-container"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -137,9 +119,9 @@ var CarList = function CarList(_ref) {
     }, "Remove")), /*#__PURE__*/_react.default.createElement("div", {
       className: "start-stop-btns"
     }, /*#__PURE__*/_react.default.createElement("button", {
-      className: "green-btn sm-padding sm-btn",
+      className: "green-btn sm-padding sm-btn engine-active-btn",
+      id: "btn-start-engine-".concat(car.id),
       onClick: function onClick() {
-        setAnimationPlayState('running');
         setIsCarMoving(true);
         fetch("http://localhost:3000/engine?id=".concat(car.id, "&status=started"), {
           method: 'PATCH'
@@ -151,26 +133,40 @@ var CarList = function CarList(_ref) {
           }).then(function (res) {
             var animatedCar = document.getElementById("animated-car-".concat(car.id));
             var carTime = Math.round(res.data.distance / res.data.velocity / 10) / 100;
+            var thisBtnStartEngine = document.getElementById("btn-start-engine-".concat(car.id));
+            var thisBtnStopEngine = document.getElementById("btn-stop-engine-".concat(car.id));
+            thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.remove('engine-active-btn');
+            thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.add('engine-inactive-btn');
+            thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.remove('engine-inactive-btn');
+            thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.add('engine-active-btn');
             setSingleCarTime(carTime);
             animatedCar === null || animatedCar === void 0 || animatedCar.classList.add('animation-move-car');
-            setTimeout(function () {
-              _sweetalert.default.fire({
-                title: "".concat(car.name, " has come to finish in ").concat(carTime, " seconds"),
-                showClass: {
-                  popup: "\n                                          animate__animated\n                                          animate__fadeInUp\n                                          animate__faster\n                                        "
-                },
-                hideClass: {
-                  popup: "\n                                          animate__animated\n                                          animate__fadeOutDown\n                                          animate__faster\n                                        "
-                }
-              });
-            }, carTime * 1000);
           });
         });
       }
     }, "A"), /*#__PURE__*/_react.default.createElement("button", {
-      className: "gray-btn sm-padding sm-btn",
+      className: "gray-btn sm-padding sm-btn engine-inactive-btn",
+      id: "btn-stop-engine-".concat(car.id),
       onClick: function onClick() {
-        setAnimationPlayState('paused');
+        setIsCarMoving(true);
+        fetch("http://localhost:3000/engine?id=".concat(car.id, "&status=stopped"), {
+          method: 'PATCH'
+        }).then(function (response) {
+          return response.json().then(function (data) {
+            return {
+              data: data
+            };
+          }).then(function (res) {
+            var animatedCar = document.getElementById("animated-car-".concat(car.id));
+            var thisBtnStartEngine = document.getElementById("btn-start-engine-".concat(car.id));
+            var thisBtnStopEngine = document.getElementById("btn-stop-engine-".concat(car.id));
+            thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.remove('engine-inactive-btn');
+            thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.add('engine-active-btn');
+            thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.remove('engine-active-btn');
+            thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.add('engine-inactive-btn');
+            animatedCar === null || animatedCar === void 0 || animatedCar.classList.remove('animation-move-car');
+          });
+        });
       }
     }, "B")), /*#__PURE__*/_react.default.createElement("div", {
       className: "car-ico",
@@ -181,10 +177,8 @@ var CarList = function CarList(_ref) {
       className: "fa-solid fa-car-side",
       id: "animated-car-".concat(car.id),
       style: {
-        'animationDuration': "".concat(singleCarTime, "s"),
-        'animationPlayState': "".concat(animationPlayState)
-      },
-      onAnimationStart: handleAnimationStart
+        'animationDuration': "".concat(singleCarTime, "s")
+      }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "car-name"
     }, /*#__PURE__*/_react.default.createElement("p", null, car.name))), /*#__PURE__*/_react.default.createElement("div", {

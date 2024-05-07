@@ -33,21 +33,6 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
     const [btnSelectedAmount, setBtnSelectedAmount] = useState<number>(0);
     const [singleCarTime , setSingleCarTime] = useState<number>(0);
     const [isCarMoving, setIsCarMoving] = useState<boolean>(false);
-    const [amountOfAlerts, setAmountOfAlerts] = useState<number>(0);
-    const [animationPlayState, setAnimationPlayState] = useState<string>('paused');
-    const [isAnimating, setIsAnimating] = useState(false);
-
-  const handleAnimationStart = () => {
-    setIsAnimating(false);
-    console.log('animation started');
-    console.log(isAnimating);
-  };
-
-  const handleAnimationEnd = () => {
-    setIsAnimating(true);
-    console.log('animation ended');
-    console.log(isAnimating);
-  };
 
     return (
         <div className="class-list-container">
@@ -125,13 +110,9 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                             </button>
                         </div>
                         <div className="start-stop-btns">
-                          <button className='green-btn sm-padding sm-btn'
+                          <button className='green-btn sm-padding sm-btn engine-active-btn'
+                            id={`btn-start-engine-${car.id}`}
                             onClick={() => {
-                                if (animationPlayState === 'paused') {
-                                  setAnimationPlayState('running');
-                                }
-                                else {
-                                  setAnimationPlayState('running');
                                 setIsCarMoving(true);
                                 fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
@@ -140,43 +121,44 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                               .then(data => ({data: data}))
                               .then((res) => {
                               const animatedCar = document.getElementById(`animated-car-${car.id}`);
-                              const carTime = Math.round(((res.data.distance / res.data.velocity)/10)) / 100;                             
+                              const carTime = Math.round(((res.data.distance / res.data.velocity)/10)) / 100;
+                              const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
+                              const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
+                              thisBtnStartEngine?.classList.remove('engine-active-btn');
+                              thisBtnStartEngine?.classList.add('engine-inactive-btn');
+                              thisBtnStopEngine?.classList.remove('engine-inactive-btn');
+                              thisBtnStopEngine?.classList.add('engine-active-btn');
                               setSingleCarTime(carTime);
                               animatedCar?.classList.add('animation-move-car');
                               }))
-                                }
                           }}
                             >A</button>
-                            <button className='gray-btn sm-padding sm-btn'
-                                    onClick={() => {setAnimationPlayState('paused')}}
+                            <button className='gray-btn sm-padding sm-btn engine-inactive-btn'
+                                    id={`btn-stop-engine-${car.id}`}
+                                    onClick={() => {
+                                setIsCarMoving(true);
+                                fetch(`http://localhost:3000/engine?id=${car.id}&status=stopped`, {
+                                method: 'PATCH'
+                              })
+                              .then(response => response.json()
+                              .then(data => ({data: data}))
+                              .then((res) => {
+                              const animatedCar = document.getElementById(`animated-car-${car.id}`);
+                              const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
+                              const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
+                              thisBtnStartEngine?.classList.remove('engine-inactive-btn');
+                              thisBtnStartEngine?.classList.add('engine-active-btn');
+                              thisBtnStopEngine?.classList.remove('engine-active-btn');
+                              thisBtnStopEngine?.classList.add('engine-inactive-btn');
+                              animatedCar?.classList.remove('animation-move-car');
+                              }))
+                                    }}
                             >B</button>
                         </div>
                         <div className="car-ico" style={{'color': car.color}}>
                             <i className="fa-solid fa-car-side" 
                                 id={`animated-car-${car.id}`} 
-                                style={{'animationDuration': `${singleCarTime}s`, 'animationPlayState': `${animationPlayState}`}} 
-                                onAnimationStart={handleAnimationStart} 
-                                onAnimationEnd={() => {
-                                  if (singleCarTime !== 0) {
-                                    Swal.fire({
-                                      title: `${car.name} has come to finish in ${singleCarTime} seconds`,
-                                      showClass: {
-                                        popup: `
-                                          animate__animated
-                                          animate__fadeInUp
-                                          animate__faster
-                                        `
-                                      },
-                                      hideClass: {
-                                        popup: `
-                                          animate__animated
-                                          animate__fadeOutDown
-                                          animate__faster
-                                        `
-                                      }
-                                    });
-                                  }
-                                }}></i>
+                                style={{'animationDuration': `${singleCarTime}s`}}></i>
                         </div>
                         <div className="car-name">
                             <p>{car.name}</p>

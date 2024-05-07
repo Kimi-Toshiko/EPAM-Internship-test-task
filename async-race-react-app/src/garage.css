@@ -202,6 +202,20 @@
   background-color: #D39E6F;
   color: #021826;
 }
+#garage-content .cars-list .car .car-sets .car-race-btns .engine-active-btn, #garage-content .cars-list .car .car-sets .start-stop-btns .engine-active-btn {
+  color: #8FD36F;
+  border-color: #8FD36F;
+}
+#garage-content .cars-list .car .car-sets .car-race-btns .engine-active-btn:hover, #garage-content .cars-list .car .car-sets .start-stop-btns .engine-active-btn:hover {
+  color: #021826;
+  background-color: #8FD36F;
+}
+#garage-content .cars-list .car .car-sets .car-race-btns .engine-inactive-btn, #garage-content .cars-list .car .car-sets .start-stop-btns .engine-inactive-btn {
+  color: #CBCBCB;
+  border-color: #CBCBCB;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 #garage-content .cars-list .car .car-sets .animation-move-car {
   -webkit-animation-name: moveCar;
           animation-name: moveCar;

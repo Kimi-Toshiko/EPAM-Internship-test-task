@@ -130,6 +130,22 @@
                         background-color: $orange;
                         color: $dark-blue;
                     }
+
+                    .engine-active-btn {
+                        color: $green;
+                        border-color: $green;
+                        &:hover {
+                            color: $dark-blue;
+                            background-color: $green;
+                        }
+                    }
+
+                    .engine-inactive-btn {
+                        color: $gray;
+                        border-color: $gray;
+                        cursor: not-allowed;
+                        pointer-events: none;
+                    }
                 }
 
                 .animation-move-car {

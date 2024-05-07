@@ -202,6 +202,32 @@
   background-color: #D39E6F;
   color: #021826;
 }
+#garage-content .cars-list .car .car-sets .animation-move-car {
+  -webkit-animation-name: moveCar;
+          animation-name: moveCar;
+  -webkit-animation-direction: right;
+          animation-direction: right;
+  -webkit-animation-timing-function: ease-in;
+          animation-timing-function: ease-in;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+@-webkit-keyframes moveCar {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 80vw;
+  }
+}
+@keyframes moveCar {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 80vw;
+  }
+}
 #garage-content .cars-list .car .car-sets .car-ico i {
   font-size: 3rem;
   position: relative;

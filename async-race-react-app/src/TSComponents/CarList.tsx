@@ -31,7 +31,23 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
 
     const [carContainerId, setCarContainerId] = useState<number>(cars.length + 1);
     const [btnSelectedAmount, setBtnSelectedAmount] = useState<number>(0);
+    const [singleCarTime , setSingleCarTime] = useState<number>(0);
     const [isCarMoving, setIsCarMoving] = useState<boolean>(false);
+    const [amountOfAlerts, setAmountOfAlerts] = useState<number>(0);
+    const [animationPlayState, setAnimationPlayState] = useState<string>('paused');
+    const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleAnimationStart = () => {
+    setIsAnimating(false);
+    console.log('animation started');
+    console.log(isAnimating);
+  };
+
+  const handleAnimationEnd = () => {
+    setIsAnimating(true);
+    console.log('animation ended');
+    console.log(isAnimating);
+  };
 
     return (
         <div className="class-list-container">
@@ -109,41 +125,58 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged}) => {
                             </button>
                         </div>
                         <div className="start-stop-btns">
-                            <button className='green-btn sm-padding sm-btn'
+                          <button className='green-btn sm-padding sm-btn'
                             onClick={() => {
+                                if (animationPlayState === 'paused') {
+                                  setAnimationPlayState('running');
+                                }
+                                else {
+                                  setAnimationPlayState('running');
                                 setIsCarMoving(true);
                                 fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
-                            }).then(response => response.json().then(data => ({data: data})).then((res) => {
+                              })
+                              .then(response => response.json()
+                              .then(data => ({data: data}))
+                              .then((res) => {
                               const animatedCar = document.getElementById(`animated-car-${car.id}`);
                               const carTime = Math.round(((res.data.distance / res.data.velocity)/10)) / 100;                             
-                              animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "backwards"});
-                                setIsCarMoving(false);
-                                setTimeout(() => {
-                                  Swal.fire({
-                                    title: `${car.name} has come to finish in ${carTime} seconds`,
-                                    showClass: {
-                                      popup: `
-                                        animate__animated
-                                        animate__fadeInUp
-                                        animate__faster
-                                      `
-                                    },
-                                    hideClass: {
-                                      popup: `
-                                        animate__animated
-                                        animate__fadeOutDown
-                                        animate__faster
-                                      `
-                                    }
-                                  });
-                                }, carTime * 1000);
-                            }))}}
+                              setSingleCarTime(carTime);
+                              animatedCar?.classList.add('animation-move-car');
+                              }))
+                                }
+                          }}
                             >A</button>
-                            <button className='gray-btn sm-padding sm-btn'>B</button>
+                            <button className='gray-btn sm-padding sm-btn'
+                                    onClick={() => {setAnimationPlayState('paused')}}
+                            >B</button>
                         </div>
                         <div className="car-ico" style={{'color': car.color}}>
-                            <i className="fa-solid fa-car-side" id={`animated-car-${car.id}`}></i>
+                            <i className="fa-solid fa-car-side" 
+                                id={`animated-car-${car.id}`} 
+                                style={{'animationDuration': `${singleCarTime}s`, 'animationPlayState': `${animationPlayState}`}} 
+                                onAnimationStart={handleAnimationStart} 
+                                onAnimationEnd={() => {
+                                  if (singleCarTime !== 0) {
+                                    Swal.fire({
+                                      title: `${car.name} has come to finish in ${singleCarTime} seconds`,
+                                      showClass: {
+                                        popup: `
+                                          animate__animated
+                                          animate__fadeInUp
+                                          animate__faster
+                                        `
+                                      },
+                                      hideClass: {
+                                        popup: `
+                                          animate__animated
+                                          animate__fadeOutDown
+                                          animate__faster
+                                        `
+                                      }
+                                    });
+                                  }
+                                }}></i>
                         </div>
                         <div className="car-name">
                             <p>{car.name}</p>

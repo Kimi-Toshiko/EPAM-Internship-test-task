@@ -70,6 +70,10 @@
         }
     }
 
+    .winners-info {
+        @include flex (row, no-wrap, space-between);
+    }
+
     .fetch-error, .fetch-loading {
         margin-top: 2rem;
     }
@@ -82,7 +86,7 @@
     #winners-content {
         font-size: 1rem;
 
-        h2 {
+        h2, .winners-count p {
             font-size: 1.3rem;
         }
 

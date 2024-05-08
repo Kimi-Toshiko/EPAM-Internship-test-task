@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>262 points</ins>)**
+**(Total score: <ins>287 points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -91,10 +91,10 @@ These instructions will help to get you a copy of the project up and running it 
 - [x] **Button States (5 points)**: Start engine button is disabled, if the car is in driving mode. Stop engine button is also disabled, when the car's is at its initial place.
 - [x] **Responsive Animation (5 points)**: Car animations are fluid on screens as small as 500px.
 
-### Race Animation (0 points out of 35 points)
-- [ ] **Start Race Button (0 out of 15 points)**: Not implemented.
+### Race Animation (25 points out of 35 points)
+- [x] **Start Race Button (15 points)**: Button starts the race for all cars on the current page.
 - [ ] **Reset Race Button (0 out of 10 points)**: Not implemented.
-- [ ] **Winner Announcement (0 out of 10 points)**: Not implemented.
+- [x] **Winner Announcement (10 points)**: After some car finishes first user sees the message, which contains the car, which have won and its current time.
 
 ### Winners View (22 points out of 45 points)
 - [x] **Display Winners (7 out of 15 points)**: Winners are displayed, however, as the race is not implemented, its winners are not added.

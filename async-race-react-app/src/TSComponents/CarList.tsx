@@ -160,6 +160,13 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                               animatedCar?.setAttribute('animation-duration', `${carTime}`);
                               // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "backwards"});
                               animatedCar?.addEventListener('animationend', () => {
+                                const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
+                                    const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
+                                    thisBtnStartEngine?.classList.remove('engine-inactive-btn');
+                                    thisBtnStartEngine?.classList.add('engine-active-btn');
+                                   thisBtnStopEngine?.classList.remove('engine-active-btn');
+                                    thisBtnStopEngine?.classList.add('engine-inactive-btn');
+                                    animatedCar?.classList.remove('animation-move-car');
                                 Swal.fire({
                                   title: `${car.name} had finished race in ${carTime}s!`,
                                   showClass: {
@@ -177,12 +184,6 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                                     `
                                   }
                                 });
-                                const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
-                                    const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
-                                    thisBtnStartEngine?.classList.remove('engine-inactive-btn');
-                                    thisBtnStartEngine?.classList.add('engine-active-btn');
-                                   thisBtnStopEngine?.classList.remove('engine-active-btn');
-                                    thisBtnStopEngine?.classList.add('engine-inactive-btn');
                               });
                               }))
                           }

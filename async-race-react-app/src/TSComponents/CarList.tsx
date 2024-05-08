@@ -6,6 +6,7 @@ import { useState } from "react";
 import useFetch from "./useFetch";
 import Swal from "sweetalert2";
 import 'animate.css';
+import IWinner from "./Interfaces/IWinner";
 
 interface ICarListProps {
     cars: ICar[];
@@ -34,9 +35,12 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
     const [singleCarTime , setSingleCarTime] = useState<number>(0);
     const [isCarMoving, setIsCarMoving] = useState<boolean>(false);
     const [isRaceClickedCount, setIsRaceClickedCount] = useState<number>(0);
+    const [bestRaceCarTime, setBestRaceCarTime] = useState(0);
 
     if(isRaceClicked > isRaceClickedCount) {
       setIsRaceClickedCount(isRaceClicked + 1);
+      let timesArray: [number] = [99999];
+      let bestTimeArray: [number] = [99999];
       cars.map(car => {
         fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
@@ -52,12 +56,53 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                               thisBtnStartEngine?.classList.add('engine-inactive-btn');
                               thisBtnStopEngine?.classList.remove('engine-inactive-btn');
                               thisBtnStopEngine?.classList.add('engine-active-btn');
-                              animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "backwards"});
-                              console.log(res.data.velocity);
-                              console.log(res.data.distance);
-                              console.log(isRaceClicked);
-                              console.log(isRaceClickedCount);
-                          }))
+                              animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "forwards"});
+                              timesArray.push(carTime);
+                        }).then(() => {
+                          if (timesArray.length > cars.length) {
+                            setBestRaceCarTime(Math.min(...timesArray));
+                            setTimeout(() => {
+                              Swal.fire({
+                                title: `${car.name} won with the time ${Math.min(...timesArray)}s!`,
+                                showClass: {
+                                  popup: `
+                                    animate__animated
+                                    animate__fadeInUp
+                                    animate__faster
+                                  `
+                                },
+                                hideClass: {
+                                  popup: `
+                                    animate__animated
+                                    animate__fadeOutDown
+                                    animate__faster
+                                  `
+                                }
+                              });
+
+                              winnersData.map((winner: IWinner) => {
+                                if (car.id === winner.id) {
+                                  axios.patch(`${winnersUrl}/${winner.id}`, {"wins": winner.id + 1})
+                                  .catch(err => {console.log(err)});;
+                                  if (winner.time > Math.min(...timesArray)) {
+                                    axios.patch(`${winnersUrl}/${winner.id}`, {"time": Math.min(...timesArray)})
+                                    .catch(err => {console.log(err)});
+                                  }
+                                }
+                                else {
+                                  let newWinner = {
+                                    'id': car.id,
+                                    'wins': 1,
+                                    'time': Math.min(...timesArray)
+                                }
+                                axios.post(winnersUrl, newWinner)
+                                .catch(err => {console.log(err)});;
+                                }
+                              });
+
+                            }, Math.min(...timesArray)*1000);
+                          }
+                        }))
       });
     }
 

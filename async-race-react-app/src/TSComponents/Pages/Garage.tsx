@@ -19,6 +19,7 @@ const Garage = (props: Props) => {
     const [createInputColor, setCreateInputColor] = useState<string>('#000000');
     const [updateInputName, setUpdateInputName] = useState<string>('');
     const [updateInputColor, setUpdateInputColor] = useState<string>('');
+    const [isRaceClicked, setIsRaceClicked] = useState<number>(0);
 
     const createCarName = document.getElementById('create-car-name');
     const selectedCar = document.querySelector('div[data-selected]');
@@ -117,13 +118,17 @@ const Garage = (props: Props) => {
         }
     }
 
+    const handleRace = () => {
+        setIsRaceClicked(isRaceClicked + 1);
+    }
+
     return (
         <div className="garage">
             <div id="garage-content">
                 <h1>Garage</h1>
                 <div className="btns-block">
                     <div className="race-btns">
-                        <button className='orange-btn'>Race <i className="fa-solid fa-play"></i></button>
+                        <button className='orange-btn' onClick={handleRace}>Race <i className="fa-solid fa-play"></i></button>
                         <button className='light-blue-btn'>Reset <i className="fa-solid fa-rotate-left"></i></button>
                     </div>
                     <div className="cu-btns">
@@ -137,7 +142,7 @@ const Garage = (props: Props) => {
                         <div className="update">
                             <form action="http://localhost:3000/garage" method='POST'>
                                 <input type="text" onChange={handleUpdateNameInputChange} />
-                                <input type="color" onChange={handleUpdateColorInputChange} />
+                               <input type="color" onChange={handleUpdateColorInputChange} />
                                 <button className='orange-btn' type='submit' onClick={handleUpdate}>Update</button>
                             </form>
                         </div>
@@ -150,7 +155,7 @@ const Garage = (props: Props) => {
                 <section>
                     {error && <p className='fetch-error'>{error}</p>}
                     {isPending && <p className='fetch-loading'>Loading cars...</p>}
-                    {cars && <CarList cars={cars} isDataChanged={() => {setIsDataChanged(isDataChanged + 1)}} />}
+                    {cars && <CarList cars={cars} isDataChanged={() => {setIsDataChanged(isDataChanged + 1)}} isRaceClicked={isRaceClicked} />}
                 </section>
             </div>
         </div>

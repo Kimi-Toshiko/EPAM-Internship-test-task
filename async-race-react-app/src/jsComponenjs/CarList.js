@@ -23,7 +23,8 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CarList = function CarList(_ref) {
   var cars = _ref.cars,
-    isDataChanged = _ref.isDataChanged;
+    isDataChanged = _ref.isDataChanged,
+    isRaceClicked = _ref.isRaceClicked;
   var _usePagination = (0, _usePagination2.default)({
       contentPerPage: 7,
       count: cars.length
@@ -53,11 +54,52 @@ var CarList = function CarList(_ref) {
     _useState8 = _slicedToArray(_useState7, 2),
     isCarMoving = _useState8[0],
     setIsCarMoving = _useState8[1];
+  var _useState9 = (0, _react.useState)(0),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isRaceClickedCount = _useState10[0],
+    setIsRaceClickedCount = _useState10[1];
+  if (isRaceClicked > isRaceClickedCount) {
+    setIsRaceClickedCount(isRaceClicked + 1);
+    cars.map(function (car) {
+      fetch("http://localhost:3000/engine?id=".concat(car.id, "&status=started"), {
+        method: 'PATCH'
+      }).then(function (response) {
+        return response.json().then(function (data) {
+          return {
+            data: data
+          };
+        }).then(function (res) {
+          var animatedCar = document.getElementById("animated-car-".concat(car.id));
+          var carTime = Math.round(res.data.distance / res.data.velocity / 10) / 100;
+          var thisBtnStartEngine = document.getElementById("btn-start-engine-".concat(car.id));
+          var thisBtnStopEngine = document.getElementById("btn-stop-engine-".concat(car.id));
+          thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.remove('engine-active-btn');
+          thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.add('engine-inactive-btn');
+          thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.remove('engine-inactive-btn');
+          thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.add('engine-active-btn');
+          animatedCar === null || animatedCar === void 0 || animatedCar.animate([{
+            left: '0px'
+          }, {
+            left: '80vw'
+          }], {
+            duration: carTime * 1000,
+            iterations: 1,
+            fill: "backwards"
+          });
+          console.log(res.data.velocity);
+          console.log(res.data.distance);
+          console.log(isRaceClicked);
+          console.log(isRaceClickedCount);
+        });
+      });
+    });
+  }
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "class-list-container"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "cars-list"
   }, cars.slice(firstContentIndex, lastContentIndex).map(function (car) {
+    var _document$getElementB5;
     return /*#__PURE__*/_react.default.createElement("div", {
       className: "car car-container",
       "data-selected": "".concat(carContainerId),
@@ -140,6 +182,11 @@ var CarList = function CarList(_ref) {
             thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.add('engine-active-btn');
             setSingleCarTime(carTime);
             animatedCar === null || animatedCar === void 0 || animatedCar.classList.add('animation-move-car');
+            animatedCar === null || animatedCar === void 0 || animatedCar.setAttribute('animation-duration', "".concat(carTime));
+            // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "backwards"});
+            // animatedCar?.addEventListener('animationend', () => {
+
+            // });
           });
         });
       }
@@ -175,30 +222,9 @@ var CarList = function CarList(_ref) {
     }, /*#__PURE__*/_react.default.createElement("i", {
       className: "fa-solid fa-car-side",
       id: "animated-car-".concat(car.id),
+      "animation-duration": "0s",
       style: {
-        'animationDuration': "".concat(singleCarTime, "s")
-      },
-      onAnimationEnd: function onAnimationEnd() {
-        if (singleCarTime !== 0) {
-          var thisCar = document.getElementById("animated-car-".concat(car.id));
-          thisCar === null || thisCar === void 0 || thisCar.classList.remove('animation-move-car');
-          _sweetalert.default.fire({
-            title: "".concat(car.name, " had finished race in ").concat(singleCarTime, "s!"),
-            showClass: {
-              popup: "\n                                          animate__animated\n                                          animate__fadeInUp\n                                          animate__faster\n                                        "
-            },
-            hideClass: {
-              popup: "\n                                          animate__animated\n                                          animate__fadeOutDown\n                                          animate__faster\n                                        "
-            }
-          });
-          var thisBtnStartEngine = document.getElementById("btn-start-engine-".concat(car.id));
-          var thisBtnStopEngine = document.getElementById("btn-stop-engine-".concat(car.id));
-          thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.remove('engine-inactive-btn');
-          thisBtnStartEngine === null || thisBtnStartEngine === void 0 || thisBtnStartEngine.classList.add('engine-active-btn');
-          thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.remove('engine-active-btn');
-          thisBtnStopEngine === null || thisBtnStopEngine === void 0 || thisBtnStopEngine.classList.add('engine-inactive-btn');
-        }
-        ;
+        'animationDuration': "".concat((_document$getElementB5 = document.getElementById("animated-car-".concat(car.id))) === null || _document$getElementB5 === void 0 || (_document$getElementB5 = _document$getElementB5.getAttribute('animation-duration')) === null || _document$getElementB5 === void 0 ? void 0 : _document$getElementB5.valueOf(), "s")
       }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "car-name"
@@ -212,19 +238,17 @@ var CarList = function CarList(_ref) {
   }, /*#__PURE__*/_react.default.createElement("p", null, "GARAGE (", cars.length, ")")), /*#__PURE__*/_react.default.createElement("div", {
     className: "pagination"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: prevPage,
-    className: "orange-btn sm-padding prev-page"
+    className: "orange-btn sm-padding ".concat(page === 1 ? 'btn-disabled' : 'btn-enabled'),
+    disabled: page === 1 ? true : false,
+    onClick: prevPage
   }, /*#__PURE__*/_react.default.createElement("i", {
     className: "fa-solid fa-caret-left"
-  })), /*#__PURE__*/_react.default.createElement("p", {
-    className: "text"
-  }, "Page \u2116", page, "/", totalPages), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: nextPage,
-    className: "orange-btn sm-padding next-page"
+  })), /*#__PURE__*/_react.default.createElement("p", null, "PAGE \u2116", page, "/", totalPages), /*#__PURE__*/_react.default.createElement("button", {
+    className: "orange-btn sm-padding ".concat(page === totalPages ? 'btn-disabled' : 'btn-enabled'),
+    disabled: page === totalPages ? true : false,
+    onClick: nextPage
   }, /*#__PURE__*/_react.default.createElement("i", {
     className: "fa-solid fa-caret-right"
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "items"
-  })))));
+  }))))));
 };
 var _default = exports.default = CarList;

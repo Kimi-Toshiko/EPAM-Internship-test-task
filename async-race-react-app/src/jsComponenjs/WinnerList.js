@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var WinnerList = function WinnerList(_ref) {
   var winners = _ref.winners;
   var _usePagination = (0, _usePagination2.default)({
-      contentPerPage: 7,
+      contentPerPage: 10,
       count: winners.length
     }),
     firstContentIndex = _usePagination.firstContentIndex,
@@ -55,6 +55,8 @@ var WinnerList = function WinnerList(_ref) {
       }
     })), /*#__PURE__*/_react.default.createElement("td", null, isCarsDataLoaded ? filterById(carsData, winner.id)['name'] : ''), /*#__PURE__*/_react.default.createElement("td", null, winner.wins), /*#__PURE__*/_react.default.createElement("td", null, winner.time, " seconds"));
   })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "winners-info"
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "winners-count"
   }, /*#__PURE__*/_react.default.createElement("p", null, "WINNERS (", winners.length, ")")), /*#__PURE__*/_react.default.createElement("div", {
     className: "pagination"
@@ -70,6 +72,6 @@ var WinnerList = function WinnerList(_ref) {
     onClick: nextPage
   }, /*#__PURE__*/_react.default.createElement("i", {
     className: "fa-solid fa-caret-right"
-  }))));
+  })))));
 };
 var _default = exports.default = WinnerList;

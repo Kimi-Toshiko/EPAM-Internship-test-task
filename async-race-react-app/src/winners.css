@@ -63,6 +63,20 @@
 #winners-content .winners-tb tr th:nth-child(4), #winners-content .winners-tb tr td:nth-child(4) {
   width: 10%;
 }
+#winners-content .winners-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: no-wrap;
+      flex-wrap: no-wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
 #winners-content .fetch-error, #winners-content .fetch-loading {
   margin-top: 2rem;
 }
@@ -106,7 +120,7 @@
   #winners-content {
     font-size: 1rem;
   }
-  #winners-content h2 {
+  #winners-content h2, #winners-content .winners-count p {
     font-size: 1.3rem;
   }
   #winners-content .winners-tb tr td {

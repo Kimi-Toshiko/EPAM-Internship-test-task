@@ -65,23 +65,25 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
                     ))
                 }
             </table>
-            <div className="winners-count">
-                <p>WINNERS ({winners.length})</p>
-            </div>
-            <div className="pagination">
-                <button 
-                className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 
-                disabled={page === 1 ? true : false} 
-                onClick={prevPage}>
-                    <i className="fa-solid fa-caret-left"></i>
-                </button>
-                <p>PAGE №{page}/{totalPages}</p>
-                <button 
-                className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
-                disabled={page === totalPages ? true : false} 
-                onClick={nextPage}>
-                    <i className="fa-solid fa-caret-right"></i>
-                </button>
+            <div className="winners-info">
+                <div className="winners-count">
+                    <p>WINNERS ({winners.length})</p>
+                </div>
+                <div className="pagination">
+                    <button 
+                    className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 
+                    disabled={page === 1 ? true : false} 
+                    onClick={prevPage}>
+                        <i className="fa-solid fa-caret-left"></i>
+                    </button>
+                    <p>PAGE №{page}/{totalPages}</p>
+                    <button 
+                    className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
+                    disabled={page === totalPages ? true : false} 
+                    onClick={nextPage}>
+                        <i className="fa-solid fa-caret-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -223,8 +223,8 @@
           animation-direction: right;
   -webkit-animation-timing-function: ease-in;
           animation-timing-function: ease-in;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
 }
 @-webkit-keyframes moveCar {
   from {
@@ -320,8 +320,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {
@@ -348,8 +348,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {
@@ -376,8 +376,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {
@@ -454,8 +454,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {
@@ -522,8 +522,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {
@@ -550,8 +550,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {
@@ -578,8 +578,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {
@@ -606,8 +606,8 @@
             animation-direction: right;
     -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: backwards;
+            animation-fill-mode: backwards;
   }
   @-webkit-keyframes moveCar {
     from {

@@ -82,7 +82,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
 
                               winnersData.map((winner: IWinner) => {
                                 if (car.id === winner.id) {
-                                  axios.patch(`${winnersUrl}/${winner.id}`, {"wins": winner.id + 1})
+                                  axios.patch(`${winnersUrl}/${winner.id}`, {"wins": winner.wins + 1})
                                   .catch(err => {console.log(err)});;
                                   if (winner.time > Math.min(...timesArray)) {
                                     axios.patch(`${winnersUrl}/${winner.id}`, {"time": Math.min(...timesArray)})

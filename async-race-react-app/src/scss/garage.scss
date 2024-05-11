@@ -152,7 +152,7 @@
                     animation-name: moveCar;
                     animation-direction: right;
                     animation-timing-function: ease-in;
-                    animation-fill-mode: backwards;
+                    // animation-fill-mode: backwards;
 
                     @keyframes moveCar {
                         from {

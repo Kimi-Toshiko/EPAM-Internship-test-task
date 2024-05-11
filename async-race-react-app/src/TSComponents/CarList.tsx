@@ -12,11 +12,12 @@ interface ICarListProps {
     cars: ICar[];
     isDataChanged?: () => void;
     isRaceClicked: number;
+    isResetClicked: number;
 }
 
 const contentPerPage: number = 7;
 
-const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) => {
+const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, isResetClicked}) => {
     const {
         firstContentIndex,
         lastContentIndex,
@@ -37,12 +38,12 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
     const [singleCarTime , setSingleCarTime] = useState<number>(0);
     const [isCarMoving, setIsCarMoving] = useState<boolean>(false);
     const [isRaceClickedCount, setIsRaceClickedCount] = useState<number>(0);
+    const [isResetClickedCount, setIsResetClickedCount] = useState<number>(0);
     const [bestRaceCarTime, setBestRaceCarTime] = useState(0);
 
     if(isRaceClicked > isRaceClickedCount) {
       setIsRaceClickedCount(isRaceClicked + 1);
       let timesArray: [number] = [99999];
-      let bestTimeArray: [number] = [99999];
       cars.slice(firstContentIndex, lastContentIndex).map(car => {
         fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
@@ -58,7 +59,9 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                               thisBtnStartEngine?.classList.add('engine-inactive-btn');
                               thisBtnStopEngine?.classList.remove('engine-inactive-btn');
                               thisBtnStopEngine?.classList.add('engine-active-btn');
-                              animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "forwards"});
+                              // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "forwards"});
+                              animatedCar?.classList.add('animation-move-car');
+                              animatedCar?.setAttribute('animation-duration', `${carTime}`);
                               timesArray.push(carTime);
                               console.log(timesArray.length);
                         }).then(() => {
@@ -106,6 +109,20 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                             }, Math.min(...timesArray)*1000);
                           }
                         }))
+      });
+    }
+
+    if (isResetClicked > isResetClickedCount) {
+      setIsResetClickedCount(isResetClicked + 1);
+      cars.slice(firstContentIndex, lastContentIndex).map(car => {
+        const animatedCar = document.getElementById(`animated-car-${car.id}`);
+        const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
+        const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
+        thisBtnStartEngine?.classList.remove('engine-inactive-btn');
+        thisBtnStartEngine?.classList.add('engine-active-btn');
+        thisBtnStopEngine?.classList.remove('engine-active-btn');
+        thisBtnStopEngine?.classList.add('engine-inactive-btn');
+        animatedCar?.classList.remove('animation-move-car');
       });
     }
 
@@ -206,10 +223,12 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                               setSingleCarTime(carTime);
                               animatedCar?.classList.add('animation-move-car');
                               animatedCar?.setAttribute('animation-duration', `${carTime}`);
+                              animatedCar?.setAttribute('animation-fill', 'backwards');
                               // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "backwards"});
                               animatedCar?.addEventListener('animationend', () => {
-                                const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
-                                    const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
+                                    if (animatedCar?.classList.contains('animation-move-car')) {
+                                      const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
+                                      const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
                                     thisBtnStartEngine?.classList.remove('engine-inactive-btn');
                                     thisBtnStartEngine?.classList.add('engine-active-btn');
                                    thisBtnStopEngine?.classList.remove('engine-active-btn');
@@ -232,6 +251,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                                     `
                                   }
                                 });
+                                    }
                               });
                               }))
                           }
@@ -263,7 +283,8 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                             <i className="fa-solid fa-car-side" 
                                 id={`animated-car-${car.id}`} 
                                 animation-duration='0s'
-                                style={{'animationDuration': `${document.getElementById(`animated-car-${car.id}`)?.getAttribute('animation-duration')?.valueOf()}s`}}
+                                animation-fill='forwards'
+                                style={{'animationDuration': `${document.getElementById(`animated-car-${car.id}`)?.getAttribute('animation-duration')?.valueOf()}s`, 'animationFillMode': `${document.getElementById(`animated-car-${car.id}`)?.getAttribute('animation-fill')}`}}
                                 ></i>
                         </div>
                         <div className="car-name">

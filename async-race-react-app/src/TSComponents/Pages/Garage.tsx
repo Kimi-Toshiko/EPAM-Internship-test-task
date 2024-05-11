@@ -20,6 +20,7 @@ const Garage = (props: Props) => {
     const [updateInputName, setUpdateInputName] = useState<string>('');
     const [updateInputColor, setUpdateInputColor] = useState<string>('');
     const [isRaceClicked, setIsRaceClicked] = useState<number>(0);
+    const [isResetClicked, setIsResetClicked] = useState<number>(0);
 
     const createCarName = document.getElementById('create-car-name');
     const selectedCar = document.querySelector('div[data-selected]');
@@ -122,6 +123,10 @@ const Garage = (props: Props) => {
         setIsRaceClicked(isRaceClicked + 1);
     }
 
+    const handleReset = () => {
+        setIsResetClicked(isResetClicked + 1);
+    }
+
     return (
         <div className="garage">
             <div id="garage-content">
@@ -129,7 +134,7 @@ const Garage = (props: Props) => {
                 <div className="btns-block">
                     <div className="race-btns">
                         <button className='orange-btn' onClick={handleRace}>Race <i className="fa-solid fa-play"></i></button>
-                        <button className='light-blue-btn'>Reset <i className="fa-solid fa-rotate-left"></i></button>
+                        <button className='light-blue-btn' onClick={handleReset} >Reset <i className="fa-solid fa-rotate-left"></i></button>
                     </div>
                     <div className="cu-btns">
                         <div className="create">
@@ -155,7 +160,7 @@ const Garage = (props: Props) => {
                 <section>
                     {error && <p className='fetch-error'>{error}</p>}
                     {isPending && <p className='fetch-loading'>Loading cars...</p>}
-                    {cars && <CarList cars={cars} isDataChanged={() => {setIsDataChanged(isDataChanged + 1)}} isRaceClicked={isRaceClicked} />}
+                    {cars && <CarList cars={cars} isDataChanged={() => {setIsDataChanged(isDataChanged + 1)}} isRaceClicked={isRaceClicked} isResetClicked={isResetClicked} />}
                 </section>
             </div>
         </div>

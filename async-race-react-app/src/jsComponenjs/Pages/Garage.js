@@ -47,6 +47,14 @@ var Garage = function Garage(props) {
     _useState10 = _slicedToArray(_useState9, 2),
     updateInputColor = _useState10[0],
     setUpdateInputColor = _useState10[1];
+  var _useState11 = (0, _react.useState)(0),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isRaceClicked = _useState12[0],
+    setIsRaceClicked = _useState12[1];
+  var _useState13 = (0, _react.useState)(0),
+    _useState14 = _slicedToArray(_useState13, 2),
+    isResetClicked = _useState14[0],
+    setIsResetClicked = _useState14[1];
   var createCarName = document.getElementById('create-car-name');
   var selectedCar = document.querySelector('div[data-selected]');
   var handleGenerateRandomCars = function handleGenerateRandomCars() {
@@ -128,20 +136,28 @@ var Garage = function Garage(props) {
       }
     }
   };
+  var handleRace = function handleRace() {
+    setIsRaceClicked(isRaceClicked + 1);
+  };
+  var handleReset = function handleReset() {
+    setIsResetClicked(isResetClicked + 1);
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "garage"
   }, /*#__PURE__*/React.createElement("div", {
     id: "garage-content"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h1", null, "Garage"), /*#__PURE__*/React.createElement("div", {
     className: "btns-block"
   }, /*#__PURE__*/React.createElement("div", {
     className: "race-btns"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "orange-btn"
+    className: "orange-btn",
+    onClick: handleRace
   }, "Race ", /*#__PURE__*/React.createElement("i", {
     className: "fa-solid fa-play"
   })), /*#__PURE__*/React.createElement("button", {
-    className: "light-blue-btn"
+    className: "light-blue-btn",
+    onClick: handleReset
   }, "Reset ", /*#__PURE__*/React.createElement("i", {
     className: "fa-solid fa-rotate-left"
   }))), /*#__PURE__*/React.createElement("div", {
@@ -193,7 +209,9 @@ var Garage = function Garage(props) {
     cars: cars,
     isDataChanged: function isDataChanged() {
       setIsDataChanged(_isDataChanged + 1);
-    }
+    },
+    isRaceClicked: isRaceClicked,
+    isResetClicked: isResetClicked
   }))));
 };
 var _default = exports.default = Garage;

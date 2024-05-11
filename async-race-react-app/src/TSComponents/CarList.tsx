@@ -14,6 +14,8 @@ interface ICarListProps {
     isRaceClicked: number;
 }
 
+const contentPerPage: number = 7;
+
 const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) => {
     const {
         firstContentIndex,
@@ -23,7 +25,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
         page,
         totalPages,
     } = usePagination({
-        contentPerPage: 7,
+        contentPerPage: contentPerPage,
         count: cars.length,
     });
 
@@ -41,7 +43,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
       setIsRaceClickedCount(isRaceClicked + 1);
       let timesArray: [number] = [99999];
       let bestTimeArray: [number] = [99999];
-      cars.map(car => {
+      cars.slice(firstContentIndex, lastContentIndex).map(car => {
         fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
                               })
@@ -58,8 +60,9 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked}) 
                               thisBtnStopEngine?.classList.add('engine-active-btn');
                               animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "forwards"});
                               timesArray.push(carTime);
+                              console.log(timesArray.length);
                         }).then(() => {
-                          if (timesArray.length > cars.length) {
+                          if ((cars.length <= contentPerPage && timesArray.length > cars.length) || (cars.length > contentPerPage && timesArray.length > contentPerPage)) {
                             setBestRaceCarTime(Math.min(...timesArray));
                             setTimeout(() => {
                               Swal.fire({

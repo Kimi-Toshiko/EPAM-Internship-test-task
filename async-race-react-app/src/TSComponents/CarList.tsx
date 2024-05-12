@@ -207,9 +207,9 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                                                   });
                                             }
                                             else {
-                                                axios.delete(`http://localhost:3000/garage/${car.id}`);
+                                                axios.delete(`http://localhost:3000/garage/${car.id}`)
+                                                .catch(err => {console.log(err)});
                                                 isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged not defined');
-                                                axios.delete(`http://localhost:3000/winners/${car.id}`);
                                               }}
                                             }>
                                 Remove

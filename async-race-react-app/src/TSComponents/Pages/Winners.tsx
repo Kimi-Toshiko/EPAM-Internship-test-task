@@ -1,5 +1,5 @@
 import '../../winners.css';
-import useFetch from '../useFetch';
+import useFetch from '../Hooks/useFetch';
 import WinnerList from '../WinnerList';
 
 type Props = {};

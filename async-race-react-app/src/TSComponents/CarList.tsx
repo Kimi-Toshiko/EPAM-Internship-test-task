@@ -1,9 +1,9 @@
 import React from "react";
 import ICar from "./Interfaces/ICar";
-import usePagination from "./usePagination";
+import usePagination from "./Hooks/usePagination";
 import axios from "axios";
 import { useState } from "react";
-import useFetch from "./useFetch";
+import useFetch from "./Hooks/useFetch";
 import Swal from "sweetalert2";
 import 'animate.css';
 import IWinner from "./Interfaces/IWinner";

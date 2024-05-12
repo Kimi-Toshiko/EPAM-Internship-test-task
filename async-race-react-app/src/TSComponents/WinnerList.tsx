@@ -1,7 +1,7 @@
 import React from "react";
-import useFetch from "./useFetch";
+import useFetch from "./Hooks/useFetch";
 import IWinner from "./Interfaces/IWinner";
-import usePagination from "./usePagination";
+import usePagination from "./Hooks/usePagination";
 
 interface IWinnerListProps {
     winners: IWinner[];

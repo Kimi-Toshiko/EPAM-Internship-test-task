@@ -1,6 +1,6 @@
 import '../../garage.css';
 import CarList from '../CarList';
-import useFetch from '../useFetch';
+import useFetch from '../Hooks/useFetch';
 import axios from 'axios';
 import CarBrandList from '../Data/CarBrandList';
 import CarModelList from '../Data/CarModelList';

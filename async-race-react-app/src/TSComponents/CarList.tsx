@@ -44,9 +44,10 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
     if(isRaceClicked > isRaceClickedCount) {
       setIsRaceClickedCount(isRaceClicked + 1);
       let timesArray: [number] = [99999];
-      let winnersArr: {'name': string, 'winTime': number} = {
+      let winnersArr: {'name': string, 'winTime': number, id: number} = {
         'name': 'null',
-        'winTime': 99999
+        'winTime': 99999,
+        'id': 0
       };
       console.log(isRaceClicked);
       console.log(isRaceClickedCount);
@@ -68,10 +69,12 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                               // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "forwards"});
                               animatedCar?.setAttribute('animation-duration', `${carTime}`);
                               animatedCar?.setAttribute('animation-fill', 'forwards');
+                              animatedCar?.setAttribute('is-participating', 'true');
                               animatedCar?.classList.add('animation-move-car');
-                              if (carTime < winnersArr.winTime) {
+                              if (carTime < winnersArr.winTime && animatedCar?.getAttribute('is-participating')?.valueOf() === 'true') {
                                 winnersArr.name = `${car.name}`;
                                 winnersArr.winTime = carTime;
+                                winnersArr.id = car.id;
                               }
                               timesArray.push(carTime);
                         }).then(() => {
@@ -97,19 +100,19 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                               });
 
                               winnersData.map((winner: IWinner) => {
-                                if (car.id === winner.id) {
+                                if (winnersArr.id === winner.id) {
                                   axios.patch(`${winnersUrl}/${winner.id}`, {"wins": winner.wins + 1})
                                   .catch(err => {console.log(err)});;
-                                  if (winner.time > Math.min(...timesArray)) {
-                                    axios.patch(`${winnersUrl}/${winner.id}`, {"time": Math.min(...timesArray)})
+                                  if (winner.time > winnersArr.winTime) {
+                                    axios.patch(`${winnersUrl}/${winner.id}`, {"time": winnersArr.winTime})
                                     .catch(err => {console.log(err)});
                                   }
                                 }
                                 else {
                                   let newWinner = {
-                                    'id': car.id,
+                                    'id': winnersArr.id,
                                     'wins': 1,
-                                    'time': Math.min(...timesArray)
+                                    'time': winnersArr.winTime
                                 }
                                 axios.post(winnersUrl, newWinner)
                                 .catch(err => {console.log(err)});;
@@ -138,6 +141,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                               thisBtnStartEngine?.classList.add('engine-active-btn');
                               thisBtnStopEngine?.classList.remove('engine-active-btn');
                               thisBtnStopEngine?.classList.add('engine-inactive-btn');
+                              animatedCar?.setAttribute('is-participating', 'false');
                               animatedCar?.classList.remove('animation-move-car');
                               }))
       });
@@ -241,6 +245,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                               animatedCar?.classList.add('animation-move-car');
                               animatedCar?.setAttribute('animation-duration', `${carTime}`);
                               animatedCar?.setAttribute('animation-fill', 'backwards');
+                              animatedCar?.setAttribute('is-participating', 'true');
                               // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "backwards"});
                               animatedCar?.addEventListener('animationend', () => {
                                     if (animatedCar?.classList.contains('animation-move-car')) {
@@ -251,6 +256,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                                    thisBtnStopEngine?.classList.remove('engine-active-btn');
                                     thisBtnStopEngine?.classList.add('engine-inactive-btn');
                                     animatedCar?.classList.remove('animation-move-car');
+                                    animatedCar?.setAttribute('is-participating', 'false');
                                 Swal.fire({
                                   title: `${car.name} had finished race in ${carTime}s!`,
                                   showClass: {
@@ -291,6 +297,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                               thisBtnStartEngine?.classList.add('engine-active-btn');
                               thisBtnStopEngine?.classList.remove('engine-active-btn');
                               thisBtnStopEngine?.classList.add('engine-inactive-btn');
+                              animatedCar?.setAttribute('is-participating', 'false');
                               animatedCar?.classList.remove('animation-move-car');
                               }))
                                     }}
@@ -301,6 +308,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                                 id={`animated-car-${car.id}`} 
                                 animation-duration='0s'
                                 animation-fill='forwards'
+                                is-participating='false'
                                 style={{'animationDuration': `${document.getElementById(`animated-car-${car.id}`)?.getAttribute('animation-duration')?.valueOf()}s`, 'animationFillMode': `${document.getElementById(`animated-car-${car.id}`)?.getAttribute('animation-fill')}`}}
                                 ></i>
                         </div>

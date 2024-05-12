@@ -48,6 +48,8 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
         'name': 'null',
         'winTime': 99999
       };
+      console.log(isRaceClicked);
+      console.log(isRaceClickedCount);
       cars.slice(firstContentIndex, lastContentIndex).map(car => {
         fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
@@ -65,6 +67,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                               thisBtnStopEngine?.classList.add('engine-active-btn');
                               // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "forwards"});
                               animatedCar?.setAttribute('animation-duration', `${carTime}`);
+                              animatedCar?.setAttribute('animation-fill', 'forwards');
                               animatedCar?.classList.add('animation-move-car');
                               if (carTime < winnersArr.winTime) {
                                 winnersArr.name = `${car.name}`;
@@ -122,14 +125,21 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
     if (isResetClicked > isResetClickedCount) {
       setIsResetClickedCount(isResetClicked + 1);
       cars.slice(firstContentIndex, lastContentIndex).map(car => {
-        const animatedCar = document.getElementById(`animated-car-${car.id}`);
-        const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
-        const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
-        thisBtnStartEngine?.classList.remove('engine-inactive-btn');
-        thisBtnStartEngine?.classList.add('engine-active-btn');
-        thisBtnStopEngine?.classList.remove('engine-active-btn');
-        thisBtnStopEngine?.classList.add('engine-inactive-btn');
-        animatedCar?.classList.remove('animation-move-car');
+        fetch(`http://localhost:3000/engine?id=${car.id}&status=stopped`, {
+                                method: 'PATCH'
+                              })
+                              .then(response => response.json()
+                              .then(data => ({data: data}))
+                              .then((res) => {
+                              const animatedCar = document.getElementById(`animated-car-${car.id}`);
+                              const thisBtnStartEngine = document.getElementById(`btn-start-engine-${car.id}`);
+                              const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${car.id}`);                          
+                              thisBtnStartEngine?.classList.remove('engine-inactive-btn');
+                              thisBtnStartEngine?.classList.add('engine-active-btn');
+                              thisBtnStopEngine?.classList.remove('engine-active-btn');
+                              thisBtnStopEngine?.classList.add('engine-inactive-btn');
+                              animatedCar?.classList.remove('animation-move-car');
+                              }))
       });
     }
 

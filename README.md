@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>287 points</ins>)**
+**(Total score: <ins>297 points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -77,7 +77,7 @@ These instructions will help to get you a copy of the project up and running it 
 
 #### 2. Garage View Functionality (55 out of 55 points)
 ##### Car Management (45 out of 45 points)
-- [x] **CRUD Operations (20 out of 20 points)**: Users are allowed to create, update and delete cars, the list of the cars is also displayed. A car has two attributes: "name" and "color". For "delete" operation car is not deleted from the winners table.
+- [x] **CRUD Operations (20 points)**: Users are allowed to create, update and delete cars, the list of the cars is also displayed. A car has two attributes: "name" and "color". For "delete" operation car is not deleted from the winners table.
 - [x] **Color Selection (10 points)**: Color selection from RGB palette is allowed. It displays the selected color on the car's image along with its name.
 - [x] **Management Buttons (5 points)**: Buttons for updating car attributes or deleting it are provided near each car's image.
 - [x] **Pagination (10 points)**: Pagination is implemented for the "Garage" view and displays 7 cars per page.
@@ -91,9 +91,9 @@ These instructions will help to get you a copy of the project up and running it 
 - [x] **Button States (5 points)**: Start engine button is disabled, if the car is in driving mode. Stop engine button is also disabled, when the car's is at its initial place.
 - [x] **Responsive Animation (5 points)**: Car animations are fluid on screens as small as 500px.
 
-### Race Animation (25 points out of 35 points)
+### Race Animation (35 points out of 35 points)
 - [x] **Start Race Button (15 points)**: Button starts the race for all cars on the current page.
-- [ ] **Reset Race Button (0 out of 10 points)**: Not implemented.
+- [x] **Reset Race Button (10 points)**: This button resets the race, returning all cars to their starting position.
 - [x] **Winner Announcement (10 points)**: After some car finishes first user sees the message, which contains the car, which have won and its current time.
 
 ### Winners View (22 points out of 45 points)

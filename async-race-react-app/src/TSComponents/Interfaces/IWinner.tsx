@@ -1,7 +1,9 @@
-interface IWinner {
+export interface IWinner {
     id: number;
     wins: number;
     time: number;
 }
 
-export default IWinner;
+export interface IWinnerListProps {
+    winners: IWinner[];
+}

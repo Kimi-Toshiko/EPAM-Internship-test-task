@@ -1,19 +1,12 @@
 import React from "react";
-import ICar from "./Interfaces/ICar";
+import { ICarListProps } from "./Interfaces/ICar";
 import usePagination from "./Hooks/usePagination";
 import axios from "axios";
 import { useState } from "react";
 import useFetch from "./Hooks/useFetch";
 import Swal from "sweetalert2";
 import 'animate.css';
-import IWinner from "./Interfaces/IWinner";
-
-interface ICarListProps {
-    cars: ICar[];
-    isDataChanged?: () => void;
-    isRaceClicked: number;
-    isResetClicked: number;
-}
+import { IWinner } from "./Interfaces/IWinner";
 
 const contentPerPage: number = 7;
 
@@ -214,9 +207,9 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                                                   });
                                             }
                                             else {
-                                                axios.delete(`http://localhost:3000/garage/${car.id}`);
+                                                axios.delete(`http://localhost:3000/garage/${car.id}`)
+                                                .catch(err => {console.log(err)});
                                                 isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged not defined');
-                                                axios.delete(`http://localhost:3000/winners/${car.id}`);
                                               }}
                                             }>
                                 Remove

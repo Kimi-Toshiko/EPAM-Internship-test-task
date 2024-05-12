@@ -1,11 +1,7 @@
 import React from "react";
 import useFetch from "./Hooks/useFetch";
-import IWinner from "./Interfaces/IWinner";
+import { IWinnerListProps } from "./Interfaces/IWinner";
 import usePagination from "./Hooks/usePagination";
-
-interface IWinnerListProps {
-    winners: IWinner[];
-}
 
 const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
     const {

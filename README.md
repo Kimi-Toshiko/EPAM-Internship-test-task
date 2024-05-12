@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>297 points</ins>)**
+**(Total score: <ins>310 points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -59,7 +59,8 @@ These instructions will help to get you a copy of the project up and running it 
     `$ npm start`
     By default the server will start running on your machine local port 3000.
     `http://localhost:3000/`
-6. Start the application the same way. Go to **async-race-react-app** directory through the terminal.Run the following command in the terminal to start Async-Race application:
+6. Start the application. I recommend to use the production build through the following link: `https://epam-internship-test-task.vercel.app/` as there is no double data accessing. However, you may use the development build through the following guide:
+Go to **async-race-react-app** directory through the terminal.Run the following command in the terminal to start Async-Race application:
    `$npm start`
    By default the server will start running on your machine local port 8000.
    `http://localhost:8000/`
@@ -96,10 +97,10 @@ These instructions will help to get you a copy of the project up and running it 
 - [x] **Reset Race Button (10 points)**: This button resets the race, returning all cars to their starting position.
 - [x] **Winner Announcement (10 points)**: After some car finishes first user sees the message, which contains the car, which have won and its current time.
 
-### Winners View (22 points out of 45 points)
-- [x] **Display Winners (7 out of 15 points)**: Winners are displayed, however, as the race is not implemented, its winners are not added.
+### Winners View (35 points out of 45 points)
+- [x] **Display Winners (15 points)**: Winners are displayed. After some car wins it is displayed at the "Winners view" table.
 - [x] **Pagination for Winners (10 points)**: Pagination for the "Winners" view , with 10 winners per page.
-- [x] **Winners Table (5 out of 10 points)**: Table includes columns for the car №, image, name, number of wins, and best time in seconds. Incrementation for cars that already had win is not implemented, as race is not implemented.
+- [x] **Winners Table (10 points)**: Table includes columns for the car №, image, name, number of wins, and best time in seconds. If the same car wins more than once the number of wins is incremented, and the best time is saved only if it's higher than the previous one.
 - [ ] **Sorting Functionality (10 points)**: Not implemented.
   
 ### Application Architecture (30 out of 40 points)

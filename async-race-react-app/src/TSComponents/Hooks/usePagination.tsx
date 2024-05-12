@@ -1,19 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
-interface IUsePaginationProps {
-    contentPerPage: number;
-    count: number;
-}
-
-interface IUsePaginationReturn {
-    page: number;
-    totalPages: number;
-    firstContentIndex: number;
-    lastContentIndex: number;
-    nextPage: () => void;
-    prevPage: () => void;
-}
+import { IUsePaginationProps, IUsePaginationReturn } from "../Interfaces/IPagination";
 
 type UsePagination = ({contentPerPage, count}: IUsePaginationProps) => (IUsePaginationReturn);
 

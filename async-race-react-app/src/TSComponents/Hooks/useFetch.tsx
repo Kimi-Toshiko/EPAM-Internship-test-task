@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-
-interface IUseFetchResult {
-    data: any | null;
-    isPending: boolean;
-    error: any | null;
-}
+import { IUseFetchResult } from "../Interfaces/IFetch";
 
 const useFetch = (url: string, isDataChanged?: number): IUseFetchResult => {
     const [data, setData] = useState<any | null>(null);

@@ -44,6 +44,10 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
     if(isRaceClicked > isRaceClickedCount) {
       setIsRaceClickedCount(isRaceClicked + 1);
       let timesArray: [number] = [99999];
+      let winnersArr: {'name': string, 'winTime': number} = {
+        'name': 'null',
+        'winTime': 99999
+      };
       cars.slice(firstContentIndex, lastContentIndex).map(car => {
         fetch(`http://localhost:3000/engine?id=${car.id}&status=started`, {
                                 method: 'PATCH'
@@ -60,16 +64,19 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                               thisBtnStopEngine?.classList.remove('engine-inactive-btn');
                               thisBtnStopEngine?.classList.add('engine-active-btn');
                               // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "forwards"});
-                              animatedCar?.classList.add('animation-move-car');
                               animatedCar?.setAttribute('animation-duration', `${carTime}`);
+                              animatedCar?.classList.add('animation-move-car');
+                              if (carTime < winnersArr.winTime) {
+                                winnersArr.name = `${car.name}`;
+                                winnersArr.winTime = carTime;
+                              }
                               timesArray.push(carTime);
-                              console.log(timesArray.length);
                         }).then(() => {
                           if ((cars.length <= contentPerPage && timesArray.length > cars.length) || (cars.length > contentPerPage && timesArray.length > contentPerPage)) {
                             setBestRaceCarTime(Math.min(...timesArray));
                             setTimeout(() => {
                               Swal.fire({
-                                title: `${car.name} won with the time ${Math.min(...timesArray)}s!`,
+                                title: `${winnersArr.name} won with the time ${winnersArr.winTime}s!`,
                                 showClass: {
                                   popup: `
                                     animate__animated

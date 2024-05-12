@@ -71,6 +71,7 @@ var CarList = function CarList(_ref) {
     setBestRaceCarTime = _useState14[1];
   if (isRaceClicked > isRaceClickedCount) {
     setIsRaceClickedCount(isRaceClicked + 1);
+    console.log("race is clicked");
     var timesArray = [99999];
     cars.slice(firstContentIndex, lastContentIndex).map(function (car) {
       fetch("http://localhost:3000/engine?id=".concat(car.id, "&status=started"), {

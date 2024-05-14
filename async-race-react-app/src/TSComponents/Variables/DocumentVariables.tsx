@@ -1,0 +1,1 @@
+export const createCarName = document.getElementById('create-car-name');

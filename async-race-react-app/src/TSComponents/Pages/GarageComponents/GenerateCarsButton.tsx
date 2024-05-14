@@ -1,5 +1,5 @@
 import { ICar } from "../../Interfaces/ICar";
-import { GenerateRandomCars } from "../../API/GarageView/generate-random-cars";
+import { GenerateRandomCars } from "../../API/GarageView/GenerateRandomCars";
 
 type Props = {
     dataArr: ICar[];

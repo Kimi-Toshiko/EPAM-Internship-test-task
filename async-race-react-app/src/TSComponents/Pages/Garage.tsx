@@ -6,52 +6,23 @@ import { useState } from 'react';
 import 'animate.css';
 import Swal from 'sweetalert2';
 import GenerateCarsButton from './GarageComponents/GenerateCarsButton';
-import { garageViewLink } from '../DataLinksVariables';
+import { garageViewLink } from '../Variables/DataLinksVariables';
+import CreateNewCarForm from './GarageComponents/CreateNewCarForm';
 
 const Garage = () => {
     const [isDataChanged, setIsDataChanged] = useState<number>(0);
-    // const carsUrl: string = 'http://localhost:3000/garage'; 
-    const { data: cars, isPending, error } = useFetch(garageViewLink, isDataChanged);
-    const [createInputName, setCreateInputName] = useState<string>('');
-    const [createInputColor, setCreateInputColor] = useState<string>('#000000');
     const [updateInputName, setUpdateInputName] = useState<string>('');
     const [updateInputColor, setUpdateInputColor] = useState<string>('');
     const [isRaceClicked, setIsRaceClicked] = useState<number>(0);
     const [isResetClicked, setIsResetClicked] = useState<number>(0);
+
+    const { data: cars, isPending, error } = useFetch(garageViewLink, isDataChanged);
 
     const createCarName = document.getElementById('create-car-name');
     const selectedCar = document.querySelector('div[data-selected]');
 
     const handleDataChange: VoidFunction = () => {
         setIsDataChanged(isDataChanged + 1);
-    }
-
-    const handleCreateNameInputChange: React.ChangeEventHandler<HTMLInputElement> = (el) => {
-        setCreateInputName(el.target.value);
-        if (createCarName?.classList.contains('invalid-form-input')) {
-            createCarName?.classList.remove('invalid-form-input');
-        }
-    }
-
-    const handleCreateColorInputChange: React.ChangeEventHandler<HTMLInputElement> = (el) => {
-        setCreateInputColor(el.target.value);
-    }
-
-    const handleCreateCar: React.MouseEventHandler<HTMLButtonElement> = (el) => {
-        el.preventDefault();
-        let newCar = {
-            'name': createInputName,
-            'color': createInputColor
-        }
-
-        if (createInputName === '') {
-            createCarName?.setAttribute('placeholder', 'Enter car name...');
-            createCarName?.classList.add('invalid-form-input');
-        }
-        else {
-            axios.post(garageViewLink, newCar);
-            setIsDataChanged(isDataChanged + 1);
-        }
     }
 
     const handleUpdateNameInputChange: React.ChangeEventHandler<HTMLInputElement> = (el) => {
@@ -126,13 +97,7 @@ const Garage = () => {
                         <button className='light-blue-btn' onClick={handleReset} >Reset <i className="fa-solid fa-rotate-left"></i></button>
                     </div>
                     <div className="cu-btns">
-                        <div className="create">
-                            <form action="http://localhost:3000/garage" method='POST'>
-                                <input type="text" id='create-car-name' onChange={handleCreateNameInputChange} />
-                                <input type="color" id='create-car-color' onChange={handleCreateColorInputChange} />
-                                <button className='orange-btn' type='submit' onClick={handleCreateCar}>Create</button>
-                            </form>
-                        </div>
+                        <CreateNewCarForm IsDataChanged={handleDataChange} dataArr={cars} fetchLink={garageViewLink}/>
                         <div className="update">
                             <form action="http://localhost:3000/garage" method='POST'>
                                 <input type="text" onChange={handleUpdateNameInputChange} />

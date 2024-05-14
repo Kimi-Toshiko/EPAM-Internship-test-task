@@ -3,7 +3,7 @@ import CarModelList from "../../Data/CarModelList";
 import CarBrandList from "../../Data/CarBrandList";
 import { ICar } from "../../Interfaces/ICar";
 import axios from "axios";
-import { garageViewLink } from "../../DataLinksVariables";
+import { garageViewLink } from "../../Variables/DataLinksVariables";
 
 export function GenerateRandomCars (dataArr: ICar[]) {
     for (let i: number = dataArr.length; i < dataArr.length + 100; i++) {

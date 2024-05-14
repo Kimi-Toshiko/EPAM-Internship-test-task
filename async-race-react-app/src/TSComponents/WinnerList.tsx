@@ -2,6 +2,8 @@ import React from "react";
 import useFetch from "./Hooks/useFetch";
 import { IWinnerListProps } from "./Interfaces/IWinner";
 import usePagination from "./Hooks/usePagination";
+import { garageViewLink } from './Variables/DataLinksVariables';
+import filterById from "./API/WinnersView/FilterByID";
 
 const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
     const {
@@ -16,16 +18,9 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
         count: winners.length
     });
 
-    const carsUrl: string = 'http://localhost:3000/garage';
-    const {data: carsData} = useFetch(carsUrl);
-
-    function filterById(jsonObject: [], id: number) {
-        return jsonObject.filter(function(jsonObject) {
-            return (jsonObject['id'] === id);})[0];
-    };
+    const {data: carsData} = useFetch(garageViewLink);
 
     let isCarsDataLoaded: boolean = false;
-
     try {
         if (carsData === null) {
             console.log('cars data is null');

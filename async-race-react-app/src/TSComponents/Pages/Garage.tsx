@@ -97,7 +97,7 @@ const Garage = () => {
                         <button className='light-blue-btn' onClick={handleReset} >Reset <i className="fa-solid fa-rotate-left"></i></button>
                     </div>
                     <div className="cu-btns">
-                        <CreateNewCarForm IsDataChanged={handleDataChange} dataArr={cars} fetchLink={garageViewLink}/>
+                        <CreateNewCarForm IsDataChanged={handleDataChange} fetchLink={garageViewLink}/>
                         <div className="update">
                             <form action="http://localhost:3000/garage" method='POST'>
                                 <input type="text" onChange={handleUpdateNameInputChange} />

@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import Garage from './TSComponents/Pages/Garage';
 import Winners from './TSComponents/Pages/Winners';

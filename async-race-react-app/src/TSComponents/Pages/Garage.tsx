@@ -2,16 +2,12 @@ import '../../garage.css';
 import CarList from '../CarList';
 import useFetch from '../Hooks/useFetch';
 import axios from 'axios';
-import CarBrandList from '../Data/CarBrandList';
-import CarModelList from '../Data/CarModelList';
-import HexAlphabetList from '../Data/HexAlphabetList';
 import { useState } from 'react';
 import 'animate.css';
 import Swal from 'sweetalert2';
+import GenerateCarsButton from './GarageComponents/GenerateCarsButton';
 
-type Props = {};
-
-const Garage = (props: Props) => {
+const Garage = () => {
     const [isDataChanged, setIsDataChanged] = useState<number>(0);
     const carsUrl: string = 'http://localhost:3000/garage'; 
     const { data: cars, isPending, error } = useFetch(carsUrl, isDataChanged);
@@ -25,20 +21,12 @@ const Garage = (props: Props) => {
     const createCarName = document.getElementById('create-car-name');
     const selectedCar = document.querySelector('div[data-selected]');
 
-    const handleGenerateRandomCars: VoidFunction = () => {        
-        for (let i: number = cars.length; i < cars.length + 100; i++) {
-            let newCar = {
-                "name": `${CarBrandList[Math.round(Math.random()*(CarBrandList.length -1))]} ${CarModelList[Math.round(Math.random()*(CarModelList.length -1))]}`,
-                "color": `#${HexAlphabetList[Math.round(Math.random()*(HexAlphabetList.length-1))]}${HexAlphabetList[Math.round(Math.random()*(HexAlphabetList.length-1))]}${HexAlphabetList[Math.round(Math.random()*(HexAlphabetList.length-1))]}${HexAlphabetList[Math.round(Math.random()*(HexAlphabetList.length-1))]}${HexAlphabetList[Math.round(Math.random()*(HexAlphabetList.length-1))]}${HexAlphabetList[Math.round(Math.random()*(HexAlphabetList.length-1))]}`
-            };
-            axios.post(carsUrl, newCar);
-        }
+    const handleDataChange: VoidFunction = () => {
         setIsDataChanged(isDataChanged + 1);
     }
 
     const handleCreateNameInputChange: React.ChangeEventHandler<HTMLInputElement> = (el) => {
         setCreateInputName(el.target.value);
-
         if (createCarName?.classList.contains('invalid-form-input')) {
             createCarName?.classList.remove('invalid-form-input');
         }
@@ -119,11 +107,11 @@ const Garage = (props: Props) => {
         }
     }
 
-    const handleRace = () => {
+    const handleRace: React.MouseEventHandler<HTMLButtonElement> = () => {
         setIsRaceClicked(isRaceClicked + 1);
     }
 
-    const handleReset = () => {
+    const handleReset: React.MouseEventHandler<HTMLButtonElement> = () => {
         setIsResetClicked(isResetClicked + 1);
     }
 
@@ -152,15 +140,13 @@ const Garage = (props: Props) => {
                             </form>
                         </div>
                     </div>
-                    <div className="generate-cars-btn">
-                        <button className='light-blue-btn' onClick={handleGenerateRandomCars}>Generate cars</button>
-                    </div>
+                    <GenerateCarsButton isDataChanged={isDataChanged} setIsDataChanged={handleDataChange} dataArr={cars} />
                 </div>
                 <div className="divider"></div>
                 <section>
                     {error && <p className='fetch-error'>{error}</p>}
                     {isPending && <p className='fetch-loading'>Loading cars...</p>}
-                    {cars && <CarList cars={cars} isDataChanged={() => {setIsDataChanged(isDataChanged + 1)}} isRaceClicked={isRaceClicked} isResetClicked={isResetClicked} />}
+                    {cars && <CarList cars={cars} isDataChanged={handleDataChange} isRaceClicked={isRaceClicked} isResetClicked={isResetClicked} />}
                 </section>
             </div>
         </div>

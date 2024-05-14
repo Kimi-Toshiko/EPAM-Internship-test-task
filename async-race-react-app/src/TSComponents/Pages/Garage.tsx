@@ -6,7 +6,7 @@ import { useState } from 'react';
 import 'animate.css';
 import Swal from 'sweetalert2';
 import GenerateCarsButton from './GarageComponents/GenerateCarsButton';
-import { garageViewLink } from '../dist/DataLinksVariables';
+import { garageViewLink } from '../DataLinksVariables';
 
 const Garage = () => {
     const [isDataChanged, setIsDataChanged] = useState<number>(0);

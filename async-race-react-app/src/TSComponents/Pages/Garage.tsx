@@ -6,11 +6,12 @@ import { useState } from 'react';
 import 'animate.css';
 import Swal from 'sweetalert2';
 import GenerateCarsButton from './GarageComponents/GenerateCarsButton';
+import { garageViewLink } from '../dist/DataLinksVariables';
 
 const Garage = () => {
     const [isDataChanged, setIsDataChanged] = useState<number>(0);
-    const carsUrl: string = 'http://localhost:3000/garage'; 
-    const { data: cars, isPending, error } = useFetch(carsUrl, isDataChanged);
+    // const carsUrl: string = 'http://localhost:3000/garage'; 
+    const { data: cars, isPending, error } = useFetch(garageViewLink, isDataChanged);
     const [createInputName, setCreateInputName] = useState<string>('');
     const [createInputColor, setCreateInputColor] = useState<string>('#000000');
     const [updateInputName, setUpdateInputName] = useState<string>('');
@@ -48,7 +49,7 @@ const Garage = () => {
             createCarName?.classList.add('invalid-form-input');
         }
         else {
-            axios.post(carsUrl, newCar);
+            axios.post(garageViewLink, newCar);
             setIsDataChanged(isDataChanged + 1);
         }
     }
@@ -90,15 +91,15 @@ const Garage = () => {
         }
         else {
             if ((updateInputName === '' || null || undefined) && (updateInputColor !== '' || null || undefined)) {
-                axios.patch(`${carsUrl}/${selectedCarId}`, {"color": updateInputColor})
+                axios.patch(`${garageViewLink}/${selectedCarId}`, {"color": updateInputColor})
                 setIsDataChanged(isDataChanged + 1);
             }
             else if ((updateInputName !== '' || null || undefined) && (updateInputColor === '' || null || undefined)) {
-                axios.patch(`${carsUrl}/${selectedCarId}`, {"name": updateInputName})
+                axios.patch(`${garageViewLink}/${selectedCarId}`, {"name": updateInputName})
                 setIsDataChanged(isDataChanged + 1);
             }
             else if ((updateInputName !== '' || null || undefined) && (updateInputColor !== '' || null || undefined)) {
-                axios.patch(`${carsUrl}/${selectedCarId}`, {"name":updateInputName, "color": updateInputColor, "id": selectedCarId})
+                axios.patch(`${garageViewLink}/${selectedCarId}`, {"name":updateInputName, "color": updateInputColor, "id": selectedCarId})
                 setIsDataChanged(isDataChanged + 1);
             }
             else {
@@ -140,7 +141,7 @@ const Garage = () => {
                             </form>
                         </div>
                     </div>
-                    <GenerateCarsButton isDataChanged={isDataChanged} setIsDataChanged={handleDataChange} dataArr={cars} />
+                    <GenerateCarsButton setIsDataChanged={handleDataChange} dataArr={cars} />
                 </div>
                 <div className="divider"></div>
                 <section>

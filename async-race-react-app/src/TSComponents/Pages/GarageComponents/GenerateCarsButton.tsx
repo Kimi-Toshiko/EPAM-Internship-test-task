@@ -3,7 +3,6 @@ import { GenerateRandomCars } from "../../API/GarageView/generate-random-cars";
 
 type Props = {
     dataArr: ICar[];
-    isDataChanged: number;
     setIsDataChanged: Function;
 };
 

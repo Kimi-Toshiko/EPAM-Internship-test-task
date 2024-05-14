@@ -2,9 +2,7 @@ import '../../winners.css';
 import useFetch from '../Hooks/useFetch';
 import WinnerList from '../WinnerList';
 
-type Props = {};
-
-const Winners = (props: Props) => {
+const Winners = () => {
     const winnersUrl: string = 'http://localhost:3000/winners';
     const {data: winnersData, isPending: winnersIsPending, error: winnersError} = useFetch(winnersUrl);
 

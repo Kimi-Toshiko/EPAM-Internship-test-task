@@ -1,15 +1,13 @@
-import { ICar } from "../../Interfaces/ICar";
 import { useState } from "react";
 import { createCarName } from "../../Variables/DocumentVariables";
 import CreateCar from "../../API/GarageView/CreateCar";
 
-type Props = {
-    dataArr: ICar[];
+interface ICreateNewCarForm {
     IsDataChanged: Function;
     fetchLink: string;
 };
 
-const CreateNewCarForm = (props: Props) => {
+const CreateNewCarForm: React.FC<ICreateNewCarForm> = ({IsDataChanged, fetchLink}) => {
     const [createInputName, setCreateInputName] = useState<string>('');
     const [createInputColor, setCreateInputColor] = useState<string>('#000000');
 
@@ -26,8 +24,8 @@ const CreateNewCarForm = (props: Props) => {
 
     const handleCreateCar: React.MouseEventHandler<HTMLButtonElement> = (el) => {
         el.preventDefault();
-        CreateCar(createInputName, createInputColor, props.fetchLink);
-        props.IsDataChanged();
+        CreateCar(createInputName, createInputColor, fetchLink);
+        IsDataChanged();
     }
 
     return (

@@ -1,6 +1,7 @@
 import { ICar } from "../../Interfaces/ICar";
 import { useState } from "react";
-import axios from "axios";
+import { createCarName } from "../../Variables/DocumentVariables";
+import CreateCar from "../../API/GarageView/CreateCar";
 
 type Props = {
     dataArr: ICar[];
@@ -11,8 +12,7 @@ type Props = {
 const CreateNewCarForm = (props: Props) => {
     const [createInputName, setCreateInputName] = useState<string>('');
     const [createInputColor, setCreateInputColor] = useState<string>('#000000');
-    const createCarName = document.getElementById('create-car-name');
-    
+
     const handleCreateNameInputChange: React.ChangeEventHandler<HTMLInputElement> = (el) => {
         setCreateInputName(el.target.value);
         if (createCarName?.classList.contains('invalid-form-input')) {
@@ -26,19 +26,8 @@ const CreateNewCarForm = (props: Props) => {
 
     const handleCreateCar: React.MouseEventHandler<HTMLButtonElement> = (el) => {
         el.preventDefault();
-        let newCar = {
-            'name': createInputName,
-            'color': createInputColor
-        }
-
-        if (createInputName === '') {
-            createCarName?.setAttribute('placeholder', 'Enter car name...');
-            createCarName?.classList.add('invalid-form-input');
-        }
-        else {
-            axios.post(props.fetchLink, newCar);
-            props.IsDataChanged();
-        }
+        CreateCar(createInputName, createInputColor, props.fetchLink);
+        props.IsDataChanged();
     }
 
     return (

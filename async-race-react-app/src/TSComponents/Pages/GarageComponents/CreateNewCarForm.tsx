@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { createCarName } from "../../Variables/DocumentVariables";
 import CreateCar from "../../API/GarageView/CreateCar";
+import { ICarsListActions } from "../../Interfaces/ICarsListActions";
 
-interface ICreateNewCarForm {
-    IsDataChanged: Function;
-    fetchLink: string;
-};
-
-const CreateNewCarForm: React.FC<ICreateNewCarForm> = ({IsDataChanged, fetchLink}) => {
+const CreateNewCarForm: React.FC<ICarsListActions> = ({IsDataChanged, fetchLink}) => {
     const [createInputName, setCreateInputName] = useState<string>('');
     const [createInputColor, setCreateInputColor] = useState<string>('#000000');
 

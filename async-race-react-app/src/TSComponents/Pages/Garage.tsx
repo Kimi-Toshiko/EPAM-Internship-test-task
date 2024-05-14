@@ -37,10 +37,10 @@ const Garage = () => {
                         <button className='light-blue-btn' onClick={handleReset} >Reset <i className="fa-solid fa-rotate-left"></i></button>
                     </div>
                     <div className="cu-btns">
-                        <CreateNewCarForm IsDataChanged={handleDataChange} fetchLink={garageViewLink}/>
+                        <CreateNewCarForm dataArr={cars} IsDataChanged={handleDataChange} fetchLink={garageViewLink}/>
                         <UpdateCarForm dataArr={cars} IsDataChanged={handleDataChange} fetchLink={garageViewLink} />
                     </div>
-                    <GenerateCarsButton setIsDataChanged={handleDataChange} dataArr={cars} />
+                    <GenerateCarsButton fetchLink={garageViewLink} IsDataChanged={handleDataChange} dataArr={cars} />
                 </div>
                 <div className="divider"></div>
                 <section>

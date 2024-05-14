@@ -1,15 +1,10 @@
-import { ICar } from "../../Interfaces/ICar";
+import { ICarsListActions } from "../../Interfaces/ICarsListActions";
 import { GenerateRandomCars } from "../../API/GarageView/GenerateRandomCars";
 
-type Props = {
-    dataArr: ICar[];
-    setIsDataChanged: Function;
-};
-
-const GenerateCarsButton = (props: Props) => {
+const GenerateCarsButton: React.FC<ICarsListActions> = ({dataArr, IsDataChanged}) => {
     const handleGenerateRandomCars: React.MouseEventHandler<HTMLButtonElement> = () => {   
-        GenerateRandomCars(props.dataArr);
-        props.setIsDataChanged();
+        GenerateRandomCars(dataArr);
+        IsDataChanged();
     }
 
     return (

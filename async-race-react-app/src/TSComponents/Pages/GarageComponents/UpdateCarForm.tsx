@@ -1,16 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { createCarName } from '../../Variables/DocumentVariables';
-import { ICar } from '../../Interfaces/ICar';
+import { ICarsListActions } from '../../Interfaces/ICarsListActions';
 import UpdateCar from '../../API/GarageView/UpdateCar';
 
-interface IUpdateCarForm {
-    dataArr: ICar[];
-    IsDataChanged: Function;
-    fetchLink: string;
-};
-
-const UpdateCarForm: React.FC<IUpdateCarForm> = ({dataArr, IsDataChanged, fetchLink}) => {
+const UpdateCarForm: React.FC<ICarsListActions> = ({dataArr, IsDataChanged, fetchLink}) => {
     const [updateInputName, setUpdateInputName] = useState<string>('');
     const [updateInputColor, setUpdateInputColor] = useState<string>('');
 

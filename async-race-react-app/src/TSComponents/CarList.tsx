@@ -1,7 +1,6 @@
 import React from "react";
 import { ICarListProps } from "./Interfaces/ICar";
 import usePagination from "./Hooks/usePagination";
-import axios from "axios";
 import { useState } from "react";
 import useFetch from "./Hooks/useFetch";
 import 'animate.css';
@@ -11,6 +10,7 @@ import ShowAlert from "./API/DOM/ShowAlert";
 import ResetRace from "./API/GarageView/ResetRace";
 import StopSingleCar from "./API/GarageView/StopSingleCar";
 import StartSingleCar from "./API/GarageView/StartSingleCar";
+import RemoveCar from "./API/GarageView/RemoveCar";
 
 const contentPerPage: number = 7;
 
@@ -45,14 +45,9 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
     }
 
     const handleRemoveCar = (carId: number) => {
-      if (document.getElementById(`select-btn-${carId}`)?.classList.contains('btn-selected-active')) {
-        ShowAlert("Please, deselect this car before deleting it!");
-    }
-    else {
-        axios.delete(`http://localhost:3000/garage/${carId}`)
-        .catch(err => {console.log(err)});
+      RemoveCar(carId, () => {
         isDataChanged !== undefined ? isDataChanged() : console.log('isDataChanged not defined');
-      }
+      });
     }
 
     const handleSelectCar = (carId: number) => {

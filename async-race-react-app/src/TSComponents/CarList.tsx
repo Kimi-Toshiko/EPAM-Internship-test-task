@@ -9,6 +9,8 @@ import { winnersViewLink } from "./Variables/DataLinksVariables";
 import StartRace from "./API/GarageView/StartRace";
 import ShowAlert from "./API/DOM/ShowAlert";
 import ResetRace from "./API/GarageView/ResetRace";
+import StopSingleCar from "./API/GarageView/StopSingleCar";
+import StartSingleCar from "./API/GarageView/StartSingleCar";
 
 const contentPerPage: number = 7;
 
@@ -29,8 +31,6 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
 
     const [carContainerId, setCarContainerId] = useState<number>(cars.length + 1);
     const [btnSelectedAmount, setBtnSelectedAmount] = useState<number>(0);
-    const [singleCarTime , setSingleCarTime] = useState<number>(0);
-    const [isCarMoving, setIsCarMoving] = useState<boolean>(false);
     const [isRaceClickedCount, setIsRaceClickedCount] = useState<number>(0);
     const [isResetClickedCount, setIsResetClickedCount] = useState<number>(0);
 
@@ -42,64 +42,6 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
     if (isResetClicked > isResetClickedCount) {
       setIsResetClickedCount(isResetClicked + 1);
       ResetRace(cars, firstContentIndex, lastContentIndex);
-    }
-
-    const handleStopSingleCar = (carId: number) => {
-      setIsCarMoving(false);
-      fetch(`http://localhost:3000/engine?id=${carId}&status=stopped`, {
-        method: 'PATCH'
-      })
-        .then(response => response.json()
-        .then(data => ({data: data}))
-        .then((res) => {
-          const animatedCar = document.getElementById(`animated-car-${carId}`);
-          const thisBtnStartEngine = document.getElementById(`btn-start-engine-${carId}`);
-          const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${carId}`);                          
-          thisBtnStartEngine?.classList.remove('engine-inactive-btn');
-          thisBtnStartEngine?.classList.add('engine-active-btn');
-          thisBtnStopEngine?.classList.remove('engine-active-btn');
-          thisBtnStopEngine?.classList.add('engine-inactive-btn');
-          animatedCar?.setAttribute('is-participating', 'false');
-          animatedCar?.classList.remove('animation-move-car');
-      }))
-    }
-
-    const handleStartSingleCar = (carId: number, carName: string) => {
-      setIsCarMoving(true);
-      fetch(`http://localhost:3000/engine?id=${carId}&status=started`, {
-        method: 'PATCH'
-      })
-        .then(response => response.json()
-        .then(data => ({data: data}))
-        .then((res) => {
-        const animatedCar = document.getElementById(`animated-car-${carId}`);
-        const carTime = Math.round(((res.data.distance / res.data.velocity)/10)) / 100;
-        const thisBtnStartEngine = document.getElementById(`btn-start-engine-${carId}`);
-        const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${carId}`);                          
-        thisBtnStartEngine?.classList.remove('engine-active-btn');
-        thisBtnStartEngine?.classList.add('engine-inactive-btn');
-        thisBtnStopEngine?.classList.remove('engine-inactive-btn');
-        thisBtnStopEngine?.classList.add('engine-active-btn');
-        setSingleCarTime(carTime);
-        animatedCar?.classList.add('animation-move-car');
-        animatedCar?.setAttribute('animation-duration', `${carTime}`);
-        animatedCar?.setAttribute('animation-fill', 'backwards');
-        animatedCar?.setAttribute('is-participating', 'true');
-        // animatedCar?.animate([{left: '0px'}, {left: '80vw'}], {duration: carTime*1000, iterations: 1, fill: "backwards"});
-        animatedCar?.addEventListener('animationend', () => {
-          if (animatedCar?.classList.contains('animation-move-car')) {
-            const thisBtnStartEngine = document.getElementById(`btn-start-engine-${carId}`);
-            const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${carId}`);                          
-            thisBtnStartEngine?.classList.remove('engine-inactive-btn');
-            thisBtnStartEngine?.classList.add('engine-active-btn');
-            thisBtnStopEngine?.classList.remove('engine-active-btn');
-            thisBtnStopEngine?.classList.add('engine-inactive-btn');
-            animatedCar?.classList.remove('animation-move-car');
-            animatedCar?.setAttribute('is-participating', 'false');
-            ShowAlert(`${carName} had finished race in ${carTime}s!`);
-          }
-        });
-      }))
     }
 
     const handleRemoveCar = (carId: number) => {
@@ -149,10 +91,10 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                         <div className="start-stop-btns">
                           <button className='green-btn sm-padding sm-btn engine-active-btn'
                             id={`btn-start-engine-${car.id}`}
-                            onClick={() => {handleStartSingleCar(car.id, car.name)}}>A</button>
+                            onClick={() => {StartSingleCar(car.id, car.name)}}>A</button>
                             <button className='gray-btn sm-padding sm-btn engine-inactive-btn'
                                     id={`btn-stop-engine-${car.id}`}
-                                    onClick={() => {handleStopSingleCar(car.id)}}>B</button>
+                                    onClick={() => {StopSingleCar(car.id)}}>B</button>
                         </div>
                         <div className="car-ico" style={{'color': car.color}}>
                             <i className="fa-solid fa-car-side" id={`animated-car-${car.id}`} is-participating='false'></i>

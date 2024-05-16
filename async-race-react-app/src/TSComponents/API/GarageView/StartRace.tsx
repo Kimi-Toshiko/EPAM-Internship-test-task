@@ -23,7 +23,7 @@ const StartRace = (cars: ICar[], winners: IWinner[], firstContentIndex: number, 
             .then((res) => {
                 const animatedCar = getAnimatedCar(car.id);
                 const carTime = Math.round(((res.data.distance / res.data.velocity)/10)) / 100;
-                AddCarAnimation(car.id, carTime);
+                AddCarAnimation(car.id, carTime, 'forwards');
                 EngineButtonsStarted(car.id);
                 if (carTime < winnersArr.winTime && animatedCar?.getAttribute('is-participating')?.valueOf() === 'true') {
                     winnersArr.name = `${car.name}`;

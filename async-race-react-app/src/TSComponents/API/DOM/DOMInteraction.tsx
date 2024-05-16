@@ -18,10 +18,10 @@ export const EngineButtonsStopped = (id: number) => {
     thisBtnStopEngine?.classList.remove('engine-active-btn');
 }
 
-export const AddCarAnimation = (id: number, animationDuration: number) => {
+export const AddCarAnimation = (id: number, animationDuration: number, fillMode: string) => {
     const animatedCar = getAnimatedCar(id);
     animatedCar?.setAttribute('is-participating', 'true');
-    animatedCar?.setAttribute('style', `animation-fill-mode: forwards; animation-duration: ${animationDuration}s; `);
+    animatedCar?.setAttribute('style', `animation-fill-mode: ${fillMode}; animation-duration: ${animationDuration}s; `);
     animatedCar?.classList.add('animation-move-car');    
 }
 

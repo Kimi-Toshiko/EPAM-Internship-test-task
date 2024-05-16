@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>317 points</ins>)**
+**(Total score: <ins>322 points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -59,7 +59,8 @@ These instructions will help to get you a copy of the project up and running it 
     `$ npm start`
     By default the server will start running on your machine local port 3000.
     `http://localhost:3000/`
-6. Start the application. I recommend to use the production build through the following link: `https://epam-internship-test-task.vercel.app/` as there is no double data accessing. However, you may use the development build through the following guide:
+6. Start the application. I recommend to use the production build through the following link: `https://epam-internship-test-task.vercel.app/` as there is no double data accessing.[^2]
+   [^2]: However, you may use the development build through the following guide:
 Go to **async-race-react-app** directory through the terminal.Run the following command in the terminal to start Async-Race application:
    `$npm start`
    By default the server will start running on your machine local port 8000.
@@ -103,8 +104,8 @@ Go to **async-race-react-app** directory through the terminal.Run the following 
 - [x] **Winners Table (10 points)**: Table includes columns for the car №, image, name, number of wins, and best time in seconds. If the same car wins more than once the number of wins is incremented, and the best time is saved only if it's higher than the previous one.
 - [ ] **Sorting Functionality (10 points)**: Not implemented.
   
-### Application Architecture (35 out of 40 points)
-- [x] **Modular Design (35 out of 40 points)**: Application is divided into logical mudules or layers, such as API interaction, UI rendering, and state management.
+### Application Architecture (40 out of 40 points)
+- [x] **Modular Design (40 points)**: Application is divided into logical modules or layers, such as API interaction, UI rendering, and state management.
 
 ### Dynamic Content Generation (30 out of 30 points)
 - [x] **JavaScript-Generated HTML Content (30 points)**: All HTML content is dynamically generated using JavaScript, with the `<body>` tag containing only a single `<script>` tag.

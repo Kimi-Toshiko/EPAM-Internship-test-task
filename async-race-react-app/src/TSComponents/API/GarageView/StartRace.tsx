@@ -1,10 +1,10 @@
 import { ICar } from "../../Interfaces/ICar";
 import { IWinner } from "../../Interfaces/IWinner";
-import Swal from "sweetalert2";
 import { getAnimatedCar } from "../../Variables/DocumentVariables";
 import { MakeButtonsInactive, AddCarAnimation } from "../DOM/DOMInteraction";
 import { engineLink } from "../../Variables/DataLinksVariables";
 import PostWinners from "../WinnersView/PostWinners";
+import ShowAlert from "../DOM/ShowAlert";
 
 const StartRace = (cars: ICar[], winners: IWinner[], firstContentIndex: number, lastContentIndex: number, contentPerPage: number) => {
     let timesArray: [number] = [99999];
@@ -35,25 +35,9 @@ const StartRace = (cars: ICar[], winners: IWinner[], firstContentIndex: number, 
             .then(() => {
                 if ((cars.length <= contentPerPage && timesArray.length > cars.length) || (cars.length > contentPerPage && timesArray.length > contentPerPage)) {
                 setTimeout(() => {
-                    Swal.fire({
-                        title: `${winnersArr.name} won with the time ${winnersArr.winTime}s!`,
-                        showClass: {
-                            popup: `
-                            animate__animated
-                            animate__fadeInUp
-                            animate__faster
-                            `
-                        },
-                        hideClass: {
-                            popup: `
-                            animate__animated
-                            animate__fadeOutDown
-                            animate__faster
-                            `
-                        }
-                    });
+                    ShowAlert(`${winnersArr.name} won with the time ${winnersArr.winTime}s!`);
                     PostWinners(winners, winnersArr);
-                }, Math.min(...timesArray)*1000);
+                }, winnersArr.winTime*1000);
             }
         }))
     });

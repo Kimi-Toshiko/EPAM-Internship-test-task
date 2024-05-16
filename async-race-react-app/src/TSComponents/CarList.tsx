@@ -4,10 +4,10 @@ import usePagination from "./Hooks/usePagination";
 import axios from "axios";
 import { useState } from "react";
 import useFetch from "./Hooks/useFetch";
-import Swal from "sweetalert2";
 import 'animate.css';
 import { winnersViewLink } from "./Variables/DataLinksVariables";
 import StartRace from "./API/GarageView/StartRace";
+import ShowAlert from "./API/DOM/ShowAlert";
 
 const contentPerPage: number = 7;
 
@@ -112,23 +112,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
             thisBtnStopEngine?.classList.add('engine-inactive-btn');
             animatedCar?.classList.remove('animation-move-car');
             animatedCar?.setAttribute('is-participating', 'false');
-            Swal.fire({
-              title: `${carName} had finished race in ${carTime}s!`,
-              showClass: {
-                popup: `
-                  animate__animated
-                  animate__fadeInUp
-                  animate__faster
-                  `
-              },
-              hideClass: {
-                popup: `
-                  animate__animated
-                  animate__fadeOutDown
-                  animate__faster
-                  `
-              }
-            });
+            ShowAlert(`${carName} had finished race in ${carTime}s!`);
           }
         });
       }))
@@ -136,23 +120,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
 
     const handleRemoveCar = (carId: number) => {
       if (document.getElementById(`select-btn-${carId}`)?.classList.contains('btn-selected-active')) {
-        Swal.fire({
-            title: "Please, deselect this car before deleting it!",
-            showClass: {
-              popup: `
-                animate__animated
-                animate__fadeInUp
-                animate__faster
-              `
-            },
-            hideClass: {
-              popup: `
-                animate__animated
-                animate__fadeOutDown
-                animate__faster
-              `
-            }
-          });
+        ShowAlert("Please, deselect this car before deleting it!");
     }
     else {
         axios.delete(`http://localhost:3000/garage/${carId}`)
@@ -169,23 +137,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
             setCarContainerId(cars.length + 1);
         }
         else {
-            Swal.fire({
-                title: "Please, deselect the previous car!",
-                showClass: {
-                  popup: `
-                    animate__animated
-                    animate__fadeInUp
-                    animate__faster
-                  `
-                },
-                hideClass: {
-                  popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                  `
-                }
-              });
+            ShowAlert("Please, deselect the previous car!");
         }
     }
       else {

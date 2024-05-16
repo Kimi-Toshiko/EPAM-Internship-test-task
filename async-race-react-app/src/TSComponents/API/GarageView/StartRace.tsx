@@ -1,7 +1,7 @@
 import { ICar } from "../../Interfaces/ICar";
 import { IWinner } from "../../Interfaces/IWinner";
 import { getAnimatedCar } from "../../Variables/DocumentVariables";
-import { MakeButtonsInactive, AddCarAnimation } from "../DOM/DOMInteraction";
+import { EngineButtonsStarted, AddCarAnimation } from "../DOM/DOMInteraction";
 import { engineLink } from "../../Variables/DataLinksVariables";
 import PostWinners from "../WinnersView/PostWinners";
 import ShowAlert from "../DOM/ShowAlert";
@@ -24,7 +24,7 @@ const StartRace = (cars: ICar[], winners: IWinner[], firstContentIndex: number, 
                 const animatedCar = getAnimatedCar(car.id);
                 const carTime = Math.round(((res.data.distance / res.data.velocity)/10)) / 100;
                 AddCarAnimation(car.id, carTime);
-                MakeButtonsInactive(car.id);
+                EngineButtonsStarted(car.id);
                 if (carTime < winnersArr.winTime && animatedCar?.getAttribute('is-participating')?.valueOf() === 'true') {
                     winnersArr.name = `${car.name}`;
                     winnersArr.winTime = carTime;

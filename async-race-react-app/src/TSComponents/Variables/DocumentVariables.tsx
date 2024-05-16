@@ -11,3 +11,7 @@ export const getBtnStartEngine = (id: number) => {
 export const getBtnStopEngine = (id: number) => {
     return document.getElementById(`btn-stop-engine-${id}`);
 }
+
+export const getSelectBtn = (id: number) => {
+    return document.getElementById(`select-btn-${id}`);
+}

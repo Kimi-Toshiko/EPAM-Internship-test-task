@@ -6,11 +6,11 @@ import useFetch from "./Hooks/useFetch";
 import 'animate.css';
 import { winnersViewLink } from "./Variables/DataLinksVariables";
 import StartRace from "./API/GarageView/StartRace";
-import ShowAlert from "./API/DOM/ShowAlert";
 import ResetRace from "./API/GarageView/ResetRace";
 import StopSingleCar from "./API/GarageView/StopSingleCar";
 import StartSingleCar from "./API/GarageView/StartSingleCar";
 import RemoveCar from "./API/GarageView/RemoveCar";
+import SelectCar from "./API/GarageView/SelectCar";
 
 const contentPerPage: number = 7;
 
@@ -51,21 +51,13 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
     }
 
     const handleSelectCar = (carId: number) => {
-      if (btnSelectedAmount >= 1) {
-        if (document.getElementById(`select-btn-${carId}`)?.classList.contains('btn-selected-active')) {
-            document.getElementById(`select-btn-${carId}`)?.classList.toggle('btn-selected-active');
-            setBtnSelectedAmount(btnSelectedAmount - 1);
-            setCarContainerId(cars.length + 1);
-        }
-        else {
-            ShowAlert("Please, deselect the previous car!");
-        }
-    }
-      else {
+      SelectCar(carId, btnSelectedAmount, () => {
+        setBtnSelectedAmount(btnSelectedAmount - 1);
+        setCarContainerId(cars.length + 1);
+      }, () => {
         setCarContainerId(carId);
         setBtnSelectedAmount(btnSelectedAmount + 1);
-        document.getElementById(`select-btn-${carId}`)?.classList.toggle('btn-selected-active');
-      }
+      });
     }
 
     return (

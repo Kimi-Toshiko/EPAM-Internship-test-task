@@ -1,12 +1,21 @@
-import { getAnimatedCar } from "../../Variables/DocumentVariables";
+import { getAnimatedCar, getBtnStartEngine, getBtnStopEngine } from "../../Variables/DocumentVariables";
 
-export const MakeButtonsInactive = (id: number) => {
-    const thisBtnStartEngine = document.getElementById(`btn-start-engine-${id}`);
-    const thisBtnStopEngine = document.getElementById(`btn-stop-engine-${id}`);                          
+export const EngineButtonsStarted = (id: number) => {
+    const thisBtnStartEngine = getBtnStartEngine(id);
+    const thisBtnStopEngine = getBtnStopEngine(id);                         
     thisBtnStartEngine?.classList.remove('engine-active-btn');
     thisBtnStartEngine?.classList.add('engine-inactive-btn');
     thisBtnStopEngine?.classList.remove('engine-inactive-btn');
     thisBtnStopEngine?.classList.add('engine-active-btn');
+}
+
+export const EngineButtonsStopped = (id: number) => {
+    const thisBtnStartEngine = getBtnStartEngine(id);
+    const thisBtnStopEngine = getBtnStopEngine(id);                          
+    thisBtnStartEngine?.classList.add('engine-active-btn');
+    thisBtnStartEngine?.classList.remove('engine-inactive-btn');
+    thisBtnStopEngine?.classList.add('engine-inactive-btn');
+    thisBtnStopEngine?.classList.remove('engine-active-btn');
 }
 
 export const AddCarAnimation = (id: number, animationDuration: number) => {
@@ -14,4 +23,10 @@ export const AddCarAnimation = (id: number, animationDuration: number) => {
     animatedCar?.setAttribute('is-participating', 'true');
     animatedCar?.setAttribute('style', `animation-fill-mode: forwards; animation-duration: ${animationDuration}s; `);
     animatedCar?.classList.add('animation-move-car');    
+}
+
+export const RemoveCarAnimation = (id: number) => {
+    const animatedCar = getAnimatedCar(id);
+    animatedCar?.classList.remove('animation-move-car');
+    animatedCar?.removeAttribute('style');
 }

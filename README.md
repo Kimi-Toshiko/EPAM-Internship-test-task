@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>310 points</ins>)**
+**(Total score: <ins>317 points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -103,8 +103,8 @@ Go to **async-race-react-app** directory through the terminal.Run the following 
 - [x] **Winners Table (10 points)**: Table includes columns for the car №, image, name, number of wins, and best time in seconds. If the same car wins more than once the number of wins is incremented, and the best time is saved only if it's higher than the previous one.
 - [ ] **Sorting Functionality (10 points)**: Not implemented.
   
-### Application Architecture (30 out of 40 points)
-- [x] **Modular Design (30 out of 40 points)**: Application is divided into logical mudules or layers, such as API interaction, UI rendering, and state management.
+### Application Architecture (35 out of 40 points)
+- [x] **Modular Design (35 out of 40 points)**: Application is divided into logical mudules or layers, such as API interaction, UI rendering, and state management.
 
 ### Dynamic Content Generation (30 out of 30 points)
 - [x] **JavaScript-Generated HTML Content (30 points)**: All HTML content is dynamically generated using JavaScript, with the `<body>` tag containing only a single `<script>` tag.
@@ -119,7 +119,7 @@ Go to **async-race-react-app** directory through the terminal.Run the following 
 - [x] **Eslint with Airbnb Style Guide (7 out of 15 points)**: Code is adhered to the ESLint configuration. However, there are some warnings about unused variables.
 
 ### Code Organization and Efficiency (8 out of 15 points)
-  - [x] **Function Modularization (5 out of 10 points)**: Some parts of the code are divided into small, clearly named functions with no more, than 40 lines of code, however, some are not.
+  - [x] **Function Modularization (7 out of 10 points)**: Most of the code is divided into small, clearly named functions with no more, than 40 lines of code, however, some are not.
   - [x] **Code Duplication and Magic Numbers (3 out of 5 points)**: Code duplication is not often, however, there are some parts, which are duplicated.
 
 ### Prettier and ESLint Configuration (2 out of 10 points)

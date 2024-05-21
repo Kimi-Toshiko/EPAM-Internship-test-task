@@ -260,6 +260,7 @@
   margin-top: 1.5rem;
 }
 #garage-content .garage-info .garage-count p {
+  text-transform: uppercase;
   font-size: 2rem;
   font-weight: 600;
   color: #CFFBFC;

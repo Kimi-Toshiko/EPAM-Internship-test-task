@@ -11,21 +11,12 @@ import StopSingleCar from "./API/GarageView/StopSingleCar";
 import StartSingleCar from "./API/GarageView/StartSingleCar";
 import RemoveCar from "./API/GarageView/RemoveCar";
 import SelectCar from "./API/GarageView/SelectCar";
+import Pagination from "./Pages/Pagination";
 
 const contentPerPage: number = 7;
 
 const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, isResetClicked}) => {
-    const {
-        firstContentIndex,
-        lastContentIndex,
-        nextPage,
-        prevPage,
-        page,
-        totalPages,
-    } = usePagination({
-        contentPerPage: contentPerPage,
-        count: cars.length,
-    });
+    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: contentPerPage, count: cars.length });
 
     const {data: winnersData} = useFetch(winnersViewLink);
 
@@ -94,26 +85,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
                     <hr />
                 </div>
             ))}
-            <div className="garage-info">
-              <div className="garage-count">
-                <p>GARAGE ({cars.length})</p>
-              </div>
-              <div className="pagination">
-                <button 
-                className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 
-                disabled={page === 1 ? true : false} 
-                onClick={prevPage}>
-                    <i className="fa-solid fa-caret-left"></i>
-                </button>
-                <p>PAGE №{page}/{totalPages}</p>
-                <button 
-                className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
-                disabled={page === totalPages ? true : false} 
-                onClick={nextPage}>
-                    <i className="fa-solid fa-caret-right"></i>
-                </button>
-              </div>
-            </div>
+            <Pagination paginatedBlockName="garage" dataArray={cars} page={page} prevPage={prevPage} nextPage={nextPage} totalPages={totalPages} />
           </div>
         </div>
     );

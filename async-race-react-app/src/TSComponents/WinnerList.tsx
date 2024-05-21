@@ -2,21 +2,12 @@ import React from "react";
 import useFetch from "./Hooks/useFetch";
 import { IWinnerListProps } from "./Interfaces/IWinner";
 import usePagination from "./Hooks/usePagination";
+import Pagination from "./Pages/Pagination";
 import { garageViewLink } from './Variables/DataLinksVariables';
 import filterById from "./API/WinnersView/FilterByID";
 
 const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
-    const {
-        firstContentIndex,
-        lastContentIndex,
-        nextPage,
-        prevPage,
-        page,
-        totalPages
-    } = usePagination({
-        contentPerPage: 10,
-        count: winners.length
-    });
+    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: 10, count: winners.length });
 
     const {data: carsData} = useFetch(garageViewLink);
 
@@ -53,26 +44,7 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
                     </tr>
                 ))}
             </table>
-            <div className="winners-info">
-                <div className="winners-count">
-                    <p>WINNERS ({winners.length})</p>
-                </div>
-                <div className="pagination">
-                    <button 
-                    className={`orange-btn sm-padding ${page === 1 ? 'btn-disabled' : 'btn-enabled'}`} 
-                    disabled={page === 1 ? true : false} 
-                    onClick={prevPage}>
-                        <i className="fa-solid fa-caret-left"></i>
-                    </button>
-                    <p>PAGE №{page}/{totalPages}</p>
-                    <button 
-                    className={`orange-btn sm-padding ${page === totalPages ? 'btn-disabled' : 'btn-enabled'}`} 
-                    disabled={page === totalPages ? true : false} 
-                    onClick={nextPage}>
-                        <i className="fa-solid fa-caret-right"></i>
-                    </button>
-                </div>
-            </div>
+            <Pagination paginatedBlockName="winners" dataArray={winners} page={page} prevPage={prevPage} nextPage={nextPage} totalPages={totalPages} />
         </div>
     );
 }

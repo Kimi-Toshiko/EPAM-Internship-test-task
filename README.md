@@ -1,6 +1,6 @@
 # EPAM-Internship-test-task
 
-**(Total score: <ins>322 points</ins>)**
+**(Total score: <ins>**326** points</ins>)**
 **Front-end deployment URL**: https://epam-internship-test-task.vercel.app/
 
 This repository contains the test [task](https://github.com/rolling-scopes-school/tasks/blob/master/epam/async-race.md) "Async-Race" for an internship "Javascript Developer" application at EPAM. It is designed to showcase skills in software development, problem-solving, and system design.
@@ -119,9 +119,9 @@ Go to **async-race-react-app** directory through the terminal.Run the following 
 ### Code Quality and Standards (7 out of 15 points)
 - [x] **Eslint with Airbnb Style Guide (7 out of 15 points)**: Code is adhered to the ESLint configuration. However, there are some warnings about unused variables.
 
-### Code Organization and Efficiency (8 out of 15 points)
-  - [x] **Function Modularization (7 out of 10 points)**: Most of the code is divided into small, clearly named functions with no more, than 40 lines of code, however, some are not.
-  - [x] **Code Duplication and Magic Numbers (3 out of 5 points)**: Code duplication is not often, however, there are some parts, which are duplicated.
+### Code Organization and Efficiency (14 out of 15 points)
+  - [x] **Function Modularization (9 out of 10 points)**: Code is divided into small, clearly named functions, however, two modules are over 40 lines of code.
+  - [x] **Code Duplication and Magic Numbers (5 out of 5 points)**: Code is not duplicated throughout the project.
 
 ### Prettier and ESLint Configuration (2 out of 10 points)
 - [ ] **Prettier Setup (5 points)**: Prettier is not set up.

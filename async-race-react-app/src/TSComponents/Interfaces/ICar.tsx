@@ -10,7 +10,17 @@ export interface ICar {
 }
 export interface ICarListProps {
     cars: ICar[];
-    isDataChanged?: () => void;
+    isDataChanged: () => void;
     isRaceClicked: number;
     isResetClicked: number;
+}
+
+export interface ICarInteractionButtonsProps {
+    carId: number;
+    isDataChanged: VoidFunction;
+    btnSelectedAmount: number;
+    decreaseSelectedAmount: VoidFunction;
+    changeContainerToInvalid: VoidFunction;
+    changeContainerToValid: (id: number) => void;
+    increaseSelectedAmount: VoidFunction;
 }

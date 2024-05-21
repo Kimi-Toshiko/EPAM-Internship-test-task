@@ -5,14 +5,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
-var _useFetch2 = _interopRequireDefault(require("./useFetch"));
-var _IWinner = _interopRequireDefault(require("./Interfaces/IWinner"));
-var _usePagination2 = _interopRequireDefault(require("./usePagination"));
+var _useFetch2 = _interopRequireDefault(require("./Hooks/useFetch"));
+var _IWinner = require("./Interfaces/IWinner");
+var _usePagination2 = _interopRequireDefault(require("./Hooks/usePagination"));
+var _Pagination = _interopRequireDefault(require("./Pages/Pagination"));
+var _DataLinksVariables = require("./Variables/DataLinksVariables");
+var _FilterByID = _interopRequireDefault(require("./API/WinnersView/FilterByID"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var contentPerPage = 10;
 var WinnerList = function WinnerList(_ref) {
   var winners = _ref.winners;
   var _usePagination = (0, _usePagination2.default)({
-      contentPerPage: 10,
+      contentPerPage: contentPerPage,
       count: winners.length
     }),
     firstContentIndex = _usePagination.firstContentIndex,
@@ -21,21 +25,13 @@ var WinnerList = function WinnerList(_ref) {
     prevPage = _usePagination.prevPage,
     page = _usePagination.page,
     totalPages = _usePagination.totalPages;
-  var carsUrl = 'http://localhost:3000/garage';
-  var _useFetch = (0, _useFetch2.default)(carsUrl),
+  var _useFetch = (0, _useFetch2.default)(_DataLinksVariables.garageViewLink),
     carsData = _useFetch.data;
-  function filterById(jsonObject, id) {
-    return jsonObject.filter(function (jsonObject) {
-      return jsonObject['id'] === id;
-    })[0];
-  }
-  ;
   var isCarsDataLoaded = false;
   try {
     if (carsData === null) {
       console.log('cars data is null');
     } else {
-      console.log('cars data is loaded');
       isCarsDataLoaded = true;
     }
   } catch (err) {
@@ -51,27 +47,16 @@ var WinnerList = function WinnerList(_ref) {
     }, /*#__PURE__*/_react.default.createElement("td", null, winner.id), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("i", {
       className: "fa-solid fa-car-side",
       style: {
-        'color': isCarsDataLoaded ? filterById(carsData, winner.id)['color'] : '#CBCBCB'
+        'color': isCarsDataLoaded ? (0, _FilterByID.default)(carsData, winner.id)['color'] : '#CBCBCB'
       }
-    })), /*#__PURE__*/_react.default.createElement("td", null, isCarsDataLoaded ? filterById(carsData, winner.id)['name'] : ''), /*#__PURE__*/_react.default.createElement("td", null, winner.wins), /*#__PURE__*/_react.default.createElement("td", null, winner.time, " seconds"));
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "winners-info"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "winners-count"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "WINNERS (", winners.length, ")")), /*#__PURE__*/_react.default.createElement("div", {
-    className: "pagination"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "orange-btn sm-padding ".concat(page === 1 ? 'btn-disabled' : 'btn-enabled'),
-    disabled: page === 1 ? true : false,
-    onClick: prevPage
-  }, /*#__PURE__*/_react.default.createElement("i", {
-    className: "fa-solid fa-caret-left"
-  })), /*#__PURE__*/_react.default.createElement("p", null, "PAGE \u2116", page, "/", totalPages), /*#__PURE__*/_react.default.createElement("button", {
-    className: "orange-btn sm-padding ".concat(page === totalPages ? 'btn-disabled' : 'btn-enabled'),
-    disabled: page === totalPages ? true : false,
-    onClick: nextPage
-  }, /*#__PURE__*/_react.default.createElement("i", {
-    className: "fa-solid fa-caret-right"
-  })))));
+    })), /*#__PURE__*/_react.default.createElement("td", null, isCarsDataLoaded ? (0, _FilterByID.default)(carsData, winner.id)['name'] : ''), /*#__PURE__*/_react.default.createElement("td", null, winner.wins), /*#__PURE__*/_react.default.createElement("td", null, winner.time, " seconds"));
+  })), /*#__PURE__*/_react.default.createElement(_Pagination.default, {
+    paginatedBlockName: "winners",
+    dataArray: winners,
+    page: page,
+    prevPage: prevPage,
+    nextPage: nextPage,
+    totalPages: totalPages
+  }));
 };
 var _default = exports.default = WinnerList;

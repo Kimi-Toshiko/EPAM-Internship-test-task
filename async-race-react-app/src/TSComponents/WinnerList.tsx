@@ -6,8 +6,10 @@ import Pagination from "./Pages/Pagination";
 import { garageViewLink } from './Variables/DataLinksVariables';
 import filterById from "./API/WinnersView/FilterByID";
 
+const contentPerPage: number = 10;
+
 const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
-    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: 10, count: winners.length });
+    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: contentPerPage, count: winners.length });
 
     const {data: carsData} = useFetch(garageViewLink);
 

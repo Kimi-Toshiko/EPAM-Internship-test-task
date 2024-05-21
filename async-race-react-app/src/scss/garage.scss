@@ -152,7 +152,6 @@
                     animation-name: moveCar;
                     animation-direction: right;
                     animation-timing-function: ease-in;
-                    // animation-fill-mode: backwards;
 
                     @keyframes moveCar {
                         from {
@@ -179,6 +178,7 @@
         margin-top: 1.5rem;
 
         .garage-count p {
+            text-transform: uppercase;
             font-size: 2rem;
             font-weight: 600;
             color: $light-blue;

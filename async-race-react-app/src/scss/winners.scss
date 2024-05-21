@@ -13,6 +13,9 @@
         color: $light-blue;
         font-size: 2rem;
         font-weight: bold;
+        p {
+            text-transform: uppercase;
+        }
     }
 
     .sm-padding {

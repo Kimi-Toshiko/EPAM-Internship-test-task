@@ -4,12 +4,11 @@ import { IWinnerListProps } from "./Interfaces/IWinner";
 import usePagination from "./Hooks/usePagination";
 import Pagination from "./Pages/Pagination";
 import { garageViewLink } from './Variables/DataLinksVariables';
-import filterById from "./API/WinnersView/FilterByID";
-
-const contentPerPage: number = 10;
+import { WINNERS_LIST_CONTENT_PER_PAGE } from "./Variables/ListsOptions";
+import FilterById from "./API/WinnersView/FilterByID";
 
 const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
-    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: contentPerPage, count: winners.length });
+    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: WINNERS_LIST_CONTENT_PER_PAGE, count: winners.length });
 
     const {data: carsData} = useFetch(garageViewLink);
 
@@ -39,8 +38,8 @@ const WinnerList: React.FC<IWinnerListProps> = ({winners}) => {
                 {winners.slice(firstContentIndex, lastContentIndex).map(winner => (
                     <tr key={winner.id}>
                         <td>{winner.id}</td>
-                        <td><i className="fa-solid fa-car-side" style={{'color': isCarsDataLoaded ? filterById(carsData, winner.id)['color'] : '#CBCBCB'}}></i></td>
-                        <td>{isCarsDataLoaded ? filterById(carsData, winner.id)['name'] : ''}</td>
+                        <td><i className="fa-solid fa-car-side" style={{'color': isCarsDataLoaded ? FilterById(carsData, winner.id)['color'] : '#CBCBCB'}}></i></td>
+                        <td>{isCarsDataLoaded ? FilterById(carsData, winner.id)['name'] : ''}</td>
                         <td>{winner.wins}</td>
                         <td>{winner.time} seconds</td>
                     </tr>

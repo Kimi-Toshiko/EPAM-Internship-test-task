@@ -10,11 +10,10 @@ import ResetRace from "./API/GarageView/ResetRace";
 import Pagination from "./Pages/Pagination";
 import CarInteractionButtons from "./Pages/CarListComponents/CarInteractionButtons";
 import CarEngineButtons from "./Pages/CarListComponents/CarEngineButtons";
-
-const contentPerPage: number = 7;
+import { CAR_LIST_CONTENT_PER_PAGE } from "./Variables/ListsOptions";
 
 const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, isResetClicked}) => {
-    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: contentPerPage, count: cars.length });
+    const { firstContentIndex, lastContentIndex, nextPage, prevPage, page, totalPages } = usePagination({ contentPerPage: CAR_LIST_CONTENT_PER_PAGE, count: cars.length });
 
     const {data: winnersData} = useFetch(winnersViewLink);
 
@@ -33,7 +32,7 @@ const CarList: React.FC<ICarListProps> = ({cars, isDataChanged, isRaceClicked, i
 
     if(isRaceClicked > isRaceClickedCount) {
       setIsRaceClickedCount(isRaceClicked + 1);
-      StartRace(cars, winnersData, firstContentIndex, lastContentIndex, contentPerPage);
+      StartRace(cars, winnersData, firstContentIndex, lastContentIndex, CAR_LIST_CONTENT_PER_PAGE);
     }
 
     if (isResetClicked > isResetClickedCount) {
